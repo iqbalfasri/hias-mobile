@@ -28,6 +28,7 @@ import DrawerContent from './src/components/Drawer';
 
 // Products
 import HotProducts from './src/screens/HotProducts.screen';
+import BestProdcuts from './src/screens/BestProduct.screen';
 
 const TabIcon = ({title}) => <Text>{title}</Text>;
 
@@ -97,6 +98,7 @@ const App = () => {
                   hideNavBar
                 />
                 <Scene key="HotProducts" component={HotProducts} hideNavBar />
+                <Scene key="BestProducts" component={BestProdcuts} hideNavBar />
               </Scene>
 
               <Scene

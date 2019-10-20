@@ -107,6 +107,7 @@ const _renderBestSeller = bestItems => {
   return (
     <View>
       <TouchableOpacity
+        onPress={() => Actions.BestProducts({test: 'Halo'})}
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
