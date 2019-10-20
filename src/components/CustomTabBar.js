@@ -42,8 +42,6 @@ class CustomTabBar extends Component {
       <View
         style={[styles.tabBarWrapper, globalStyle.elevationShadowStyleTop(2)]}>
         {state.routes.map((element, index) => {
-          console.log(element, 'What inside element parameter');
-          console.log(element.key, 'Key');
           return (
             <TouchableOpacity
               key={element.key}
@@ -56,7 +54,7 @@ class CustomTabBar extends Component {
             </TouchableOpacity>
           );
         })}
-        <TouchableOpacity onPress={() => alert("Pressed")}>
+        <TouchableOpacity onPress={() => alert('Pressed')}>
           <Icon type="feather" name="inbox" />
         </TouchableOpacity>
         {/* This button for open drawer */}
