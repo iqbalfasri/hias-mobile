@@ -42,7 +42,7 @@ const Card = props => {
       key={data.id}
       type="transparent"
       style={[styles.cardWrapper]}
-      onPress={() => Actions.ProductDetail({ test: "Halo" })}
+      onPress={() => Actions.ProductDetail({id_product: data.id})}
       {...props}>
       <View
         style={[

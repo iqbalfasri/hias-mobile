@@ -52,19 +52,6 @@ const Home = () => {
     getBestSeller();
   }, []);
 
-  // looping data to get each data
-  function _loop() {
-    if (hotItems.length !== null || hotItems.length !== 0) {
-      hotItems.map(item => console.log(item, 'Each item in hot items'));
-    }
-
-    return null;
-  }
-  // _loop();
-
-  console.log(hotItems, 'hot from useState');
-  console.log(bestSeller, 'best from useState');
-
   return (
     <Layout>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
