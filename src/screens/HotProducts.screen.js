@@ -11,9 +11,22 @@ import {
 
 import TopBar from '../components/HiasTopBar';
 import {Layout} from '../components/HiasLayout';
+import {UrlAPI} from '../lib';
 
 const HotProducts = props => {
-  console.log(props, "Props hot products screen");
+  const [hotProducts, setHotProducts] = useState([]);
+
+  useEffect(() => {
+    async function getAllHotProducts() {
+      let response = await fetch(UrlAPI('/product/hotItems'));
+      let {data, success, error} = await response.json();
+
+      setHotProducts(data);
+    }
+
+    getAllHotProducts();
+  }, []);
+
   return (
     <Layout>
       <TopBar title="Products" />

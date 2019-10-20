@@ -8,11 +8,58 @@ import CheckBox from 'react-native-check-box';
 import Button from '../components/HiasButton';
 import {FormWithLabel} from '../components/HiasForm';
 import {Container, Layout} from '../components/HiasLayout';
-import {deviceWidth} from '../lib';
+import {
+  deviceWidth,
+  UrlAPI,
+  requestParameter,
+  LocalStorage,
+  KEY_STORAGE,
+} from '../lib';
 import globalStyle, {color} from '../styles/globalStyles';
 
+// Main screen
 const SigupScreen = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phoneNumer, setPhoneNumber] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [checked, setChecked] = useState(false);
+
+  // function for handle signup
+  _handleSignUp = async () => {
+    try {
+      const params = {
+        name: name,
+        email: email,
+        username: email,
+        password: confirmPassword,
+        telp: phoneNumer,
+      };
+
+      let response = await fetch(
+        UrlAPI('/register'),
+        requestParameter(params, 'POST'),
+      );
+      let responseJson = await response.json();
+      let {success, error, data} = responseJson;
+
+      let {token} = data.register;
+
+      // save token to local storage
+      LocalStorage.saveItem(KEY_STORAGE.TOKEN, token);
+
+      if (success) {
+        Actions.SignupSuccess();
+      } else {
+        // if username / email is already exist
+        alert(error.errorMessage);
+      }
+    } catch (error) {
+      alert('Server internal error');
+    }
+  };
+
   return (
     <Layout>
       <ScrollView>
@@ -28,31 +75,39 @@ const SigupScreen = () => {
             <FormWithLabel
               label="Full Name"
               placeholder="Enter your full name"
+              onChangeText={fullName => setName(fullName)}
             />
             {/* Form for email address */}
-            <FormWithLabel label="Email Address" placeholder="Type your mail" />
+            <FormWithLabel
+              type="email-address"
+              label="Email Address"
+              placeholder="Type your mail"
+              onChangeText={email => setEmail(email)}
+            />
             {/* Form for phone number */}
-            <FormWithLabel label="Phone Number" placeholder="+62" />
+            <FormWithLabel
+              type="number-pad"
+              label="Phone Number"
+              placeholder="+62"
+              onChangeText={phoneNum => setPhoneNumber(phoneNum)}
+            />
             {/* Form for password */}
             <FormWithLabel
               label="Password"
               placeholder="Type your password"
               isPassword={true}
+              onChangeText={password => setPassword(password)}
             />
             {/* Form for Re type Password */}
             <FormWithLabel
               label="Re-type Password"
               placeholder="Re-type your password"
               isPassword={true}
+              onChangeText={confirmPass => setConfirmPassword(confirmPass)}
             />
             {/* Form for agree terms */}
             {/* TODO: fix style */}
             <View>
-              {/* <CheckBox
-                checked={checked}
-                onPress={() => setChecked(!checked)}
-                title="I agree with term and condition from Hias House, view terms and condition."
-              /> */}
               <CheckBox
                 rightText={
                   'I agree with term and condition from Hias House, view terms and condition.'
@@ -60,7 +115,6 @@ const SigupScreen = () => {
                 isChecked={checked}
                 onClick={() => setChecked(!checked)}
                 style={{flex: 1, paddingVertical: 25}}
-                // checkBoxColor="#00B1DB"
                 checkedCheckBoxColor="#000"
                 uncheckedCheckBoxColor="#C6C6C5"
               />
@@ -70,7 +124,7 @@ const SigupScreen = () => {
               {/* Form for Next Step */}
               <Button
                 disabled={!checked}
-                onPress={() => Actions.SignupSuccess()}
+                onPress={() => _handleSignUp()}
                 style={[globalStyle.primaryButton, {marginBottom: 5}]}>
                 <Text
                   style={[

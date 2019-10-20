@@ -29,8 +29,8 @@ export const UrlAPI = endpoint => {
  * example: fetch(@var UrlAPI, requestParameter(variableData))
  * example with axios: soon.
  *
- * @param method is POST or http request
  * @param requestObj for object data
+ * @param method is POST or http request
  */
 export function requestParameter(requestObj, method = 'GET') {
   if (requestObj === null) {
@@ -51,20 +51,23 @@ export function requestParameter(requestObj, method = 'GET') {
 /**
  * Save to storage use Async Storage
  */
-export class LocalStorage {
-  constructor() {
-    this.key = {
-      CART: 'CART',
-      ACCOUNT_ID: 'ACCOUNT_ID',
-      TOKEN: 'TOKEN',
-    };
-  }
 
+export const KEY_STORAGE = {
+  CART: 'CART',
+  ACCOUNT_ID: 'ACCOUNT_ID',
+  TOKEN: 'TOKEN',
+};
+export class LocalStorage {
+  /**
+   *
+   * @param {*} key key store, example: "TOKEN" || "CART"
+   * @param {*} value value or data to save for local storage
+   */
   static async saveItem(key, value) {
     try {
       await AsyncStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      alert("Gagal simpan data ke local storage")
+      alert('Gagal simpan data ke local storage');
     }
   }
 
@@ -75,16 +78,13 @@ export class LocalStorage {
         return JSON.parse(value);
       }
     } catch (error) {
-      alert("Gagal mengambil data dari local storage")
+      alert('Gagal mengambil data dari local storage');
     }
   }
 
   static async removeItem(key) {
     try {
-
-    } catch (error) {
-
-    }
+    } catch (error) {}
   }
 }
 

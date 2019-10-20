@@ -23,13 +23,14 @@ SearchBar.propTypes = {
 };
 
 export const FormWithLabel = props => {
-  const {placeholder, label, isPassword} = props;
+  const {placeholder, label, isPassword, type} = props;
   return (
     <ScrollView>
       <Container>
         <View style={[props.style, styles.formGroup]} {...props}>
           <Text style={styles.formGroupLabel}>{label}</Text>
           <TextInput
+            keyboardType={type}
             autoCapitalize={'none'}
             autoCompleteType={'off'}
             autoCorrect={false}

@@ -5,55 +5,59 @@ import {Actions} from 'react-native-router-flux';
 // Own component
 import Button from '../components/HiasButton';
 import {Layout, Container} from '../components/HiasLayout';
-import {isAndroid} from '../lib';
+import {isAndroid, LocalStorage, KEY_STORAGE} from '../lib';
 import globalStyle, {color} from '../styles/globalStyles';
 
 const SuccessIlustration = require('../assets/images/hiashouse-succes-signup.png');
 const HiasLogoWithText = require('../assets/images/hiashouse-logo-text.png');
 
-const SignupSuccess = () => (
-  <Layout>
-    <Container>
-      {/* Image logo with text */}
-      <Image style={styles.imageLogo} source={HiasLogoWithText} />
-      {/* Image ilustration */}
-      <Image style={styles.imageSuccess} source={SuccessIlustration} />
-      {/* Content group */}
-      <View style={styles.contentTextWrapper}>
-        <Text style={[styles.textTitle, globalStyle.textBold]}>
-          CONGRATULATIONS!
-        </Text>
-        <Text style={[styles.textSubTitle]}>
-          Your Hias House Account has been successfuly registered.
-        </Text>
-      </View>
-      {/* Button group */}
-      <View style={styles.buttonGroup}>
-        {/* Button for continue */}
-        <Button
-          style={[globalStyle.primaryButton, {marginBottom: 5}]}
-          onPress={() => Actions.HomeStack()}>
-          <Text
-            style={[
-              globalStyle.textWhite,
-              globalStyle.textBold,
-              globalStyle.textCenter,
-            ]}>
-            CONTINUE
+const SignupSuccess = () => {
+  alert(LocalStorage.getItem(KEY_STORAGE.TOKEN));
+
+  return (
+    <Layout>
+      <Container>
+        {/* Image logo with text */}
+        <Image style={styles.imageLogo} source={HiasLogoWithText} />
+        {/* Image ilustration */}
+        <Image style={styles.imageSuccess} source={SuccessIlustration} />
+        {/* Content group */}
+        <View style={styles.contentTextWrapper}>
+          <Text style={[styles.textTitle, globalStyle.textBold]}>
+            CONGRATULATIONS!
           </Text>
-        </Button>
-        {/* Button for signin */}
-        <Button
-          type="transparent"
-          style={[globalStyle.buttonTransparent, {marginTop: 5}]}>
-          <Text style={[globalStyle.textCenter, {color: color.darkBlue}]}>
-            Already have an account? Sign In
+          <Text style={[styles.textSubTitle]}>
+            Your Hias House Account has been successfuly registered.
           </Text>
-        </Button>
-      </View>
-    </Container>
-  </Layout>
-);
+        </View>
+        {/* Button group */}
+        <View style={styles.buttonGroup}>
+          {/* Button for continue */}
+          <Button
+            style={[globalStyle.primaryButton, {marginBottom: 5}]}
+            onPress={() => Actions.HomeStack()}>
+            <Text
+              style={[
+                globalStyle.textWhite,
+                globalStyle.textBold,
+                globalStyle.textCenter,
+              ]}>
+              CONTINUE
+            </Text>
+          </Button>
+          {/* Button for signin */}
+          <Button
+            type="transparent"
+            style={[globalStyle.buttonTransparent, {marginTop: 5}]}>
+            <Text style={[globalStyle.textCenter, {color: color.darkBlue}]}>
+              Already have an account? Sign In
+            </Text>
+          </Button>
+        </View>
+      </Container>
+    </Layout>
+  );
+};
 
 const styles = StyleSheet.create({
   screen: {
