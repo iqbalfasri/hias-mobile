@@ -7,7 +7,7 @@
     "test": "jest",
     "lint": "eslint .",
     "run-android": "react-native run-android",
-    "run-ios": "react-native run-ios"
+    "run-ios": "react-native run-ios --simulator='iPhone 11'"
   },
   "dependencies": {
     "react": "16.8.6",
