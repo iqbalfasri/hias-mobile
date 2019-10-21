@@ -49,6 +49,7 @@ const Card = props => {
           globalStyles.elevationShadowStyle(5),
           styles.imageProductWrapper,
         ]}>
+        
         {/* TODO: change hardcode image source */}
         <Image style={styles.imageProduct} source={sofa1} />
         <RenderBadgesRate bestProduct={data.bestProduct} />

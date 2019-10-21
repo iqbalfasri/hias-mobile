@@ -17,6 +17,7 @@ import SignupVerifScreen from './src/screens/_SignupVerif.screen';
 import SignupSuccessScreen from './src/screens/SignupSuccess.screen';
 import ProductDetailScreen from './src/screens/ProductDetail.screen';
 import OrderScreen from './src/screens/Order.screen';
+import SearchScreen from './src/screens/Search.screen';
 
 // Tab Bar Component
 import CustomTabBar from './src/components/CustomTabBar';
@@ -99,6 +100,7 @@ const App = () => {
                 />
                 <Scene key="HotProducts" component={HotProducts} hideNavBar />
                 <Scene key="BestProducts" component={BestProdcuts} hideNavBar />
+                <Scene key="Search" component={SearchScreen} hideNavBar />
               </Scene>
 
               <Scene

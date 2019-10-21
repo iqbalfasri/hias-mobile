@@ -16,6 +16,7 @@ import Card from '../components/HiasCard';
 import Carousel from '../components/HiasCarousel';
 import TopBar from '../components/HiasTopBar';
 import {Container, Layout} from '../components/HiasLayout';
+import Button from '../components/HiasButton';
 
 // Skeleton placeholder
 import Skeleton from '../components/SkeletonPlaceholder';
@@ -135,22 +136,18 @@ const _renderBestSeller = bestItems => {
 };
 
 const _renderSearch = () => {
-  const [search, setsearch] = useState('');
   return (
-    <View style={styles.searchBar}>
+    <Button
+      type="transparent"
+      style={styles.searchBar}
+      onPress={() => Actions.Search()}>
       <View style={styles.searchIcon}>
         <Icon color="#9F9F9F" size={16} name="search" type="font-awesome" />
       </View>
-      <TextInput
-        value={search}
-        placeholder="Search"
-        style={styles.searchInput}
-        selectionColor="red"
-        onChangeText={value => setsearch(value)}
-        selectionColor="lightblue"
-        underlineColorAndroid="transparent"
-      />
-    </View>
+      <View style={styles.searchInput}>
+        <Text style={{color: '#9F9F9F'}}>Search</Text>
+      </View>
+    </Button>
   );
 };
 
