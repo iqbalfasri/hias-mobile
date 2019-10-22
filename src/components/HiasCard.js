@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 

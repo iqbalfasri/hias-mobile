@@ -79,13 +79,6 @@ export class CustomTopBar extends Component {
     const {state} = this.props.navigation;
     const activeTabIndex = state.index;
 
-    _activeScreen = index => {
-      if (index === activeTabIndex) {
-        return '#000';
-      }
-      return '#fff';
-    };
-
     return (
       <SafeAreaView style={{backgroundColor: '#fff'}}>
         <TopBar title="Order" />
@@ -105,7 +98,7 @@ export class CustomTopBar extends Component {
                 <Text
                   style={{
                     fontWeight: 'bold',
-                    fontSize: 12,
+                    fontSize: 13,
                     color: index === activeTabIndex ? '#000' : '#969696',
                   }}>
                   {route.routes[0].params.title}

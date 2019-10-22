@@ -4,9 +4,9 @@ import {deviceWidth, isAndroid} from '../lib';
 
 export const Layout = props => {
   return isAndroid ? (
-    <View style={styles.layout}>{props.children}</View>
+    <View style={[styles.layout, {...props.style}]}>{props.children}</View>
   ) : (
-    <SafeAreaView style={styles.layout}>{props.children}</SafeAreaView>
+    <SafeAreaView style={[styles.layout, {...props.style}]}>{props.children}</SafeAreaView>
   );
 };
 

@@ -82,7 +82,7 @@ const CartCard = props => {
 };
 
 const _handleOrder = () => {
-  Actions.AddressDetail();
+  Actions.replace('AddressDetail', { someText: "Halo" });
 };
 
 const Cart = props => {
