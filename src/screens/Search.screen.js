@@ -56,14 +56,21 @@ class Search extends React.Component {
     }
   }
 
-  toggle(index, e) {
-    let mainCat =
-      this.state.mainCategory !== null ? [...this.state.mainCategory] : null;
-    mainCat[index].toggle = !mainCat[index].toggle;
+  /**
+   *
+   * @param {*} index index each element
+   * @param {*} e
+   */
+  toggleMainCategory(index, e) {
+    const {mainCategory} = this.state;
 
-    // console.log(mainCat);
-    this.setState({mainCategory: mainCat});
+    let mCat = mainCategory !== null ? [...mainCategory] : null;
+    mCat[index].toggle = !mCat[index].toggle;
+
+    this.setState({mainCategory: mCat});
   }
+
+  toggleSubCategory(index, e, idMainCategory) {}
 
   render() {
     return (
@@ -71,21 +78,16 @@ class Search extends React.Component {
         <Text>Search Screen</Text>
         {this.state.mainCategory !== null
           ? this.state.mainCategory.map((cat, i) => {
-              console.log(cat);
               return (
                 <React.Fragment key={i}>
-                  <Button onPress={this.toggle.bind(this, i)}>
+                  {/* Button colappse Main Category */}
+                  <Button onPress={this.toggleMainCategory.bind(this, i)}>
                     <Text>{cat.mainCategoryName}</Text>
                   </Button>
+                  {/* Collapsed main category */}
                   <Collapsible collapsed={!cat.toggle}>
-                    <Text>Text colapsible outer</Text>
-
-                    <Button
-                      onPress={() =>
-                        this.setState({
-                          innerCollapse: !this.state.innerCollapse,
-                        })
-                      }>
+                    {/* Button collapse Sub Category */}
+                    <Button>
                       <Text>Inner</Text>
                     </Button>
 

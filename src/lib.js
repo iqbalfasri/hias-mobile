@@ -1,5 +1,6 @@
 import React from 'react';
-import {Dimensions, Platform, AsyncStorage} from 'react-native';
+import {Dimensions, Platform} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 /**
  * Get device width
@@ -74,9 +75,10 @@ export class LocalStorage {
   static async getItem(key) {
     try {
       const value = await AsyncStorage.getItem(key);
-      if (value !== null) {
-        return JSON.parse(value);
+      if (value === null) {
+        return null;
       }
+      return value;
     } catch (error) {
       alert('Gagal mengambil data dari local storage');
     }

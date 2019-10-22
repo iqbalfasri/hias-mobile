@@ -7,9 +7,10 @@
     "test": "jest",
     "lint": "eslint .",
     "run-android": "react-native run-android",
-    "run-ios": "react-native run-ios --simulator='iPhone 11'"
+    "run-ios": "react-native run-ios"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.2",
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-check-box": "^2.1.7",

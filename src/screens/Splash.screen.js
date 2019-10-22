@@ -8,11 +8,15 @@ import {
   StatusBar,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import {LocalStorage, KEY_STORAGE} from '../lib';
 
 const HiasHouseWhiteLogo = require('../assets/images/hiashouse-circle-logo.png');
 
 const Splashpage = () => {
   useEffect(() => {
+    // get token from localstorage
+    const getToken = LocalStorage.getItem(KEY_STORAGE.TOKEN);
+    console.log(getToken, 'JWT Token');
     // After 2 second redirect to slider info page
     setTimeout(() => {
       Actions.SliderInfo();

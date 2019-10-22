@@ -49,9 +49,13 @@ const Card = props => {
           globalStyles.elevationShadowStyle(5),
           styles.imageProductWrapper,
         ]}>
-        
         {/* TODO: change hardcode image source */}
-        <Image style={styles.imageProduct} source={sofa1} />
+        <Image
+          style={styles.imageProduct}
+          onLoad={e => console.log(e, 'Loading gambar...')}
+          onLoadEnd={e => console.log(e, 'Loading gambar done')}
+          source={{uri: data.thumbnail}}
+        />
         <RenderBadgesRate bestProduct={data.bestProduct} />
       </View>
       <View style={{flexDirection: 'column', paddingVertical: 13}}>

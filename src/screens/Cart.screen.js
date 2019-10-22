@@ -82,14 +82,7 @@ const CartCard = props => {
 };
 
 const _handleOrder = () => {
-  // Action.Order();
-  const localStore = new LocalStorage();
-
-  // save data to localstorage
-  localStore._saveItem('CART', exampleDataCart);
-
-  // get
-  console.log(localStore._getItem('CART'));
+  Actions.Order();
 };
 
 const Cart = props => {
