@@ -20,7 +20,7 @@ import OrderScreen from './src/screens/Order.screen';
 import SearchScreen from './src/screens/Search.screen';
 
 // Tab Bar Component
-import CustomTabBar from './src/components/CustomTabBar';
+import CustomTabBar, {CustomTopBar} from './src/components/CustomTabBar';
 
 // Tab Bar Screen Component
 import HomeScreen from './src/screens/Home.screen';
@@ -30,6 +30,12 @@ import DrawerContent from './src/components/Drawer';
 // Products
 import HotProducts from './src/screens/HotProducts.screen';
 import BestProdcuts from './src/screens/BestProduct.screen';
+
+// Orders
+import AddressOrderScreen from './src/screens/AddressOrder.screen';
+import BillingOrderScreen from './src/screens/BillingDetailOrder.screen';
+import PaymentOrderScreen from './src/screens/PaymentOrder.screen';
+import StatusOrderScreen from './src/screens/StatusOrder.screen';
 
 const TabIcon = ({title}) => <Text>{title}</Text>;
 
@@ -109,6 +115,35 @@ const App = () => {
                   <CartScreen test={sceneProps} {...sceneProps} />
                 )}
                 hideNavBar
+              />
+            </Scene>
+
+            {/* Order tabbar */}
+            <Scene
+              tabs
+              key="toptabbar"
+              tabBarPosition="top"
+              tabBarComponent={CustomTopBar}
+              hideNavBar>
+              <Scene
+                key="AddressDetail"
+                component={AddressOrderScreen}
+                initial
+                hideNavBar
+                title="Address"
+              />
+              <Scene
+                key="BillingDetail"
+                component={BillingOrderScreen}
+                hideNavBar
+                title="Billing Detail"
+              />
+              <Scene key="Payment" component={PaymentOrderScreen} hideNavBar title="Payment" />
+              <Scene
+                key="OrderStatus"
+                component={StatusOrderScreen}
+                hideNavBar
+                title="Order Status"
               />
             </Scene>
           </Scene>

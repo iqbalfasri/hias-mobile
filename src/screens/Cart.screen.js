@@ -82,7 +82,7 @@ const CartCard = props => {
 };
 
 const _handleOrder = () => {
-  Actions.Order();
+  Actions.AddressDetail();
 };
 
 const Cart = props => {

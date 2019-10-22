@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  SafeAreaView,
+} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Icon} from 'react-native-elements';
 
 import globalStyle, {color} from '../styles/globalStyles';
 
 import {isAndroid} from '../lib';
+import TopBar from './HiasTopBar';
 
 class CustomTabBar extends Component {
   render() {
@@ -66,6 +74,51 @@ class CustomTabBar extends Component {
   }
 }
 
+export class CustomTopBar extends Component {
+  render() {
+    const {state} = this.props.navigation;
+    const activeTabIndex = state.index;
+
+    _activeScreen = index => {
+      if (index === activeTabIndex) {
+        return '#000';
+      }
+      return '#fff';
+    };
+
+    return (
+      <SafeAreaView style={{backgroundColor: '#fff'}}>
+        <TopBar title="Order" />
+        <View style={styles.topBarWrapper}>
+          {state.routes.map((route, index) => {
+            return (
+              <TouchableOpacity
+                style={[
+                  styles.topBarButton,
+                  {
+                    borderBottomColor:
+                      index === activeTabIndex ? '#000' : '#fff',
+                  },
+                ]}
+                key={route.key}
+                onPress={() => Actions[route.key]()}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 12,
+                    color: index === activeTabIndex ? '#000' : '#969696',
+                  }}>
+                  {route.routes[0].params.title}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </SafeAreaView>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   tabBarWrapper: {
     flexDirection: 'row',
@@ -75,6 +128,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: isAndroid ? 30 : 30,
     paddingBottom: isAndroid ? 20 : 50,
     paddingTop: isAndroid ? 20 : 30,
+  },
+  topBarWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: 25,
+  },
+  topBarButton: {
+    paddingVertical: 20,
+    backgroundColor: '#fff',
+    borderBottomWidth: 2,
   },
 });
 
