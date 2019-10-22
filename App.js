@@ -37,18 +37,15 @@ import BillingOrderScreen from './src/screens/BillingDetailOrder.screen';
 import PaymentOrderScreen from './src/screens/PaymentOrder.screen';
 import StatusOrderScreen from './src/screens/StatusOrder.screen';
 
-const TabIcon = ({title}) => <Text>{title}</Text>;
-
-import {LocalStorage} from './src/lib';
-
-const App = () => {
+// FIXME: Refactore route
+const App = props => {
   // for hide warning
   console.disableYellowBox = true;
 
   return (
     <Fragment>
-      <StatusBar backgroundColor="#5BC6E2" />
-      <Router>
+      <StatusBar />
+      <Router {...props}>
         <Scene key="root">
           <Scene
             init
@@ -89,6 +86,7 @@ const App = () => {
 
           {/* Main */}
           <Scene
+            type={ActionConst.RESET}
             drawer
             drawerPosition="right"
             contentComponent={DrawerContent}
@@ -109,18 +107,13 @@ const App = () => {
                 <Scene key="Search" component={SearchScreen} hideNavBar />
               </Scene>
 
-              <Scene
-                key="Cart"
-                component={sceneProps => (
-                  <CartScreen test={sceneProps} {...sceneProps} />
-                )}
-                hideNavBar
-              />
+              <Scene key="Cart" component={CartScreen} hideNavBar />
             </Scene>
 
             {/* Order tabbar */}
             <Scene
               tabs
+              showLabel={true}
               key="toptabbar"
               tabBarPosition="top"
               tabBarComponent={CustomTopBar}
@@ -138,7 +131,12 @@ const App = () => {
                 hideNavBar
                 title="Billing Detail"
               />
-              <Scene key="Payment" component={PaymentOrderScreen} hideNavBar title="Payment" />
+              <Scene
+                key="Payment"
+                component={PaymentOrderScreen}
+                hideNavBar
+                title="Payment"
+              />
               <Scene
                 key="OrderStatus"
                 component={StatusOrderScreen}
