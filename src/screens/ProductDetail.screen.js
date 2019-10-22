@@ -14,7 +14,7 @@ import Swiper from 'react-native-swiper';
 import Collapsible from 'react-native-collapsible';
 import {Actions} from 'react-native-router-flux';
 import {Header} from 'react-native-elements';
-import {deviceWidth, LocalStorage, UrlAPI} from '../lib';
+import {deviceWidth, LocalStorage, UrlAPI, requestParameter} from '../lib';
 
 // Own component
 import TopBar from '../components/HiasTopBar';
@@ -41,6 +41,29 @@ const ProductDetail = props => {
 
     getDetailProduct();
   }, [id_product]);
+
+  const _handleAddToCart = async () => {
+    try {
+      // Hardcoded token
+      const TOKEN =
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha2hsYXJpYyIsInJvbGVzIjpbXSwiaWF0IjoxNTcxNjMzMjkzLCJleHAiOjE1NzIyMzgwOTN9.eAG8-DtZDZ8QNTj_o0Boi8_gQIOyL1qIeD--kCe1M0U';
+
+      const params = {
+        userId: 10,
+        productId: 3,
+        amount: 1,
+      };
+      let response = await fetch(
+        UrlAPI('/product/addToCart'),
+        requestParameter(params , 'POST', TOKEN),
+      );
+
+      const responseJson = await response.json();
+      console.log(responseJson, 'Respose to add to card');
+    } catch (error) {
+      console.log('Server internal error');
+    }
+  };
 
   const DetailProduct = ({data}) => {
     // FIXME: SELANJUTNYA BUATKAN SKELETON UNTUK HANDLE LOAD DATA
@@ -130,7 +153,7 @@ const ProductDetail = props => {
                   </Button>
 
                   <Button
-                    onPress={() => Actions.Cart()}
+                    onPress={() => _handleAddToCart()}
                     style={{
                       paddingHorizontal: 25,
                       paddingVertical: 13,

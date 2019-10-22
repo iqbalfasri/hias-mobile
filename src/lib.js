@@ -33,7 +33,7 @@ export const UrlAPI = endpoint => {
  * @param requestObj for object data
  * @param method is POST or http request
  */
-export function requestParameter(requestObj, method = 'GET') {
+export function requestParameter(requestObj, method = 'GET', authToken) {
   if (requestObj === null) {
     return {
       method: method,
@@ -41,12 +41,17 @@ export function requestParameter(requestObj, method = 'GET') {
   }
 
   const appJson = 'application/json';
+  const withToken = authToken ? {Authorization: `Bearer ${authToken}`} : null;
 
-  return {
+  const obj = {
     method: method,
-    headers: {Accept: appJson, 'Content-Type': appJson},
+    headers: {Accept: appJson, 'Content-Type': appJson, withToken},
     body: JSON.stringify(requestObj),
   };
+
+  console.log(obj, 'Request param');
+
+  return obj;
 }
 
 /**
