@@ -63,37 +63,48 @@ export const KEY_STORAGE = {
   ACCOUNT_ID: 'ACCOUNT_ID',
   TOKEN: 'TOKEN',
 };
-export class LocalStorage {
+class LocalStorage {
   /**
    *
    * @param {*} key key store, example: "TOKEN" || "CART"
    * @param {*} value value or data to save for local storage
    */
-  static async saveItem(key, value) {
-    try {
-      await AsyncStorage.setItem(key, JSON.stringify(value));
-    } catch (error) {
-      alert('Gagal simpan data ke local storage');
-    }
+  async saveItem(key, value) {
+    const valueToJson = JSON.stringify(value);
+    AsyncStorage.setItem(key, valueToJson, error => {
+      if (error) {
+        console.log('error save item to local');
+        throw error;
+      }
+
+      console.log('Success');
+    }).catch(err => {
+      console.log('Error is ' + err);
+    });
   }
 
-  static async getItem(key) {
+  async getItem(key) {
     try {
       const value = await AsyncStorage.getItem(key);
-      if (value === null) {
-        return null;
+      if (value !== null) {
+        return JSON.parse(value);
       }
-      return value;
     } catch (error) {
-      alert('Gagal mengambil data dari local storage');
+      console.log('Error get storage');
     }
   }
 
-  static async removeItem(key) {
-    try {
-    } catch (error) {}
+  async removeItem(key) {
+    AsyncStorage.removeItem(key, (error) => {
+      if (!error) {
+        console.log("Success hapus")
+      }
+
+      console.log("Gagal hapus")
+    })
   }
 }
+export const localStorage = new LocalStorage();
 
 /**
  * To shortener long string

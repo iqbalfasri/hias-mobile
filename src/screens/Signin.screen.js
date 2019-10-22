@@ -16,7 +16,7 @@ import {
   deviceWidth,
   requestParameter,
   UrlAPI,
-  LocalStorage,
+  localStorage,
   KEY_STORAGE,
 } from '../lib';
 
@@ -47,7 +47,7 @@ const SigninScreen = () => {
 
       if (success) {
         // save token to local storage
-        LocalStorage.saveItem(KEY_STORAGE.TOKEN, token);
+        localStorage.saveItem(KEY_STORAGE.TOKEN, token);
 
         // redirect to home screen
         Actions.HomeStack();
@@ -56,6 +56,7 @@ const SigninScreen = () => {
       }
     } catch (error) {
       alert('Server internal error');
+      console.log(error, 'Error catch');
     }
   };
 
@@ -70,6 +71,7 @@ const SigninScreen = () => {
             <View style={styles.formGroup}>
               <Text style={styles.formGroupLabel}>Email address</Text>
               <TextInput
+                autoCapitalize="none"
                 style={styles.formGroupInput}
                 placeholder="email@yourmail.mail"
                 onChangeText={email => setEmail(email)}
@@ -87,7 +89,9 @@ const SigninScreen = () => {
             </View>
             {/* Form for button */}
             <View style={styles.formGroup}>
-              <Button style={styles.customButton}>
+              <Button
+                style={styles.customButton}
+                onPress={() => localStorage.removeItem('TOKEN')}>
                 <Text style={styles.customButtonForget}>
                   Forgot your password?
                 </Text>
@@ -95,7 +99,9 @@ const SigninScreen = () => {
             </View>
             <View style={styles.formGroup}>
               <Button
-                onPress={() => _handleSignin()}
+                onPress={() =>
+                  localStorage.saveItem('TOKEN', '3189u8f188y87y783y12')
+                }
                 style={[styles.customButton, styles.customButtonSignin]}>
                 <Text
                   style={[
