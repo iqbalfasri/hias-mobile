@@ -86,7 +86,7 @@ class LocalStorage {
   async getItem(key) {
     try {
       const value = await AsyncStorage.getItem(key);
-      if (value !== null) {
+      if (value !== null || value !== undefined) {
         return JSON.parse(value);
       }
     } catch (error) {
@@ -95,13 +95,13 @@ class LocalStorage {
   }
 
   async removeItem(key) {
-    AsyncStorage.removeItem(key, (error) => {
-      if (!error) {
-        console.log("Success hapus")
+    AsyncStorage.removeItem(key, error => {
+      if (error) {
+        alert('Error remove');
       }
 
-      console.log("Gagal hapus")
-    })
+      alert('Berhasil remove item');
+    });
   }
 }
 export const localStorage = new LocalStorage();
