@@ -1,7 +1,17 @@
 import React, {Fragment} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
+// own component
+import Button from '../components/HiasButton';
+
+// lib
+import {localStorage, KEY_STORAGE} from '../lib';
+
 const Drawer = () => {
+  const _handleLogout = () => {
+    localStorage.removeItem(KEY_STORAGE.TOKEN)
+  };
+
   return (
     <Fragment>
       <View style={styles.container}>
@@ -12,12 +22,16 @@ const Drawer = () => {
               height: 50,
               backgroundColor: '#ddd',
               borderRadius: 100,
-              marginRight: 10
+              marginRight: 10,
             }}
           />
           <View>
-            <Text style={[styles.drawerText, { lineHeight: 16, fontSize: 16 }]}>John Doe</Text>
-            <Text style={[styles.drawerText, { lineHeight: 24, fontSize: 12 }]}>Balance: IDR 999.000</Text>
+            <Text style={[styles.drawerText, {lineHeight: 16, fontSize: 16}]}>
+              John Doe
+            </Text>
+            <Text style={[styles.drawerText, {lineHeight: 24, fontSize: 12}]}>
+              Balance: IDR 999.000
+            </Text>
           </View>
         </View>
         <View style={styles.bottomDrawer}>
@@ -51,6 +65,14 @@ const Drawer = () => {
           </Text>
         </View>
       </View>
+      <View
+        style={{
+          marginVertical: 50,
+        }}>
+        <Button onPress={() => _handleLogout()} style={styles.logoutButton}>
+          <Text style={styles.logoutText}>Logout</Text>
+        </Button>
+      </View>
     </Fragment>
   );
 };
@@ -75,6 +97,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingHorizontal: 15,
     paddingVertical: 15,
+  },
+  logoutButton: {
+    paddingHorizontal: 25,
+    paddingVertical: 15,
+    width: '100%',
+  },
+  logoutText: {
+    color: '#BF0F0F',
+    textTransform: 'uppercase',
   },
 });
 export default Drawer;
