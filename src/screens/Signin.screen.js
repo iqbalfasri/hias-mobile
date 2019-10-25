@@ -99,9 +99,7 @@ const SigninScreen = () => {
             </View>
             <View style={styles.formGroup}>
               <Button
-                onPress={() =>
-                  localStorage.saveItem('TOKEN', '3189u8f188y87y783y12')
-                }
+                onPress={() => _handleSignin()}
                 style={[styles.customButton, styles.customButtonSignin]}>
                 <Text
                   style={[
