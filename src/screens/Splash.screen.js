@@ -17,13 +17,16 @@ const Splashpage = () => {
     // get token from localstorage
 
     const getLocalData = localStorage.getItem('TOKEN');
-    getLocalData.then(data => {
-      console.log(data);
+    const getUserId = localStorage.getItem(KEY_STORAGE.USER_ID);
+    getLocalData.then(token => {
+      setTimeout(() => {
+        if (token !== null) {
+          Actions.HomeStack();
+        } else {
+          Actions.SliderInfo();
+        }
+      }, 1500);
     });
-    // After 2 second redirect to slider info page
-    setTimeout(() => {
-      Actions.SliderInfo();
-    }, 2000);
   }, []);
 
   return (

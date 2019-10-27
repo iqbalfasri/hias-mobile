@@ -35,27 +35,36 @@ const SigninScreen = () => {
         password: password,
       };
 
-      let response = await fetch(
-        UrlAPI('/authenticate/login'),
-        requestParameter(params, 'POST'),
-      );
-      let responseJson = await response.json();
-      let {success, error, data} = responseJson;
-
-      // get token
-      let {token} = data.login;
-
-      if (success) {
-        // save token to local storage
-        localStorage.saveItem(KEY_STORAGE.TOKEN, token);
-
-        // redirect to home screen
-        Actions.HomeStack();
+      if (email === '' || email === null) {
+        alert('Email belum diisi');
+      } else if (password === '' || password === null) {
+        alert('Password belum diisi');
       } else {
-        alert(error.errorMessage);
+        let response = await fetch(
+          UrlAPI('/authenticate/login'),
+          requestParameter(params, 'POST'),
+        );
+        let responseJson = await response.json();
+        let {success, error, data} = responseJson;
+
+        if (success) {
+          // save token to local storage
+          localStorage.saveItem(KEY_STORAGE.TOKEN, data.login.token);
+
+          // save user id to local storage
+          localStorage.saveItem(KEY_STORAGE.USER_ID, data.login.user.id);
+
+          // save user data to local storage
+          localStorage.saveItem(KEY_STORAGE.USER_DATA, data.login.user);
+
+          // redirect to home screen
+          Actions.HomeStack();
+        } else {
+          alert(error.errorMessage);
+        }
       }
     } catch (error) {
-      alert('Server internal error');
+      alert('Email atau Password salah');
       console.log(error, 'Error catch');
     }
   };

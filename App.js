@@ -96,7 +96,7 @@ const App = props => {
             {/* Tabbar Scene Stack */}
             <Scene tabs key="tabbar" tabBarComponent={CustomTabBar} hideNavBar>
               <Scene key="HomeStack" hideNavBar title="Home">
-                <Scene key="Home" component={HomeScreen} initial hideNavBar />
+                <Scene key="Home" type={ActionConst.RESET} component={HomeScreen} initial hideNavBar />
                 <Scene
                   key="ProductDetail"
                   component={ProductDetailScreen}

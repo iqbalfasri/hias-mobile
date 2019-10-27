@@ -60,7 +60,8 @@ export function requestParameter(requestObj, method = 'GET', authToken) {
 
 export const KEY_STORAGE = {
   CART: 'CART',
-  ACCOUNT_ID: 'ACCOUNT_ID',
+  USER_ID: 'USER_ID',
+  USER_DATA: 'USER_DATA',
   TOKEN: 'TOKEN',
 };
 class LocalStorage {

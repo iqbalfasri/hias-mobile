@@ -52,8 +52,6 @@ const Card = props => {
         {/* TODO: change hardcode image source */}
         <Image
           style={styles.imageProduct}
-          onLoad={e => console.log(e, 'Loading gambar...')}
-          onLoadEnd={e => console.log(e, 'Loading gambar done')}
           source={{uri: data.thumbnail}}
         />
         <RenderBadgesRate bestProduct={data.bestProduct} />
