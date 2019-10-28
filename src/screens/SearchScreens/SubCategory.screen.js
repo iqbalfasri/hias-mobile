@@ -72,7 +72,7 @@ function SearchSubCategory(props) {
             return (
               <TouchableOpacity
                 key={category.id}
-                onPress={() => alert('Hola')}
+                onPress={() => Actions.SecondSubCategory({ subCategoryId: category.id })}
                 style={[
                   styles.listCategory,
                   {borderBottomWidth: isLastItem ? 0.5 : 0},
