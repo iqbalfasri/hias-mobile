@@ -14,7 +14,13 @@ import Swiper from 'react-native-swiper';
 import Collapsible from 'react-native-collapsible';
 import {Actions} from 'react-native-router-flux';
 import {Header} from 'react-native-elements';
-import {deviceWidth, LocalStorage, UrlAPI, requestParameter} from '../lib';
+import {
+  deviceWidth,
+  UrlAPI,
+  requestParameter,
+  localStorage,
+  KEY_STORAGE,
+} from '../lib';
 
 // Own component
 import TopBar from '../components/HiasTopBar';
@@ -44,24 +50,27 @@ const ProductDetail = props => {
 
   const _handleAddToCart = async () => {
     try {
-      // Hardcoded token
-      const TOKEN =
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJha2hsYXJpYyIsInJvbGVzIjpbXSwiaWF0IjoxNTcxNjMzMjkzLCJleHAiOjE1NzIyMzgwOTN9.eAG8-DtZDZ8QNTj_o0Boi8_gQIOyL1qIeD--kCe1M0U';
-
+      const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
+      const getCartId = await localStorage.getItem(KEY_STORAGE.USER_ID);
       const params = {
-        userId: 10,
-        productId: 3,
+        cartId: getCartId,
+        productId: id_product,
         amount: 1,
       };
+
       let response = await fetch(
-        UrlAPI('/product/addToCart'),
-        requestParameter(params , 'POST', TOKEN),
+        UrlAPI('/product/addItemToCart'),
+        requestParameter(params, 'POST', getToken),
       );
 
       const responseJson = await response.json();
-      console.log(responseJson, 'Respose to add to card');
+      if (responseJson.success) {
+        alert('Berhasil tambah cart');
+      } else {
+        alert('Ada masalah saat tambah cart');
+      }
     } catch (error) {
-      console.log('Server internal error');
+      alert('Server internal error');
     }
   };
 
