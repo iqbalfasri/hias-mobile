@@ -38,7 +38,7 @@ const SliderInfopage = () => {
             Next
           </Text>
         </Button>
-        <Button onPress={() => Actions.Signin()} style={styles.customButtonTp}>
+        <Button onPress={() => Actions.HomeStack()} style={styles.customButtonTp}>
           <Text
             style={[
               styles.textWhite,

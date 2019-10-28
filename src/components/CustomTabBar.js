@@ -22,6 +22,7 @@ class CustomTabBar extends Component {
     const SCENE_KEY = {
       Home: 'HomeStack',
       Cart: 'Cart',
+      Inbox: 'Inbox',
     };
 
     _renderIcon = elementKey => {
@@ -31,6 +32,9 @@ class CustomTabBar extends Component {
 
         case SCENE_KEY.Cart:
           return 'shopping-bag';
+
+        case SCENE_KEY.Inbox:
+          return 'inbox';
 
         default:
           return null;
@@ -62,9 +66,6 @@ class CustomTabBar extends Component {
             </TouchableOpacity>
           );
         })}
-        <TouchableOpacity onPress={() => alert('Pressed')}>
-          <Icon type="feather" name="inbox" />
-        </TouchableOpacity>
         {/* This button for open drawer */}
         <TouchableOpacity onPress={() => Actions.drawerOpen()}>
           <Icon type="feather" name="menu" />

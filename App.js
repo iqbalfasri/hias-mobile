@@ -17,6 +17,7 @@ import SignupVerifScreen from './src/screens/_SignupVerif.screen';
 import SignupSuccessScreen from './src/screens/SignupSuccess.screen';
 import ProductDetailScreen from './src/screens/ProductDetail.screen';
 import OrderScreen from './src/screens/Order.screen';
+import InboxScreen from './src/screens/Inbox.screen';
 
 // Tab Bar Component
 import CustomTabBar, {CustomTopBar} from './src/components/CustomTabBar';
@@ -138,6 +139,7 @@ const App = props => {
               </Stack>
 
               <Scene key="Cart" component={CartScreen} hideNavBar />
+              <Scene key="Inbox" component={InboxScreen} hideNavBar />
             </Scene>
 
             {/* Order tabbar */}
