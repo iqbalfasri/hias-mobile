@@ -42,7 +42,7 @@ const ProductCard = props => {
           onPress={() => Actions.ProductDetail({id_product: data.id})}>
           <View
             style={[globalStyles.elevationShadowStyle(5), styles.imageWrapper]}>
-            <Image style={styles.imageProduct} source={data.thumbnail} />
+            <Image style={styles.imageProduct} source={{uri: data.thumbnail}} />
           </View>
           <View style={styles.productInfoWrapper}>
             <Text style={styles.productTitle}>
@@ -84,7 +84,7 @@ const HotProducts = props => {
 
   return (
     <Layout>
-      <TopBar title="Best Products" />
+      <TopBar title="Hot Items" />
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.cardContainer}>

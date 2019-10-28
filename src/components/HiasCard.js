@@ -51,7 +51,7 @@ const Card = props => {
         ]}>
         {/* TODO: change hardcode image source */}
         <Image
-          resizeMethod="cover"
+          resizeMethod='resize'
           style={styles.imageProduct}
           source={{uri: data.thumbnail}}
         />
