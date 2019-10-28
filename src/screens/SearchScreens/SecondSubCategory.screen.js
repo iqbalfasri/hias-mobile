@@ -106,7 +106,9 @@ function SecondSubCategory(props) {
       <ScrollView>
         <View>
           <View style={styles.productCategoryTitleWrapper}>
-            <Text style={styles.productCategoryTitleText}>{'Yeah'}</Text>
+            <Text style={styles.productCategoryTitleText}>
+              {`${props.mainCategoryName}   -   ${props.subCategoryName} `}
+            </Text>
           </View>
 
           {/* List Main Category */}
