@@ -39,10 +39,10 @@ const Drawer = () => {
             style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
             Category
           </Text>
-          <Text
+          {/* <Text
             style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
             Blog
-          </Text>
+          </Text> */}
           <Text
             style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
             My Wallet
@@ -51,10 +51,10 @@ const Drawer = () => {
             style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
             Inspiration
           </Text>
-          <Text
+          {/* <Text
             style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
             Hias Bisnis Unit
-          </Text>
+          </Text> */}
           <Text
             style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
             Careers
