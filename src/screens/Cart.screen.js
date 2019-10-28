@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import {Container} from '../styles/styled';
 import {Layout} from '../components/HiasLayout';
 import TopBar from '../components/HiasTopBar';
 import globalStyle from '../styles/globalStyles';
-import {deviceWidth, LocalStorage} from '../lib';
+import {requestParameter, localStorage, KEY_STORAGE, UrlAPI} from '../lib';
 import Button from '../components/HiasButton';
 import {Actions} from 'react-native-router-flux';
 
@@ -81,13 +81,42 @@ const CartCard = props => {
   );
 };
 
-const _handleOrder = () => {
-  Actions.replace('AddressDetail', { someText: "Halo" });
-};
+const _handleOrder = async () => {};
 
 const Cart = props => {
-  console.log(props, 'PROPS');
-  console.log(props.test);
+  useEffect(() => {
+    async function getCart() {
+      try {
+        const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
+        const getCartId = await localStorage.getItem(KEY_STORAGE.USER_ID);
+
+        let response = await fetch(
+          UrlAPI(`/product/${getCartId}/getCartByUserId`),
+          {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${getToken}`,
+            },
+          },
+        );
+
+        let responseJson = await response.json();
+        let {data} = responseJson;
+        let {listItems} = data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getCart();
+
+    return () => {
+      return;
+    };
+  }, []);
+
   return (
     <Layout>
       <TopBar title="Cart" />
