@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Icon} from 'react-native-elements';
@@ -102,14 +103,16 @@ function SecondSubCategory(props) {
       </View>
 
       {/* Product Category */}
-      <View>
-        <View style={styles.productCategoryTitleWrapper}>
-          <Text style={styles.productCategoryTitleText}>{'Yeah'}</Text>
-        </View>
+      <ScrollView>
+        <View>
+          <View style={styles.productCategoryTitleWrapper}>
+            <Text style={styles.productCategoryTitleText}>{'Yeah'}</Text>
+          </View>
 
-        {/* List Main Category */}
-        <View style={styles.listCategoryWrapper}>{renderCategory()}</View>
-      </View>
+          {/* List Main Category */}
+          <View style={styles.listCategoryWrapper}>{renderCategory()}</View>
+        </View>
+      </ScrollView>
     </Layout>
   );
 }

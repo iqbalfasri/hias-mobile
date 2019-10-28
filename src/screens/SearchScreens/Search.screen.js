@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 
 // module component
@@ -106,14 +107,18 @@ function Search(props) {
       </View>
 
       {/* Product Category */}
-      <View>
-        <View style={styles.productCategoryTitleWrapper}>
-          <Text style={styles.productCategoryTitleText}>Product Category</Text>
-        </View>
+      <ScrollView>
+        <View>
+          <View style={styles.productCategoryTitleWrapper}>
+            <Text style={styles.productCategoryTitleText}>
+              Product Category
+            </Text>
+          </View>
 
-        {/* List Main Category */}
-        <View style={styles.listCategoryWrapper}>{renderCategory()}</View>
-      </View>
+          {/* List Main Category */}
+          <View style={styles.listCategoryWrapper}>{renderCategory()}</View>
+        </View>
+      </ScrollView>
     </Layout>
   );
 }
