@@ -42,6 +42,7 @@ import SearchScreen from './src/screens/SearchScreens/Search.screen';
 import SubCategory from './src/screens/SearchScreens/SubCategory.screen';
 import SecondSubCategory from './src/screens/SearchScreens/SecondSubCategory.screen';
 import ThirdSubCategory from './src/screens/SearchScreens/ThirdSubCategory.screen';
+import SearchResult from './src/screens/SearchScreens/SearchResult.screen';
 
 // FIXME: Refactore route
 const App = props => {
@@ -139,6 +140,11 @@ const App = props => {
                   <Scene
                     key="ThirdSubCategory"
                     component={ThirdSubCategory}
+                    hideNavBar
+                  />
+                  <Scene
+                    key="SearchResult"
+                    component={SearchResult}
                     hideNavBar
                   />
                 </Stack>

@@ -58,20 +58,20 @@ function BillingDetail(props) {
           </View>
 
           {/*Order items */}
-          <View style={styles.orderItemWrapper}>
-            <Text style={styles.orderItemTitle}>Billing Items</Text>
+          {/* <View style={styles.orderItemWrapper}>
+            <Text style={styles.orderItemTitle}>Billing Items</Text> */}
 
             {/* Order items card */}
+            {/* <ItemCard />
             <ItemCard />
-            <ItemCard />
-          </View>
+          </View> */}
 
           {/* Coupon code form */}
           <View></View>
 
           {/* Detail order */}
           <View style={styles.detailOrderWrapper}>
-            <View style={styles.detailOrderRows}>
+            {/* <View style={styles.detailOrderRows}>
               <Text>Subtotal</Text>
               <Text>IDR 3.598.000</Text>
             </View>
@@ -82,8 +82,8 @@ function BillingDetail(props) {
             <View style={styles.detailOrderRows}>
               <Text>Shipping</Text>
               <Text>Free</Text>
-            </View>
-            <View style={[styles.detailOrderRows, {paddingVertical: 15}]}>
+            </View> */}
+            <View style={[styles.detailOrderRows, {paddingVertical: 50}]}>
               <Text style={{fontWeight: 'bold'}}>Total</Text>
               <Text>IDR 3.598.000</Text>
             </View>

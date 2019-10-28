@@ -76,7 +76,7 @@ function ThirdSubCategory(props) {
             return (
               <TouchableOpacity
                 key={category.id}
-                onPress={() => alert('Halo')}
+                onPress={() => Actions.SearchResult({category_id: category.id})}
                 style={[
                   styles.listCategory,
                   {borderBottomWidth: isLastItem ? 0.5 : 0},
@@ -108,7 +108,7 @@ function ThirdSubCategory(props) {
         <View>
           <View style={styles.productCategoryTitleWrapper}>
             <Text style={styles.productCategoryTitleText}>
-              {`${props.mainCategoryName}   -   ${props.subCategoryName} `}
+              {`${props.subCategoryName}   -   ${props.secondSubCategoryName} `}
             </Text>
           </View>
 

@@ -32,7 +32,7 @@ const sofa1 = require('../assets/images/products/sofa1.jpg');
 const ProductDetail = props => {
   const [detailProduct, setDetailProduct] = useState([]);
   const [collapsed, setCollapsed] = useState(true);
-  const {id_product} = props;
+  const { id_product } = props;
 
   useEffect(() => {
     async function getDetailProduct() {
@@ -46,7 +46,7 @@ const ProductDetail = props => {
     }
 
     getDetailProduct();
-  }, [id_product]);
+  }, []);
 
   const _handleAddToCart = async () => {
     try {
