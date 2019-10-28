@@ -129,7 +129,7 @@ const ProductDetail = props => {
                   {product.productName}
                 </Text>
                 <Text style={styles.productInfoDesc}>
-                  {product.description}
+                  {product.overview}
                 </Text>
                 <View style={{paddingVertical: 15}}>
                   <Text
