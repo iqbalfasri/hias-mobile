@@ -1,5 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import RadioForm, {
+  RadioButton,
+  RadioButtonInput,
+  RadioButtonLabel,
+} from 'react-native-simple-radio-button';
 
 // Own component
 import {Layout} from '../components/HiasLayout';
@@ -21,24 +26,64 @@ const temproraryData = [
   },
 ];
 
-function AddressOrder(props) {
-  const [addressDetail, setAddressDetail] = useState(temproraryData);
+const data = [
+  {
+    label: 'jln kubis III dalam B',
+    value: {
+      firstName: 'daffaa',
+      lastName: 'akhlaric',
+      country: 'indonesia',
+      address: 'jln kubis III dalam B',
+      city: 'akhlaric@gmail.com',
+      phone: '087757185033',
+      company: null,
+      postCode: '15368',
+      idAddress: 3,
+      email: 'akhlaric@gmail.com',
+    },
+  },
+  {
+    label: 'jln kubis III dalam A',
+    value: {
+      firstName: 'daffaa',
+      lastName: 'akhlaric',
+      country: 'indonesia',
+      address: 'jln kubis III dalam A',
+      city: 'akhlaric@gmail.com',
+      phone: '087757185033',
+      company: null,
+      postCode: '15368',
+      idAddress: 3,
+      email: 'akhlaric@gmail.com',
+    },
+  },
+];
+class AddressOrder extends Component {
+  constructor(props) {
+    super(props);
 
-  useEffect(() => {
-    console.log(addressDetail, 'Detail data');
-  }, []);
+    this.state = {
+      value: null,
+    };
+  }
 
-  return (
-    <Layout>
-      <View style={styles.addressRow}>
-        
-      </View>
-      <TouchableOpacity
-        onPress={() => Actions.jump('BillingDetail', {test: 'halo'})}>
-        <Text>Next</Text>
-      </TouchableOpacity>
-    </Layout>
-  );
+  componentDidMount() {}
+
+  render() {
+    return (
+      <Layout>
+        <View style={styles.addressRow}>
+          <RadioForm
+            radio_props={data}
+            initial={0}
+            onPress={value =>
+              this.setState({value}, () => alert(JSON.stringify(this.state.value)))
+            }
+          />
+        </View>
+      </Layout>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
