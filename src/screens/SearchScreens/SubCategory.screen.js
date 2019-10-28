@@ -10,12 +10,12 @@ import {Actions} from 'react-native-router-flux';
 import {Icon} from 'react-native-elements';
 
 // Own component
-import {Layout} from '../components/HiasLayout';
-import TopBar from '../components/HiasTopBar';
-import SkeletonPlaceholder from '../components/SkeletonPlaceholder';
+import {Layout} from '../../components/HiasLayout';
+import TopBar from '../../components/HiasTopBar';
+import SkeletonPlaceholder from '../../components/SkeletonPlaceholder';
 
 // libs
-import {UrlAPI} from '../lib';
+import {UrlAPI} from '../../lib';
 
 function RenderSkeleton() {
   return (

@@ -17,8 +17,6 @@ import SignupVerifScreen from './src/screens/_SignupVerif.screen';
 import SignupSuccessScreen from './src/screens/SignupSuccess.screen';
 import ProductDetailScreen from './src/screens/ProductDetail.screen';
 import OrderScreen from './src/screens/Order.screen';
-import SearchScreen from './src/screens/Search.screen';
-import SearchSubCategory from './src/screens/SearchSubCategory.screen';
 
 // Tab Bar Component
 import CustomTabBar, {CustomTopBar} from './src/components/CustomTabBar';
@@ -37,6 +35,11 @@ import AddressOrderScreen from './src/screens/AddressOrder.screen';
 import BillingOrderScreen from './src/screens/BillingDetailOrder.screen';
 import PaymentOrderScreen from './src/screens/PaymentOrder.screen';
 import StatusOrderScreen from './src/screens/StatusOrder.screen';
+
+// Search
+import SearchScreen from './src/screens/SearchScreens/Search.screen';
+import SubCategory from './src/screens/SearchScreens/SubCategory.screen';
+import SecondSubCategory from './src/screens/SearchScreens/SecondSubCategory.screen';
 
 // FIXME: Refactore route
 const App = props => {
@@ -117,6 +120,7 @@ const App = props => {
                 <Scene key="HotProducts" component={HotProducts} hideNavBar />
                 <Scene key="BestProducts" component={BestProdcuts} hideNavBar />
 
+                {/* Search Category */}
                 <Stack key="SearchStack">
                   <Scene
                     initial
@@ -124,9 +128,10 @@ const App = props => {
                     component={SearchScreen}
                     hideNavBar
                   />
+                  <Scene key="SubCategory" component={SubCategory} hideNavBar />
                   <Scene
-                    key="SearchSubCategory"
-                    component={SearchSubCategory}
+                    key="SecondSubCategory"
+                    component={SecondSubCategory}
                     hideNavBar
                   />
                 </Stack>

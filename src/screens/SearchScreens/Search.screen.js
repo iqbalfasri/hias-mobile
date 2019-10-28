@@ -11,14 +11,14 @@ import {
 import {Icon} from 'react-native-elements';
 
 // own component
-import Button from '../components/HiasButton';
-import {Layout} from '../components/HiasLayout';
-import TopBar from '../components/HiasTopBar';
+import Button from '../../components/HiasButton';
+import {Layout} from '../../components/HiasLayout';
+import TopBar from '../../components/HiasTopBar';
 
 // libs
-import {UrlAPI} from '../lib';
+import {UrlAPI} from '../../lib';
 import {Actions} from 'react-native-router-flux';
-import SkeletonPlaceholder from '../components/SkeletonPlaceholder';
+import SkeletonPlaceholder from '../../components/SkeletonPlaceholder';
 
 function RenderSkeleton() {
   return (
@@ -74,7 +74,7 @@ function Search(props) {
               <TouchableOpacity
                 key={category.id}
                 onPress={() =>
-                  Actions.SearchSubCategory({
+                  Actions.SubCategory({
                     idMainCategory: category.id,
                     mainCategoryName: category.mainCategoryName,
                   })
