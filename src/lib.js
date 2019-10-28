@@ -49,8 +49,6 @@ export function requestParameter(requestObj, method = 'GET', authToken) {
     body: JSON.stringify(requestObj),
   };
 
-  console.log(obj, 'Request param');
-
   return obj;
 }
 
