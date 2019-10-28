@@ -1,114 +1,168 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 
 // module component
-import Collapsible from 'react-native-collapsible';
+import {Icon} from 'react-native-elements';
 
 // own component
 import Button from '../components/HiasButton';
+import {Layout} from '../components/HiasLayout';
+import TopBar from '../components/HiasTopBar';
 
 // libs
 import {UrlAPI} from '../lib';
+import {Actions} from 'react-native-router-flux';
+import SkeletonPlaceholder from '../components/SkeletonPlaceholder';
 
-class Search extends React.Component {
-  constructor() {
-    super();
+function RenderSkeleton() {
+  return (
+    <React.Fragment>
+      {[0, 1, 2, 3, 4].map((_, index) => {
+        return (
+          <View key={index} style={styles.skeletonWrapper}>
+            <SkeletonPlaceholder>
+              <View style={styles.skeletonStyle} />
+            </SkeletonPlaceholder>
+          </View>
+        );
+      })}
+    </React.Fragment>
+  );
+}
 
-    this.state = {
-      mainCategory: null,
-      subCategory: null,
-      outerCollapse: false,
-      innerCollapse: true,
-    };
-  }
+function Search(props) {
+  const [mainCategory, setMainCategory] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // state data category
-  // const [mainCategory, setMainCategory] = useState(null);
-  // const [subCategory, setSubCategory] = useState(null);
+  useEffect(() => {
+    async function getMainCategory() {
+      try {
+        const response = await fetch(UrlAPI('/product/mainCategory'));
+        const responseJson = await response.json();
 
-  // // state collapsible
-  // const [outerCollapse, setOuterCollapse] = useState(false);
-  // const [innerCollapse, setInnerCollapse] = useState(true);
+        const {data} = responseJson;
 
-  // fetch data
-  async componentDidMount() {
-    try {
-      const response = await fetch(UrlAPI('/product/mainCategory'));
-      const responseJson = await response.json();
-
-      const {data} = responseJson;
-
-      let dataObj = [];
-
-      // Re-structure data object
-      if (data.length !== 0) {
-        data.map(el => {
-          dataObj.push({
-            ...el,
-            toggle: false,
-          });
-        });
+        setMainCategory(data);
+        setLoading(false);
+      } catch (error) {
+        alert('Error ambil data main category');
       }
-
-      this.setState({mainCategory: dataObj});
-    } catch (error) {
-      alert('Error ambil data main category');
     }
-  }
 
-  /**
-   *
-   * @param {*} index index each element
-   * @param {*} e
-   */
-  toggleMainCategory(index, e) {
-    const {mainCategory} = this.state;
+    getMainCategory();
 
-    let mCat = mainCategory !== null ? [...mainCategory] : null;
-    mCat[index].toggle = !mCat[index].toggle;
+    // call back for component will unMount
+    return () => {
+      return;
+    };
+  }, []);
 
-    this.setState({mainCategory: mCat});
-  }
+  const renderCategory = () => {
+    if (loading) {
+      return <RenderSkeleton />;
+    } else {
+      return (
+        <React.Fragment>
+          {mainCategory.map((category, i) => {
+            let isLastItem = mainCategory.length - 1 === i;
+            return (
+              <TouchableOpacity
+                key={category.id}
+                onPress={() =>
+                  Actions.SearchSubCategory({idMainCategory: category.id})
+                }
+                style={[
+                  styles.listCategory,
+                  {borderBottomWidth: isLastItem ? 0.5 : 0},
+                ]}>
+                <Text>{category.mainCategoryName}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </React.Fragment>
+      );
+    }
+  };
 
-  toggleSubCategory(index, e, idMainCategory) {}
-
-  render() {
-    return (
-      <View style={styles.flexScreen}>
-        <Text>Search Screen</Text>
-        {this.state.mainCategory !== null
-          ? this.state.mainCategory.map((cat, i) => {
-              return (
-                <React.Fragment key={i}>
-                  {/* Button colappse Main Category */}
-                  <Button onPress={this.toggleMainCategory.bind(this, i)}>
-                    <Text>{cat.mainCategoryName}</Text>
-                  </Button>
-                  {/* Collapsed main category */}
-                  <Collapsible collapsed={!cat.toggle}>
-                    {/* Button collapse Sub Category */}
-                    <Button>
-                      <Text>Inner</Text>
-                    </Button>
-
-                    <Collapsible collapsed={this.state.innerCollapse}>
-                      <Text>Text colapsible inner</Text>
-                    </Collapsible>
-                  </Collapsible>
-                </React.Fragment>
-              );
-            })
-          : null}
+  return (
+    <Layout>
+      <TopBar title="Search" />
+      {/* Search form */}
+      <View style={styles.searchBar}>
+        <View style={styles.searchIcon}>
+          <Icon color="#9F9F9F" size={16} name="search" type="font-awesome" />
+        </View>
+        <View style={styles.searchInput}>
+          <TextInput placeholder="Search" />
+        </View>
       </View>
-    );
-  }
+
+      {/* Product Category */}
+      <View>
+        <View style={styles.productCategoryTitleWrapper}>
+          <Text style={styles.productCategoryTitleText}>Product Category</Text>
+        </View>
+
+        {/* List Main Category */}
+        <View style={styles.listCategoryWrapper}>{renderCategory()}</View>
+      </View>
+    </Layout>
+  );
 }
 
 const styles = StyleSheet.create({
-  flexScreen: {
-    flex: 1,
-    justifyContent: 'center',
+  searchBar: {
+    borderTopWidth: 0.5,
+    borderTopColor: '#E5E5E5',
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#E5E5E5',
+    flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: '8.5%',
+  },
+  searchInput: {
+    width: '100%',
+    paddingVertical: 15,
+    paddingRight: 25,
+    paddingLeft: 10,
+  },
+  searchIcon: {
+    paddingHorizontal: 8,
+  },
+  // product category
+  productCategoryTitleWrapper: {
+    paddingHorizontal: 30,
+    paddingTop: 30,
+  },
+  productCategoryTitleText: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  listCategoryWrapper: {
+    paddingVertical: 20,
+  },
+  listCategory: {
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    borderTopColor: '#000',
+    borderTopWidth: 0.5,
+    borderBottomColor: '#000',
+  },
+  // skeleton
+  skeletonWrapper: {
+    borderRadius: 5,
+    paddingHorizontal: 30,
+  },
+  skeletonStyle: {
+    paddingVertical: 15,
+    marginBottom: 10,
+    borderRadius: 5,
   },
 });
 export default Search;
