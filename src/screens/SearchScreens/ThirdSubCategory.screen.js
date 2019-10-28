@@ -34,30 +34,31 @@ function RenderSkeleton() {
   );
 }
 
-function SecondSubCategory(props) {
-  const [secondSubCategory, setSecondSubcategory] = useState([]);
+function ThirdSubCategory(props) {
+  const [thirdSubCategory, setThirdSubCategory] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // props.subCategoryId
 
   useEffect(() => {
-    async function getSecondSubCategory() {
+    async function getThirdSubCategory() {
       try {
         const response = await fetch(
           UrlAPI(
-            `/product/secondSubCategoryBySubCategoryId/${props.subCategoryId}`,
+            `/product/thirdSubCategoryBySecondMainCategoryId/${props.secondSubCategoryId}`,
           ),
         );
         const responseJson = await response.json();
 
         const {data, success} = responseJson;
-        setSecondSubcategory(data);
+        setThirdSubCategory(data);
+        // setThirdSubCategory(data)
       } catch (error) {
         alert('Something went wrong');
       }
     }
 
-    getSecondSubCategory().finally(() => setLoading(false));
+    getThirdSubCategory().finally(() => setLoading(false));
 
     return () => {
       return;
@@ -70,19 +71,17 @@ function SecondSubCategory(props) {
     } else {
       return (
         <React.Fragment>
-          {secondSubCategory.map((category, i) => {
-            let isLastItem = secondSubCategory.length - 1 === i;
+          {thirdSubCategory.map((category, i) => {
+            let isLastItem = thirdSubCategory.length - 1 === i;
             return (
               <TouchableOpacity
                 key={category.id}
-                onPress={() =>
-                  Actions.ThirdSubCategory({secondSubCategoryId: category.id})
-                }
+                onPress={() => alert('Halo')}
                 style={[
                   styles.listCategory,
                   {borderBottomWidth: isLastItem ? 0.5 : 0},
                 ]}>
-                <Text>{category.secondSubCategoryName}</Text>
+                <Text>{category.thirdSubCategoryName}</Text>
               </TouchableOpacity>
             );
           })}
@@ -171,4 +170,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SecondSubCategory;
+export default ThirdSubCategory;

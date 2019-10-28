@@ -105,6 +105,13 @@ const Cart = props => {
         let responseJson = await response.json();
         let {data} = responseJson;
         let {listItems} = data;
+
+        let subTotal = 0;
+        listItems.map(list => {
+          subTotal += list.price
+        });
+
+        // console.log(subTotal, "harusnya bisa!")
       } catch (error) {
         console.log(error);
       }
