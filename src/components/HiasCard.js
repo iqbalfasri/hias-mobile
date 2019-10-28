@@ -51,6 +51,7 @@ const Card = props => {
         ]}>
         {/* TODO: change hardcode image source */}
         <Image
+          resizeMethod="cover"
           style={styles.imageProduct}
           source={{uri: data.thumbnail}}
         />
@@ -115,7 +116,6 @@ const styles = StyleSheet.create({
     width: 115,
     height: 115,
     padding: 20,
-    // overflow: 'hidden',
     backgroundColor: '#fff',
     borderRadius: 10,
     position: 'relative',
@@ -123,8 +123,9 @@ const styles = StyleSheet.create({
   },
   imageProduct: {
     flex: 1,
-    width: null,
-    height: null,
+    width: 110,
+    height: 110,
+    alignSelf: 'center'
   },
   infoProductWrapper: {
     flexDirection: 'row',
