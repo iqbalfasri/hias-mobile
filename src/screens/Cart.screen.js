@@ -13,7 +13,13 @@ import {Container} from '../styles/styled';
 import {Layout} from '../components/HiasLayout';
 import TopBar from '../components/HiasTopBar';
 import globalStyle from '../styles/globalStyles';
-import {requestParameter, localStorage, KEY_STORAGE, UrlAPI} from '../lib';
+import {
+  requestParameter,
+  localStorage,
+  KEY_STORAGE,
+  UrlAPI,
+  getShortString,
+} from '../lib';
 import Button from '../components/HiasButton';
 import {Actions} from 'react-native-router-flux';
 
@@ -55,35 +61,47 @@ const CartCard = props => {
   };
 
   return (
-    <View
-      style={[styles.productWrapper, globalStyle.elevationShadowStyle(5)]}
-      {...props}>
-      <View style={styles.productDetailWrapper}>
-        <View style={styles.productThumbnail}>
-          <Image
-            style={{flex: 1, width: null, height: null}}
-            source={data.image}
-          />
-        </View>
-        <View style={styles.productInfo}>
-          <Text style={styles.productInfoTitle}>{data.product_name}</Text>
-          <Text style={styles.productInfoSubTitle}>{data.price}</Text>
-        </View>
-        <View>
-          <QtyButton
-            addQty={() => handleAddQty}
-            removeQty={() => setQty(qty - 1)}
-            qty={qty}
-          />
-        </View>
-      </View>
-    </View>
+    <React.Fragment>
+      {data.map((item, index) => {
+        console.log(item, 'Item card');
+        return (
+          <View
+            key={index}
+            style={[styles.productWrapper, globalStyle.elevationShadowStyle(5)]}
+            {...props}>
+            <View style={styles.productDetailWrapper}>
+              <View style={styles.productThumbnail}>
+                <Image
+                  style={{flex: 1, width: null, height: null}}
+                  source={{uri: item.thumbnail}}
+                />
+              </View>
+              <View style={styles.productInfo}>
+                <Text style={styles.productInfoTitle}>
+                  {getShortString(item.name, 10)}
+                </Text>
+                <Text style={styles.productInfoSubTitle}>{item.price}</Text>
+              </View>
+              <View>
+                <QtyButton
+                  addQty={() => handleAddQty}
+                  removeQty={() => setQty(qty - 1)}
+                  qty={item.qty}
+                />
+              </View>
+            </View>
+          </View>
+        );
+      })}
+    </React.Fragment>
   );
 };
 
 const _handleOrder = async () => {};
 
 const Cart = props => {
+  const [cartItems, setCartItems] = useState([]);
+
   useEffect(() => {
     async function getCart() {
       try {
@@ -106,12 +124,7 @@ const Cart = props => {
         let {data} = responseJson;
         let {listItems} = data;
 
-        let subTotal = 0;
-        listItems.map(list => {
-          subTotal += list.price
-        });
-
-        // console.log(subTotal, "harusnya bisa!")
+        setCartItems(listItems);
       } catch (error) {
         console.log(error);
       }
@@ -129,7 +142,7 @@ const Cart = props => {
       <TopBar title="Cart" />
       <ScrollView>
         <Container>
-          <CartCard data={exampleDataCart} />
+          <CartCard data={cartItems} />
           {/* <CartCard /> */}
         </Container>
       </ScrollView>
