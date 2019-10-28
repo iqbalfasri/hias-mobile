@@ -97,7 +97,9 @@ const CartCard = props => {
   );
 };
 
-const _handleOrder = async () => {};
+const _handleOrder = async () => {
+  Actions.toptabbar();
+};
 
 const Cart = props => {
   const [cartItems, setCartItems] = useState([]);
