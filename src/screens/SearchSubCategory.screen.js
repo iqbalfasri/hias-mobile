@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -6,19 +6,16 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-
-// module component
+import {Actions} from 'react-native-router-flux';
 import {Icon} from 'react-native-elements';
 
-// own component
-import Button from '../components/HiasButton';
+// Own component
 import {Layout} from '../components/HiasLayout';
 import TopBar from '../components/HiasTopBar';
+import SkeletonPlaceholder from '../components/SkeletonPlaceholder';
 
 // libs
 import {UrlAPI} from '../lib';
-import {Actions} from 'react-native-router-flux';
-import SkeletonPlaceholder from '../components/SkeletonPlaceholder';
 
 function RenderSkeleton() {
   return (
@@ -36,27 +33,29 @@ function RenderSkeleton() {
   );
 }
 
-function Search(props) {
-  const [mainCategory, setMainCategory] = useState([]);
+function SearchSubCategory(props) {
+  const [subCategory, setSubcategory] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function getMainCategory() {
+    async function getSubCategory() {
       try {
-        const response = await fetch(UrlAPI('/product/mainCategory'));
+        const response = await fetch(
+          UrlAPI(
+            `/product/subCategoryByMainCategoryId/${props.idMainCategory}`,
+          ),
+        );
         const responseJson = await response.json();
 
-        const {data} = responseJson;
-
-        setMainCategory(data);
+        const {data, success} = responseJson;
+        setSubcategory(data);
       } catch (error) {
-        alert('Error ambil data main category');
+        alert('Something went wrong');
       }
     }
 
-    getMainCategory().finally(() => setLoading(false));
+    getSubCategory().finally(() => setLoading(false));
 
-    // call back for component will unMount
     return () => {
       return;
     };
@@ -68,22 +67,17 @@ function Search(props) {
     } else {
       return (
         <React.Fragment>
-          {mainCategory.map((category, i) => {
-            let isLastItem = mainCategory.length - 1 === i;
+          {subCategory.map((category, i) => {
+            let isLastItem = subCategory.length - 1 === i;
             return (
               <TouchableOpacity
                 key={category.id}
-                onPress={() =>
-                  Actions.SearchSubCategory({
-                    idMainCategory: category.id,
-                    mainCategoryName: category.mainCategoryName,
-                  })
-                }
+                onPress={() => alert('Hola')}
                 style={[
                   styles.listCategory,
                   {borderBottomWidth: isLastItem ? 0.5 : 0},
                 ]}>
-                <Text>{category.mainCategoryName}</Text>
+                <Text>{category.subCategoryName}</Text>
               </TouchableOpacity>
             );
           })}
@@ -108,7 +102,9 @@ function Search(props) {
       {/* Product Category */}
       <View>
         <View style={styles.productCategoryTitleWrapper}>
-          <Text style={styles.productCategoryTitleText}>Product Category</Text>
+          <Text style={styles.productCategoryTitleText}>
+            {props.mainCategoryName}
+          </Text>
         </View>
 
         {/* List Main Category */}
@@ -167,4 +163,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
-export default Search;
+
+export default SearchSubCategory;

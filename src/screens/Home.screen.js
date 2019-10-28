@@ -140,7 +140,7 @@ const _renderSearch = () => {
     <Button
       type="transparent"
       style={styles.searchBar}
-      onPress={() => Actions.Search()}>
+      onPress={() => Actions.SearchStack()}>
       <View style={styles.searchIcon}>
         <Icon color="#9F9F9F" size={16} name="search" type="font-awesome" />
       </View>

@@ -18,6 +18,7 @@ import SignupSuccessScreen from './src/screens/SignupSuccess.screen';
 import ProductDetailScreen from './src/screens/ProductDetail.screen';
 import OrderScreen from './src/screens/Order.screen';
 import SearchScreen from './src/screens/Search.screen';
+import SearchSubCategory from './src/screens/SearchSubCategory.screen';
 
 // Tab Bar Component
 import CustomTabBar, {CustomTopBar} from './src/components/CustomTabBar';
@@ -94,9 +95,20 @@ const App = props => {
             hideDrawerButton={true}
             hideNavBar={true}>
             {/* Tabbar Scene Stack */}
-            <Scene tabs key="tabbar" tabBarComponent={CustomTabBar} hideNavBar>
-              <Scene key="HomeStack" hideNavBar title="Home">
-                <Scene key="Home" type={ActionConst.RESET} component={HomeScreen} initial hideNavBar />
+            <Scene
+              tabs
+              key="tabbar"
+              tabBarComponent={CustomTabBar}
+              type={ActionConst.RESET}
+              hideNavBar>
+              <Stack key="HomeStack" hideNavBar title="Home">
+                <Scene
+                  key="Home"
+                  type={ActionConst.RESET}
+                  component={HomeScreen}
+                  initial
+                  hideNavBar
+                />
                 <Scene
                   key="ProductDetail"
                   component={ProductDetailScreen}
@@ -104,8 +116,21 @@ const App = props => {
                 />
                 <Scene key="HotProducts" component={HotProducts} hideNavBar />
                 <Scene key="BestProducts" component={BestProdcuts} hideNavBar />
-                <Scene key="Search" component={SearchScreen} hideNavBar />
-              </Scene>
+
+                <Stack key="SearchStack">
+                  <Scene
+                    initial
+                    key="Search"
+                    component={SearchScreen}
+                    hideNavBar
+                  />
+                  <Scene
+                    key="SearchSubCategory"
+                    component={SearchSubCategory}
+                    hideNavBar
+                  />
+                </Stack>
+              </Stack>
 
               <Scene key="Cart" component={CartScreen} hideNavBar />
             </Scene>
