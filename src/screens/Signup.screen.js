@@ -44,20 +44,50 @@ const SigupScreen = () => {
       let responseJson = await response.json();
       let {success, error, data} = responseJson;
 
-      let { token } = data.register;
+      let {token} = data.register;
+      let {user} = data.register;
 
       // save token to local storage
       localStorage.saveItem(KEY_STORAGE.TOKEN, token);
 
+      // save userid to local storage
+      localStorage.saveItem(KEY_STORAGE.USER_ID, user.id);
+
       if (success) {
-        Actions.SignupSuccess();
+        // Regis cart, baru nanti redierect success
+        _registCartId(user.id);
       } else {
         // if username / email is already exist
         alert(error.errorMessage);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       alert('Server internal error');
+    }
+  };
+
+  const _registCartId = async userId => {
+    try {
+      const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
+      // const getUserId = await localStorage.getItem(KEY_STORAGE.USER_ID);
+      const getUserId = userId;
+      const params = {
+        userId: getUserId,
+      };
+
+      let response = await fetch(
+        UrlAPI('/product/addToCart'),
+        requestParameter(params, 'POST', getToken),
+      );
+
+      let responseJson = await response.json();
+      if (responseJson.success) {
+        Actions.SignupSuccess();
+      } else {
+        alert('ada kendala saat daftarkan cart id');
+      }
+    } catch (error) {
+      alert('Server Internal error');
     }
   };
 

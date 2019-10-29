@@ -9,7 +9,8 @@ import {localStorage, KEY_STORAGE} from '../lib';
 
 const Drawer = () => {
   const _handleLogout = () => {
-    localStorage.removeItem(KEY_STORAGE.TOKEN)
+    localStorage.removeItem(KEY_STORAGE.TOKEN);
+    localStorage.removeItem(KEY_STORAGE.USER_ID);
   };
 
   return (

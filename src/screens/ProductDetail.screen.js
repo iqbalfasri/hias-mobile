@@ -32,7 +32,7 @@ const sofa1 = require('../assets/images/products/sofa1.jpg');
 const ProductDetail = props => {
   const [detailProduct, setDetailProduct] = useState([]);
   const [collapsed, setCollapsed] = useState(true);
-  const { id_product } = props;
+  const {id_product} = props;
 
   useEffect(() => {
     async function getDetailProduct() {
@@ -66,6 +66,7 @@ const ProductDetail = props => {
       const responseJson = await response.json();
       if (responseJson.success) {
         alert('Berhasil tambah cart');
+        Actions.Cart();
       } else {
         alert('Ada masalah saat tambah cart');
       }
@@ -128,9 +129,7 @@ const ProductDetail = props => {
                 <Text style={styles.productInfoTitle}>
                   {product.productName}
                 </Text>
-                <Text style={styles.productInfoDesc}>
-                  {product.overview}
-                </Text>
+                <Text style={styles.productInfoDesc}>{product.overview}</Text>
                 <View style={{paddingVertical: 15}}>
                   <Text
                     style={{
