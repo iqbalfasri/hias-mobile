@@ -12,7 +12,7 @@ import {Icon} from 'react-native-elements';
 
 import globalStyle, {color} from '../styles/globalStyles';
 
-import {isAndroid} from '../lib';
+import {isAndroid, requireLogin} from '../lib';
 import TopBar from './HiasTopBar';
 
 class CustomTabBar extends Component {
@@ -57,7 +57,9 @@ class CustomTabBar extends Component {
           return (
             <TouchableOpacity
               key={element.key}
-              onPress={() => Actions[element.key]()}>
+              onPress={() => {
+                Actions[element.key]();
+              }}>
               <Icon
                 color={_activeScreen(index)}
                 type="feather"

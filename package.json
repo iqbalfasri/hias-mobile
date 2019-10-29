@@ -7,7 +7,8 @@
     "test": "jest",
     "lint": "eslint .",
     "run-android": "react-native run-android",
-    "run-ios": "react-native run-ios"
+    "run-ios": "react-native run-ios",
+    "clean:android": "cd android && ./gradlew clean && cd ../"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.2",

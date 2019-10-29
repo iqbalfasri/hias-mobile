@@ -149,6 +149,7 @@ export function toRupiah(nominal) {
 /**
  * this method to secure screen with login
  */
-export function requireLogin() {
-  return localStorage.getItem(KEY_STORAGE.TOKEN) === null;
-}
+export const requireLogin = async () => {
+  const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
+  return getToken === null;
+};

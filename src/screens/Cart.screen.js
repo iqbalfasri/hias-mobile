@@ -19,6 +19,7 @@ import {
   KEY_STORAGE,
   UrlAPI,
   getShortString,
+  requireLogin,
 } from '../lib';
 import Button from '../components/HiasButton';
 import {Actions} from 'react-native-router-flux';
@@ -62,37 +63,42 @@ const CartCard = props => {
 
   return (
     <React.Fragment>
-      {data.map((item, index) => {
-        console.log(item, 'Item card');
-        return (
-          <View
-            key={index}
-            style={[styles.productWrapper, globalStyle.elevationShadowStyle(5)]}
-            {...props}>
-            <View style={styles.productDetailWrapper}>
-              <View style={styles.productThumbnail}>
-                <Image
-                  style={{flex: 1, width: null, height: null}}
-                  source={{uri: item.thumbnail}}
-                />
+      {data !== undefined
+        ? data.map((item, index) => {
+            console.log(item, 'Item card');
+            return (
+              <View
+                key={index}
+                style={[
+                  styles.productWrapper,
+                  globalStyle.elevationShadowStyle(5),
+                ]}
+                {...props}>
+                <View style={styles.productDetailWrapper}>
+                  <View style={styles.productThumbnail}>
+                    <Image
+                      style={{flex: 1, width: null, height: null}}
+                      source={{uri: item.thumbnail}}
+                    />
+                  </View>
+                  <View style={styles.productInfo}>
+                    <Text style={styles.productInfoTitle}>
+                      {getShortString(item.name, 10)}
+                    </Text>
+                    <Text style={styles.productInfoSubTitle}>{item.price}</Text>
+                  </View>
+                  <View>
+                    <QtyButton
+                      addQty={() => handleAddQty}
+                      removeQty={() => setQty(qty - 1)}
+                      qty={item.qty}
+                    />
+                  </View>
+                </View>
               </View>
-              <View style={styles.productInfo}>
-                <Text style={styles.productInfoTitle}>
-                  {getShortString(item.name, 10)}
-                </Text>
-                <Text style={styles.productInfoSubTitle}>{item.price}</Text>
-              </View>
-              <View>
-                <QtyButton
-                  addQty={() => handleAddQty}
-                  removeQty={() => setQty(qty - 1)}
-                  qty={item.qty}
-                />
-              </View>
-            </View>
-          </View>
-        );
-      })}
+            );
+          })
+        : null}
     </React.Fragment>
   );
 };
@@ -107,6 +113,15 @@ const Cart = props => {
   useEffect(() => {
     async function getCart() {
       try {
+        // Check if user not login
+        // if (requireLogin()) {
+        //   Actions.Signin();
+        //   return;
+        // }
+
+        // console.log(requireLogin(), 'require login');
+
+        // fetch cart
         const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
         const getCartId = await localStorage.getItem(KEY_STORAGE.USER_ID);
 
@@ -137,7 +152,7 @@ const Cart = props => {
     return () => {
       return;
     };
-  }, []);
+  }, [cartItems]);
 
   return (
     <Layout>
@@ -145,7 +160,6 @@ const Cart = props => {
       <ScrollView>
         <Container>
           <CartCard data={cartItems} />
-          {/* <CartCard /> */}
         </Container>
       </ScrollView>
       <View
