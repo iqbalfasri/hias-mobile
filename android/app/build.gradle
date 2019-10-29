@@ -150,14 +150,10 @@ android {
             keyPassword 'android'
         }
         release {
-            // storeFile file(MYAPP_RELEASE_STORE_FILE)
-            // storePassword MYAPP_RELEASE_STORE_PASSWORD
-            // keyAlias MYAPP_RELEASE_KEY_ALIAS
-            // keyPassword MYAPP_RELEASE_KEY_PASSWORD
-            storeFile rootProject.file("app/mykeystore.keystore")
-            storePassword "hias2019"
-            keyAlias "mykeyalias"
-            keyPassword "hias2019"
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
         }
     }
     buildTypes {
