@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 // own component
 import Button from '../components/HiasButton';
@@ -11,6 +12,12 @@ const Drawer = () => {
   const _handleLogout = () => {
     localStorage.removeItem(KEY_STORAGE.TOKEN);
     localStorage.removeItem(KEY_STORAGE.USER_ID);
+
+    // FIXME:
+    // when success remove local storage
+    // redirect to splash screen, or
+    // to signin screen
+    Actions.Splash();
   };
 
   return (

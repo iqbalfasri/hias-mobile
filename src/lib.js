@@ -101,7 +101,7 @@ class LocalStorage {
         alert('Error remove');
       }
 
-      alert('Berhasil remove item');
+      // TODO: Success code here
     });
   }
 }
