@@ -5,15 +5,13 @@ import {Actions} from 'react-native-router-flux';
 // Own component
 import Button from '../components/HiasButton';
 import {Layout, Container} from '../components/HiasLayout';
-import {isAndroid, LocalStorage, KEY_STORAGE} from '../lib';
+import {isAndroid} from '../lib';
 import globalStyle, {color} from '../styles/globalStyles';
 
 const SuccessIlustration = require('../assets/images/hiashouse-succes-signup.png');
 const HiasLogoWithText = require('../assets/images/hiashouse-logo-text.png');
 
 const SignupSuccess = () => {
-  alert(LocalStorage.getItem(KEY_STORAGE.TOKEN));
-
   return (
     <Layout>
       <Container>

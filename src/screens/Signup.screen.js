@@ -12,7 +12,7 @@ import {
   deviceWidth,
   UrlAPI,
   requestParameter,
-  LocalStorage,
+  localStorage,
   KEY_STORAGE,
 } from '../lib';
 import globalStyle, {color} from '../styles/globalStyles';
@@ -44,10 +44,10 @@ const SigupScreen = () => {
       let responseJson = await response.json();
       let {success, error, data} = responseJson;
 
-      let {token} = data.register;
+      let { token } = data.register;
 
       // save token to local storage
-      LocalStorage.saveItem(KEY_STORAGE.TOKEN, token);
+      localStorage.saveItem(KEY_STORAGE.TOKEN, token);
 
       if (success) {
         Actions.SignupSuccess();
@@ -56,6 +56,7 @@ const SigupScreen = () => {
         alert(error.errorMessage);
       }
     } catch (error) {
+      console.log(error)
       alert('Server internal error');
     }
   };
