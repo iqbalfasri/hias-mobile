@@ -20,6 +20,7 @@ import {
   requestParameter,
   localStorage,
   KEY_STORAGE,
+  toRupiah,
 } from '../lib';
 
 // Own component
@@ -138,7 +139,7 @@ const ProductDetail = props => {
                       fontWeight: 'bold',
                       color: '#000',
                     }}>
-                    Rp {product.price}
+                    {`Rp ${toRupiah(product.price)}`}
                   </Text>
                 </View>
                 {/* Button group */}

@@ -6,7 +6,7 @@ import {Actions} from 'react-native-router-flux';
 // Own component
 import Button from '../components/HiasButton';
 import {color} from '../styles/globalStyles';
-import {deviceWidth, getShortString} from '../lib';
+import {deviceWidth, getShortString, toRupiah} from '../lib';
 import globalStyles from '../styles/globalStyles';
 import SkeletonPlaceholder from './SkeletonPlaceholder';
 
@@ -51,7 +51,7 @@ const Card = props => {
         ]}>
         {/* TODO: change hardcode image source */}
         <Image
-          resizeMethod='resize'
+          resizeMethod="resize"
           style={styles.imageProduct}
           source={{uri: data.thumbnail}}
         />
@@ -62,7 +62,7 @@ const Card = props => {
           {getShortString(data.productName, 20)}
         </Text>
         <View style={styles.infoProductWrapper}>
-          <Text style={styles.price}>Rp {data.price}</Text>
+          <Text style={styles.price}>{`Rp ${toRupiah(data.price)}`}</Text>
           <Icon
             style={{alignSelf: 'center'}}
             name="heart"
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 110,
     height: 110,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   infoProductWrapper: {
     flexDirection: 'row',
