@@ -55,7 +55,7 @@ const App = props => {
       <Router {...props}>
         <Scene key="root">
           <Scene
-            init
+            initial
             key="Splash"
             component={SplashScreen}
             type={ActionConst.RESET}

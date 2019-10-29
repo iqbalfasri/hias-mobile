@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   imageLogo: {
-    width: 163,
-    height: 94,
+    width: 177,
+    height: 63,
     marginTop: !isAndroid ? 100 : 50,
     marginBottom: 25,
     alignSelf: 'center',
