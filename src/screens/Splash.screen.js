@@ -10,7 +10,7 @@ import {
 import {Actions} from 'react-native-router-flux';
 import {localStorage, KEY_STORAGE} from '../lib';
 
-const HiasHouseWhiteLogo = require('../assets/images/hiashouse-circle-logo.png');
+const HiasHouseWhiteLogo = require('../assets/images/splash-logo.jpeg');
 
 const Splashpage = () => {
   useEffect(() => {
@@ -48,7 +48,7 @@ let styles = StyleSheet.create({
     flex: 1,
     width: getWidthDevice,
     // height: getHeightDevice,
-    backgroundColor: '#fff',
+    backgroundColor: '#f7f7f7',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -59,8 +59,8 @@ let styles = StyleSheet.create({
     color: 'white',
   },
   imageWidth: {
-    width: 272,
-    height: 272,
+    width: 106.1,
+    height: 155,
   },
 });
 
