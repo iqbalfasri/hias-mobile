@@ -145,3 +145,10 @@ export function toIdr(angka, prefix) {
 export function toRupiah(nominal) {
   return numeral(nominal).format('0,0');
 }
+
+/**
+ * this method to secure screen with login
+ */
+export function requireLogin() {
+  return localStorage.getItem(KEY_STORAGE.TOKEN) === null;
+}
