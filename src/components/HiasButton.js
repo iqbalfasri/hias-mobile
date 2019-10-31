@@ -60,5 +60,3 @@ export class ButtonAnimated extends Component {
     );
   }
 }
-
-export default RenderButton;
