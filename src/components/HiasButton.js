@@ -1,20 +1,5 @@
-import React, {useState, Component} from 'react';
-import {
-  View,
-  Text,
-  Platform,
-  Animated,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
-import PropTypes from 'prop-types';
-import {deviceWidth} from '../lib';
-
-const Button = props => (
-  <TouchableOpacity {...props}>{props.children}</TouchableOpacity>
-);
-
-export default Button;
+import React, {Component} from 'react';
+import {Animated, TouchableOpacity} from 'react-native';
 
 export class ButtonAnimated extends Component {
   scaleInAnimated = new Animated.Value(0);
@@ -66,3 +51,9 @@ export class ButtonAnimated extends Component {
     );
   }
 }
+
+const Button = props => (
+  <TouchableOpacity {...props}>{props.children}</TouchableOpacity>
+);
+
+export default Button;
