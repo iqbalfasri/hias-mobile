@@ -1,86 +1,64 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import {
   View,
   Text,
   Platform,
   Animated,
+  StyleSheet,
   TouchableOpacity,
-  TouchableNativeFeedback,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import {deviceWidth} from '../lib';
 
-/**
- * Check if platform is android
- */
-const isAndroid = Platform.OS === 'android';
+export class ButtonAnimated extends Component {
+  scaleInAnimated = new Animated.Value(0);
+  scaleOutAnimated = new Animated.Value(0);
 
-/**
- * Button for android
- */
-const ButtonAndroid = props => {
-  const {type, children} = props;
-  return type === 'transparent' ? (
-    <TouchableOpacity activeOpacity={0.8} {...props}>{children}</TouchableOpacity>
-  ) : (
-      <TouchableNativeFeedback
-      background={TouchableNativeFeedback.SelectableBackground()}
-      {...props}>
-      <View {...props}>{props.children}</View>
-    </TouchableNativeFeedback>
-  );
-};
-ButtonAndroid.propTypes = {
-  type: PropTypes.string,
-};
-ButtonAndroid.defaultProps = {
-  type: 'solid',
-};
+  getScaleTransformationStyle(
+    animated = Animated.Value,
+    startSize = 1,
+    endSize = 0.99,
+  ) {
+    const interpolation = animated.interpolate({
+      inputRange: [0, 1],
+      outputRange: [startSize, endSize],
+    });
+    return {
+      transform: [{scale: interpolation}],
+    };
+  }
 
-/**
- * Button for ios
- */
-const ButtonIOS = props => (
-  <TouchableOpacity activeOpacity={0.8} {...props}>{props.children}</TouchableOpacity>
-);
-
-/**
- * TODO: Fix this component ASAP
- * Button with simple animation
- */
-export const ButtonImate = () => {
-  const INITIAL_ANIMATED_VALUE = new Animated.Value(0);
-  const [animatePress, setAnimatePress] = useState(INITIAL_ANIMATED_VALUE);
-
-  // Animation effect
-  const animated = () => {
-    Animated.timing(animatePress, {
-      toValue: 0.8,
-      duration: 500,
+  pressInAnimation(animated = Animated.Value, duration = 150) {
+    Animated.timing(animated, {
+      toValue: 1,
+      duration,
+      useNativeDriver: true,
     }).start();
-  };
+  }
 
-  // Render button
-  return (
-    <TouchableOpacity onPressIn={() => animated()}>
-      <Animated.View
-        style={{
-          width: 200,
-          height: 120,
-          backgroundColor: 'red',
-          transform: [{scale: animatePress}],
-        }}>
-        <Text style={{color: 'red'}}>ANIMATED</Text>
-      </Animated.View>
-    </TouchableOpacity>
-  );
-};
+  pressOutAnimation(animated = Animated.Value, duration = 150) {
+    Animated.timing(animated, {
+      toValue: 0,
+      duration,
+      useNativeDriver: true,
+    }).start();
+  }
 
-/**
- *
- * @param {*} props retrieve all property
- */
-const RenderButton = props => {
-  return isAndroid ? <ButtonAndroid {...props} /> : <ButtonIOS {...props} />;
-};
+  render() {
+    return (
+      <TouchableOpacity
+        {...this.props}
+        activeOpacity={1}
+        style={[
+          this.getScaleTransformationStyle(this.scaleInAnimated, 1, 0.95),
+          this.props.style,
+        ]}
+        onPressIn={() => this.pressInAnimation(this.scaleInAnimated, 120)}
+        onPressOut={() => this.pressOutAnimation(this.scaleInAnimated, 120)}>
+        <Animated.View>{this.props.children}</Animated.View>
+      </TouchableOpacity>
+    );
+  }
+}
 
 export default RenderButton;
