@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import Button from '../components/HiasButton';
+import Button, { ButtonAnimated } from '../components/HiasButton';
 
 const HiasHouseMasterLogo = require('../assets/images/hiashouse-master-logo.png');
 const backgroundImage = require('../assets/images/background-sliderinfo.png');
@@ -27,7 +27,7 @@ const SliderInfopage = () => {
         style={{
           marginVertical: 30,
         }}>
-        <Button onPress={() => Actions.Signin()} style={styles.customButton}>
+        <ButtonAnimated onPress={() => Actions.Signin()} style={styles.customButton}>
           <Text
             style={[
               styles.textBlueLight,
@@ -37,8 +37,8 @@ const SliderInfopage = () => {
             ]}>
             Next
           </Text>
-        </Button>
-        <Button onPress={() => Actions.HomeStack()} style={styles.customButtonTp}>
+        </ButtonAnimated>
+        <ButtonAnimated onPress={() => Actions.HomeStack()} style={styles.customButtonTp}>
           <Text
             style={[
               styles.textWhite,
@@ -48,7 +48,7 @@ const SliderInfopage = () => {
             ]}>
             Skip this
           </Text>
-        </Button>
+        </ButtonAnimated>
       </View>
     </View>
   );
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     width: Dimensions.get('window').width - 80,
-    borderRadius: 13,
+    borderRadius: 5,
   },
   customButtonTp: {
     padding: 10,

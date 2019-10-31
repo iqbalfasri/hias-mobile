@@ -5,7 +5,7 @@ import {Actions} from 'react-native-router-flux';
 import CheckBox from 'react-native-check-box';
 
 // Own component
-import Button from '../components/HiasButton';
+import {ButtonAnimated} from '../components/HiasButton';
 import {FormWithLabel} from '../components/HiasForm';
 import {Container, Layout} from '../components/HiasLayout';
 import {
@@ -153,7 +153,7 @@ const SigupScreen = () => {
             {/* Button group */}
             <View style={styles.buttonGroup}>
               {/* Form for Next Step */}
-              <Button
+              <ButtonAnimated
                 disabled={!checked}
                 onPress={() => _handleSignUp()}
                 style={[globalStyle.primaryButton, {marginBottom: 5}]}>
@@ -165,16 +165,16 @@ const SigupScreen = () => {
                   ]}>
                   Next Step
                 </Text>
-              </Button>
+              </ButtonAnimated>
               {/* Form for already exist button */}
-              <Button
+              <ButtonAnimated
                 type="transparent"
                 onPress={() => Actions.Signin()}
                 style={[globalStyle.buttonTransparent, {marginTop: 5}]}>
                 <Text style={[globalStyle.textCenter, {color: color.darkBlue}]}>
                   Already have an account? Sign In
                 </Text>
-              </Button>
+              </ButtonAnimated>
             </View>
           </View>
         </Container>

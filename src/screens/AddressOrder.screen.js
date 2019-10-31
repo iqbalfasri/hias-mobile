@@ -6,6 +6,10 @@ import RadioForm, {
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 
+
+// refrensi buat bikin radio button
+// https://stackoverflow.com/questions/31889921/how-to-implement-radio-button-in-react-native
+
 // Own component
 import {Layout} from '../components/HiasLayout';
 import TopBar from '../components/HiasTopBar';

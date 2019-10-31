@@ -13,6 +13,7 @@ import {Container} from '../styles/styled';
 import {Layout} from '../components/HiasLayout';
 import TopBar from '../components/HiasTopBar';
 import globalStyle from '../styles/globalStyles';
+import {ButtonAnimated} from '../components/HiasButton';
 import {
   requestParameter,
   localStorage,
@@ -109,6 +110,7 @@ const _handleOrder = async () => {
 
 const Cart = props => {
   const [cartItems, setCartItems] = useState([]);
+  const [length, setLength] = useState(0);
 
   useEffect(() => {
     async function getCart() {
@@ -138,10 +140,16 @@ const Cart = props => {
         );
 
         let responseJson = await response.json();
-        let {data} = responseJson;
+        let {data, success} = responseJson;
         let {listItems} = data;
 
         setCartItems(listItems);
+        if (listItems.length === undefined) {
+          return;
+        }
+        setLength(listItems.length);
+
+        console.log(Object.values(listItems).length, 'val');
       } catch (error) {
         console.log(error);
       }
@@ -152,7 +160,7 @@ const Cart = props => {
     return () => {
       return;
     };
-  }, [cartItems]);
+  }, [length]);
 
   return (
     <Layout>
@@ -172,16 +180,11 @@ const Cart = props => {
           alignItems: 'center',
           padding: 25,
         }}>
-        <Button
-          onPress={() => _handleOrder()}
-          style={{
-            width: '100%',
-            paddingVertical: 13,
-            borderRadius: 5,
-            backgroundColor: '#00B1DB',
-          }}>
-          <Text style={{textAlign: 'center', color: '#fff'}}>ORDER</Text>
-        </Button>
+        <View style={{paddingHorizontal: 30}}>
+          <ButtonAnimated onPress={() => _handleOrder()}>
+            <Text style={{textAlign: 'center', color: '#fff'}}>ORDER</Text>
+          </ButtonAnimated>
+        </View>
       </View>
     </Layout>
   );

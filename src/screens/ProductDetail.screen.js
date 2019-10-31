@@ -26,7 +26,7 @@ import {
 // Own component
 import TopBar from '../components/HiasTopBar';
 import {Layout} from '../components/HiasLayout';
-import Button from '../components/HiasButton';
+import Button, {ButtonAnimated} from '../components/HiasButton';
 
 const sofa1 = require('../assets/images/products/sofa1.jpg');
 
@@ -149,7 +149,7 @@ const ProductDetail = props => {
                     padding: 10,
                     justifyContent: 'space-between',
                   }}>
-                  <Button
+                  <ButtonAnimated
                     style={{
                       paddingHorizontal: 13,
                       paddingVertical: 13,
@@ -159,9 +159,9 @@ const ProductDetail = props => {
                     }}
                     type="transparent">
                     <Text style={{color: '#fff'}}>ADD TO REGISTRY</Text>
-                  </Button>
+                  </ButtonAnimated>
 
-                  <Button
+                  <ButtonAnimated
                     onPress={() => _handleAddToCart()}
                     style={{
                       paddingHorizontal: 25,
@@ -173,7 +173,7 @@ const ProductDetail = props => {
                     <Text style={{color: '#fff', textAlign: 'center'}}>
                       ADD TO CART
                     </Text>
-                  </Button>
+                  </ButtonAnimated>
                 </View>
               </View>
             </View>
