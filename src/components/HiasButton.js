@@ -10,6 +10,12 @@ import {
 import PropTypes from 'prop-types';
 import {deviceWidth} from '../lib';
 
+const Button = props => (
+  <TouchableOpacity {...props}>{props.children}</TouchableOpacity>
+);
+
+export default Button;
+
 export class ButtonAnimated extends Component {
   scaleInAnimated = new Animated.Value(0);
   scaleOutAnimated = new Animated.Value(0);

@@ -7,7 +7,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import {Icon} from 'react-native-elements';
+import {Icon, Header} from 'react-native-elements';
 
 // Own component
 import {isAndroid, deviceWidth} from '../lib';
@@ -45,8 +45,18 @@ const Title = props => (
 const RightIcon = props => (
   <View
     style={{width: 30, flexDirection: 'row', justifyContent: 'space-between'}}>
-    <Icon name="heart" type="evilicon" size={24} />
-    <Icon onPress={() => Actions.Cart()} name="cart" type="evilicon" size={24} />
+    <Icon
+      onPress={() => Actions.push('Wishlist')}
+      name="heart"
+      type="evilicon"
+      size={24}
+    />
+    <Icon
+      onPress={() => Actions.Cart()}
+      name="cart"
+      type="evilicon"
+      size={24}
+    />
   </View>
 );
 

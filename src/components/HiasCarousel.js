@@ -1,10 +1,10 @@
 import React, {Component, useEffect} from 'react';
-import {View, Text, ScrollView, StyleSheet, Image} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 // Own component
-import {deviceWidth, isAndroid} from '../lib';
-import Button from '../components/HiasButton';
+import { deviceWidth, isAndroid } from '../lib';
+import { ButtonAnimated } from '../components/HiasButton'
 import globalStyle from '../styles/globalStyles';
 
 const image1 = require('../assets/images/carousel/crs1.jpg');
@@ -48,7 +48,7 @@ class Carousel extends Component {
         <View style={styles.carouselWrapper}>
           {/* Carousel content */}
           <View>
-            <Button
+            <ButtonAnimated
               type="transparent"
               onPress={() => alert('Press')}
               style={[styles.item1]}>
@@ -68,10 +68,10 @@ class Carousel extends Component {
                   />
                 </View>
               </View>
-            </Button>
+            </ButtonAnimated>
           </View>
           {/* Carousel */}
-          <Button
+          <ButtonAnimated
             type={'transparent'}
             onPress={() => alert('Pressed')}
             style={styles.item1}>
@@ -91,9 +91,9 @@ class Carousel extends Component {
                 />
               </View>
             </View>
-          </Button>
+          </ButtonAnimated>
           {/* Carousel */}
-          <Button
+          <ButtonAnimated
             type={'transparent'}
             onPress={() => alert('Pressed')}
             style={styles.item1}>
@@ -113,7 +113,7 @@ class Carousel extends Component {
                 />
               </View>
             </View>
-          </Button>
+          </ButtonAnimated>
         </View>
       </ScrollView>
     );

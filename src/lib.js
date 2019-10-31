@@ -34,11 +34,9 @@ export const UrlAPI = endpoint => {
  * @param requestObj for object data
  * @param method is POST or http request
  */
-export function requestParameter(requestObj, method = 'GET', authToken) {
+export function requestParameter(requestObj = null, method = 'GET', authToken) {
   if (requestObj === null) {
-    return {
-      method: method,
-    };
+    return false;
   }
 
   const appJson = 'application/json';

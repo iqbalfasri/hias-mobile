@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 // own component
-import Button from '../components/HiasButton';
+import {ButtonAnimated} from '../components/HiasButton';
 
 // lib
 import {localStorage, KEY_STORAGE} from '../lib';
@@ -77,9 +77,9 @@ const Drawer = () => {
         style={{
           marginVertical: 50,
         }}>
-        <Button onPress={() => _handleLogout()} style={styles.logoutButton}>
+        <ButtonAnimated onPress={() => _handleLogout()} style={styles.logoutButton}>
           <Text style={styles.logoutText}>Logout</Text>
-        </Button>
+        </ButtonAnimated>
       </View>
     </Fragment>
   );

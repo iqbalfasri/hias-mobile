@@ -30,6 +30,7 @@ import DrawerContent from './src/components/Drawer';
 // Products
 import HotProducts from './src/screens/HotProducts.screen';
 import BestProdcuts from './src/screens/BestProduct.screen';
+import Wishlist from './src/screens/Wishlist.screen';
 
 // Orders
 import AddressOrderScreen from './src/screens/AddressOrder.screen';
@@ -122,6 +123,7 @@ const App = props => {
                 />
                 <Scene key="HotProducts" component={HotProducts} hideNavBar />
                 <Scene key="BestProducts" component={BestProdcuts} hideNavBar />
+                <Scene key="Wishlist" component={Wishlist} hideNavBar />
 
                 {/* Search Category */}
                 <Stack key="SearchStack">

@@ -14,6 +14,7 @@ import globalStyle, {color} from '../styles/globalStyles';
 
 import {isAndroid, requireLogin} from '../lib';
 import TopBar from './HiasTopBar';
+import { ButtonAnimated } from './HiasButton';
 
 class CustomTabBar extends Component {
   render() {
@@ -55,7 +56,7 @@ class CustomTabBar extends Component {
         style={[styles.tabBarWrapper, globalStyle.elevationShadowStyleTop(2)]}>
         {state.routes.map((element, index) => {
           return (
-            <TouchableOpacity
+            <ButtonAnimated
               key={element.key}
               onPress={() => {
                 Actions[element.key]();
@@ -65,13 +66,13 @@ class CustomTabBar extends Component {
                 type="feather"
                 name={_renderIcon(element.key)}
               />
-            </TouchableOpacity>
+            </ButtonAnimated>
           );
         })}
         {/* This button for open drawer */}
-        <TouchableOpacity onPress={() => Actions.drawerOpen()}>
+        <ButtonAnimated onPress={() => Actions.drawerOpen()}>
           <Icon type="feather" name="menu" />
-        </TouchableOpacity>
+        </ButtonAnimated>
       </View>
     );
   }

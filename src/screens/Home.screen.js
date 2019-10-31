@@ -16,7 +16,7 @@ import Card from '../components/HiasCard';
 import Carousel from '../components/HiasCarousel';
 import TopBar from '../components/HiasTopBar';
 import {Container, Layout} from '../components/HiasLayout';
-import Button from '../components/HiasButton';
+import Button, {ButtonAnimated} from '../components/HiasButton';
 
 // Skeleton placeholder
 import Skeleton from '../components/SkeletonPlaceholder';
@@ -74,6 +74,7 @@ const _renderHotItems = hotItems => {
   return (
     <View>
       <TouchableOpacity
+        activeOpacity={1}
         onPress={() => Actions.HotProducts({test: 'Halo'})}
         style={{
           flexDirection: 'row',
@@ -108,6 +109,7 @@ const _renderBestSeller = bestItems => {
   return (
     <View>
       <TouchableOpacity
+        activeOpacity={1}
         onPress={() => Actions.BestProducts({test: 'Halo'})}
         style={{
           flexDirection: 'row',
@@ -137,10 +139,7 @@ const _renderBestSeller = bestItems => {
 
 const _renderSearch = () => {
   return (
-    <Button
-      type="transparent"
-      style={styles.searchBar}
-      onPress={() => Actions.SearchStack()}>
+    <Button style={styles.searchBar} onPress={() => Actions.SearchStack()}>
       <View style={styles.searchIcon}>
         <Icon color="#9F9F9F" size={16} name="search" type="font-awesome" />
       </View>
