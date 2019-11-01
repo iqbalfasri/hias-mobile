@@ -62,10 +62,19 @@ export const fetchThirdSubCategory = secondSubCategoryId => {
     });
 };
 
-// fetch result search by category, parameter by third sub category id
+// fetch search result by category, parameter by third sub category id
 export const fetchSearchByCategory = thirdSUbCategoryId => {
   return axios
     .get(`${BASE_URL}/product/categoryId/${thirdSUbCategoryId}`)
+    .then(res => {
+      return res.data;
+    });
+};
+
+// fetch search result by product name, parameter by name of product
+export const fetchSearchByName = productName => {
+  return axios
+    .post(`${BASE_URL}/product/searchName/${productName}`)
     .then(res => {
       return res.data;
     });
