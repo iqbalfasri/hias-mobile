@@ -4,30 +4,13 @@ import {Icon} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 
 // Own component
-import Button, { ButtonAnimated } from '../components/HiasButton';
+import Button, {ButtonAnimated} from '../components/HiasButton';
+
+import {toRupiah} from '../lib/utils';
+
 import {color} from '../styles/globalStyles';
-import {deviceWidth, getShortString, toRupiah} from '../lib';
+import {deviceWidth, getShortString} from '../lib';
 import globalStyles from '../styles/globalStyles';
-import SkeletonPlaceholder from './SkeletonPlaceholder';
-
-// Image
-const sofa1 = require('../assets/images/products/sofa1.jpg');
-
-const _renderSkeleton = props => {
-  {
-    new Array(4).map((_, index) => {
-      return (
-        <View
-          key={index}
-          style={{height: 30, backgroundColor: 'red', width: '100%'}}>
-          <SkeletonPlaceholder>
-            <View style={styles.cardWrapper} />
-          </SkeletonPlaceholder>
-        </View>
-      );
-    });
-  }
-};
 
 const Card = props => {
   if (props.data.length === 0) {
