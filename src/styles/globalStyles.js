@@ -1,64 +1,60 @@
 import {StyleSheet} from 'react-native';
-import {isAndroid} from '../lib';
+import {isAndroid, deviceWidth} from '../lib';
 
 export const color = {
   white: '#ffff',
   primaryColor: '#00B1DB',
   darkBlue: '#4F6AA3',
+  orange: '#FE7865',
+  dark: '#292929',
+  red: '#E93E08',
 };
 
 const globalStyles = StyleSheet.create({
   /**
-   * Text styles
+   * Fonts styles
    */
-  textWhite: {
-    color: color.white,
+  fontNormal: {
+    fontFamily: 'Gotham-Book',
   },
-  textLeft: {
-    textAlign: 'left',
+  fontMedium: {
+    fontFamily: 'Gotham-Medium',
   },
-  textCenter: {
-    textAlign: 'center',
-  },
-  textRight: {
-    textAlign: 'right',
-  },
-  textBold: {
-    fontWeight: 'bold',
-  },
-  textUpp: {
-    textTransform: 'uppercase',
+  fontBold: {
+    fontFamily: 'Gotham-Bold',
   },
 
   /**
    * Button styles
    */
-  buttonTransparent: {
-    borderRadius: 5,
+  buttonPrimary: {
     paddingVertical: 15,
-    backgroundColor: 'transparent',
-  },
-  primaryButton: {
+    paddingHorizontal: 30,
     borderRadius: 5,
-    paddingVertical: 15,
     backgroundColor: color.primaryColor,
+  },
+  buttonWhite: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    backgroundColor: color.white,
+  },
+  buttonDark: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    backgroundColor: color.dark,
+  },
+  buttonTransparent: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    backgroundColor: 'transparent',
   },
 
   /**
    * Shadow effect
    */
-  shadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 4.65,
-
-    elevation: 8,
-    zIndex: 1319,
-  },
   elevationShadowStyle: elevation => {
     if (isAndroid) {
       return {elevation};

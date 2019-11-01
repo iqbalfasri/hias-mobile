@@ -1,7 +1,17 @@
-import React from 'react';
-import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
+import React, {Fragment} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  TouchableOpacity as Button,
+} from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import Button, { ButtonAnimated } from '../components/HiasButton';
+
+import Container from '../components/Layout/Container';
+
+import globalStyles from '../styles/globalStyles';
 
 const HiasHouseMasterLogo = require('../assets/images/hiashouse-master-logo.png');
 const backgroundImage = require('../assets/images/background-sliderinfo.png');
@@ -13,43 +23,60 @@ const SliderInfopage = () => {
       <View>
         <Image style={styles.masterLogo} source={HiasHouseMasterLogo} />
       </View>
-      <View style={styles.contentText}>
-        <Text style={[styles.centeredText, styles.titleText, styles.textWhite]}>
-          Find Your Needs
-        </Text>
-        <Text
-          style={[styles.centeredText, styles.subTitleText, styles.textWhite]}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
-        </Text>
-      </View>
-      <View
-        style={{
-          marginVertical: 30,
-        }}>
-        <ButtonAnimated onPress={() => Actions.Signin()} style={styles.customButton}>
+      <Container>
+        <View style={styles.contentText}>
           <Text
             style={[
-              styles.textBlueLight,
               styles.centeredText,
-              styles.textUppercase,
-              styles.textBold,
-            ]}>
-            Next
-          </Text>
-        </ButtonAnimated>
-        <ButtonAnimated onPress={() => Actions.HomeStack()} style={styles.customButtonTp}>
-          <Text
-            style={[
+              styles.titleText,
               styles.textWhite,
-              styles.centeredText,
-              styles.textUppercase,
-              styles.textBold,
+              globalStyles.fontBold,
             ]}>
-            Skip this
+            Find Your Needs
           </Text>
-        </ButtonAnimated>
-      </View>
+          <Text
+            style={[
+              styles.centeredText,
+              styles.subTitleText,
+              styles.textWhite,
+              globalStyles.fontMedium,
+            ]}>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry.
+          </Text>
+        </View>
+        <View
+          style={{
+            marginVertical: 30,
+          }}>
+          <Button
+            onPress={() => Actions.Signin()}
+            style={globalStyles.buttonWhite}>
+            <Text
+              style={[
+                styles.textBlueLight,
+                styles.centeredText,
+                styles.textUppercase,
+                globalStyles.fontBold,
+              ]}>
+              Next
+            </Text>
+          </Button>
+          <Button
+            onPress={() => Actions.HomeStack()}
+            style={globalStyles.buttonTransparent}>
+            <Text
+              style={[
+                styles.textWhite,
+                styles.centeredText,
+                styles.textUppercase,
+                globalStyles.fontBold,
+              ]}>
+              Skip this
+            </Text>
+          </Button>
+        </View>
+      </Container>
     </View>
   );
 };
