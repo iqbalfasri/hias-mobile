@@ -17,3 +17,4 @@ class Localstorage {
 }
 
 const storage = new Localstorage();
+export default storage;
