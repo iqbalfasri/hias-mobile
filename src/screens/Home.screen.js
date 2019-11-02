@@ -12,7 +12,6 @@ import {SearchBar, Icon} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 
 // Own component
-import {deviceWidth, requestParameter, UrlAPI, LocalStorage} from '../lib';
 import Card from '../components/HiasCard';
 import Carousel from '../components/HiasCarousel';
 import TopBar from '../components/HiasTopBar';
@@ -22,25 +21,25 @@ import Button, {ButtonAnimated} from '../components/HiasButton';
 // Skeleton placeholder
 import Skeleton from '../components/SkeletonPlaceholder';
 
-const Home = () => {
-  const [search, setsearch] = useState('');
+// api
+import {fetchBestSeller, fetchHotProduct} from '../lib/api';
+
+function Home(props) {
   const [hotItems, setHotItems] = useState([]);
   const [bestSeller, setbestSeller] = useState([]);
 
   useEffect(() => {
     async function getHotItems() {
-      let response = await fetch(UrlAPI('/product/hotItems'));
-      let {data, success} = await response.json();
+      let {data, success} = await fetchHotProduct();
       if (!success) {
-        alert('Hot products error');
+        alert('Hot product bermasalah');
       }
       // set state hot items
       setHotItems(data);
     }
 
     async function getBestSeller() {
-      let response = await fetch(UrlAPI('/product/bestSeller'));
-      let {data, success} = await response.json();
+      let {data, success} = await fetchBestSeller();
       if (!success) {
         alert('Best seller error');
       }
@@ -65,7 +64,7 @@ const Home = () => {
       </ScrollView>
     </Layout>
   );
-};
+}
 
 /**
  * Hot items
