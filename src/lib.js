@@ -1,7 +1,6 @@
 import React from 'react';
 import {Dimensions, Platform} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import numeral from 'numeral';
 
 /**
  * Get device width
@@ -138,10 +137,6 @@ export function toIdr(angka, prefix) {
 
   rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
   return prefix == undefined ? rupiah : rupiah ? 'Rp. ' + rupiah : '';
-}
-
-export function toRupiah(nominal) {
-  return numeral(nominal).format('0,0');
 }
 
 /**
