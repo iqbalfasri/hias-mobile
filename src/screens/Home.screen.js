@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {SearchBar, Icon} from 'react-native-elements';
+import {Actions} from 'react-native-router-flux';
 
 // Own component
 import {deviceWidth, requestParameter, UrlAPI, LocalStorage} from '../lib';
@@ -20,7 +21,6 @@ import Button, {ButtonAnimated} from '../components/HiasButton';
 
 // Skeleton placeholder
 import Skeleton from '../components/SkeletonPlaceholder';
-import {Actions} from 'react-native-router-flux';
 
 const Home = () => {
   const [search, setsearch] = useState('');
@@ -61,7 +61,7 @@ const Home = () => {
       <ScrollView>
         <Carousel />
         {_renderHotItems(hotItems)}
-        {_renderBestSeller(hotItems)}
+        {_renderBestSeller(bestSeller)}
       </ScrollView>
     </Layout>
   );
