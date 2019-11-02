@@ -8,9 +8,10 @@ import {
   TextInput,
   ScrollView,
   Platform,
+  TouchableOpacity as Button,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import Button, {ButtonAnimated} from '../components/HiasButton';
+// import Button, {ButtonAnimated} from '../components/HiasButton';
 import globalStyles from '../styles/globalStyles';
 import {
   deviceWidth,
@@ -98,27 +99,27 @@ const SigninScreen = () => {
             </View>
             {/* Form for button */}
             <View style={styles.formGroup}>
-              <ButtonAnimated
+              <Button
                 style={styles.customButton}
                 onPress={() => localStorage.removeItem('TOKEN')}>
                 <Text style={styles.customButtonForget}>
                   Forgot your password?
                 </Text>
-              </ButtonAnimated>
+              </Button>
             </View>
             <View style={styles.formGroup}>
-              <ButtonAnimated
+              <Button
                 onPress={() => _handleSignin()}
                 style={[styles.customButton, styles.customButtonSignin]}>
                 <Text
                   style={[
                     styles.textWhite,
-                    globalStyles.textUpp,
-                    globalStyles.textBold,
+                    globalStyles.fontBold,
+                    {textTransform: 'uppercase'},
                   ]}>
                   Sign in
                 </Text>
-              </ButtonAnimated>
+              </Button>
             </View>
             {/* Form separator */}
             <View
@@ -147,28 +148,28 @@ const SigninScreen = () => {
             </View>
             {/* Form for social media */}
             <View style={styles.formGroup}>
-              <ButtonAnimated
+              <Button
                 onPress={() => Actions.HomeStack()}
                 style={[styles.customButton, styles.customButtomFb]}>
                 <Text style={[styles.textWhite]}>Sign in with Facebook</Text>
-              </ButtonAnimated>
+              </Button>
             </View>
             <View style={styles.formGroup}>
-              <ButtonAnimated
+              <Button
                 onPress={() => Actions.HomeStack()}
                 style={[styles.customButton, styles.customButtonGoogle]}>
                 <Text style={[styles.textWhite]}>Sign in with Google</Text>
-              </ButtonAnimated>
+              </Button>
             </View>
             {/* Form for create account */}
             <View style={styles.formGroup}>
-              <ButtonAnimated
+              <Button
                 onPress={() => Actions.Signup()}
                 style={[styles.customButton]}>
                 <Text style={styles.customButtonRegist}>
                   Create a new account
                 </Text>
-              </ButtonAnimated>
+              </Button>
             </View>
           </View>
         </View>
