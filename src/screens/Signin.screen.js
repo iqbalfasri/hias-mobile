@@ -79,20 +79,20 @@ const SigninScreen = () => {
           <View style={{marginVertical: 40}}>
             {/* Form for email */}
             <View style={styles.formGroup}>
-              <Text style={styles.formGroupLabel}>Email address</Text>
+              <Text style={[styles.formGroupLabel, globalStyles.fontMedium]}>Email address</Text>
               <TextInput
                 autoCapitalize="none"
-                style={styles.formGroupInput}
+                style={[styles.formGroupInput, globalStyles.fontNormal]}
                 placeholder="email@yourmail.mail"
                 onChangeText={email => setEmail(email)}
               />
             </View>
             {/* Form for password */}
             <View style={styles.formGroup}>
-              <Text style={styles.formGroupLabel}>Password</Text>
+              <Text style={[styles.formGroupLabel, globalStyles.fontMedium]}>Password</Text>
               <TextInput
                 secureTextEntry={true}
-                style={styles.formGroupInput}
+                style={[styles.formGroupInput, globalStyles.fontNormal]}
                 placeholder="Type your password"
                 onChangeText={password => setPassword(password)}
               />
@@ -100,9 +100,9 @@ const SigninScreen = () => {
             {/* Form for button */}
             <View style={styles.formGroup}>
               <Button
-                style={styles.customButton}
+                style={globalStyles.buttonTransparent}
                 onPress={() => localStorage.removeItem('TOKEN')}>
-                <Text style={styles.customButtonForget}>
+                <Text style={[styles.customButtonForget, globalStyles.fontNormal]}>
                   Forgot your password?
                 </Text>
               </Button>
@@ -110,7 +110,7 @@ const SigninScreen = () => {
             <View style={styles.formGroup}>
               <Button
                 onPress={() => _handleSignin()}
-                style={[styles.customButton, styles.customButtonSignin]}>
+                style={globalStyles.buttonPrimary}>
                 <Text
                   style={[
                     styles.textWhite,
@@ -150,23 +150,23 @@ const SigninScreen = () => {
             <View style={styles.formGroup}>
               <Button
                 onPress={() => Actions.HomeStack()}
-                style={[styles.customButton, styles.customButtomFb]}>
-                <Text style={[styles.textWhite]}>Sign in with Facebook</Text>
+                style={globalStyles.buttonFacebook}>
+                <Text style={[styles.textWhite, globalStyles.fontNormal]}>Sign in with Facebook</Text>
               </Button>
             </View>
             <View style={styles.formGroup}>
               <Button
                 onPress={() => Actions.HomeStack()}
-                style={[styles.customButton, styles.customButtonGoogle]}>
-                <Text style={[styles.textWhite]}>Sign in with Google</Text>
+                style={globalStyles.buttonGoogle}>
+                <Text style={[styles.textWhite, globalStyles.fontNormal]}>Sign in with Google</Text>
               </Button>
             </View>
             {/* Form for create account */}
             <View style={styles.formGroup}>
               <Button
                 onPress={() => Actions.Signup()}
-                style={[styles.customButton]}>
-                <Text style={styles.customButtonRegist}>
+                style={globalStyles.buttonTransparent}>
+                <Text style={[styles.customButtonRegist, globalStyles.fontNormal]}>
                   Create a new account
                 </Text>
               </Button>

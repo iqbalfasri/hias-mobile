@@ -21,10 +21,10 @@ const SignupSuccess = () => {
         <Image style={styles.imageSuccess} source={SuccessIlustration} />
         {/* Content group */}
         <View style={styles.contentTextWrapper}>
-          <Text style={[styles.textTitle, globalStyle.textBold]}>
+          <Text style={[styles.textTitle, globalStyle.fontBold]}>
             CONGRATULATIONS!
           </Text>
-          <Text style={[styles.textSubTitle]}>
+          <Text style={[styles.textSubTitle, globalStyle.fontNormal]}>
             Your Hias House Account has been successfuly registered.
           </Text>
         </View>
@@ -32,22 +32,15 @@ const SignupSuccess = () => {
         <View style={styles.buttonGroup}>
           {/* Button for continue */}
           <Button
-            style={[globalStyle.primaryButton, {marginBottom: 5}]}
+            style={[globalStyle.buttonPrimary, {marginBottom: 5}]}
             onPress={() => Actions.HomeStack()}>
-            <Text
-              style={[
-                globalStyle.textWhite,
-                globalStyle.textBold,
-                globalStyle.textCenter,
-              ]}>
-              CONTINUE
-            </Text>
+            <Text style={[globalStyle.fontBold, { textAlign: 'center', color: "#fff" }]}>CONTINUE</Text>
           </Button>
           {/* Button for signin */}
           <Button
             type="transparent"
             style={[globalStyle.buttonTransparent, {marginTop: 5}]}>
-            <Text style={[globalStyle.textCenter, {color: color.darkBlue}]}>
+            <Text style={[globalStyle.fontNormal, {color: color.darkBlue, textAlign: 'center'}]}>
               Already have an account? Sign In
             </Text>
           </Button>

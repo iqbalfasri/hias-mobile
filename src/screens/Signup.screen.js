@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
-import {View, Text, ScrollView, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity as Button,
+} from 'react-native';
 // import {CheckBox} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 import CheckBox from 'react-native-check-box';
 
 // Own component
-import {ButtonAnimated} from '../components/HiasButton';
 import {FormWithLabel} from '../components/HiasForm';
 import {Container, Layout} from '../components/HiasLayout';
 import {
@@ -96,7 +101,9 @@ const SigupScreen = () => {
       <ScrollView>
         <Container>
           <View style={styles.topHeader}>
-            <Text style={styles.title}>SIGN UP YOUR ACCOUNT</Text>
+            <Text style={[styles.title, globalStyle.fontBold]}>
+              SIGN UP YOUR ACCOUNT
+            </Text>
           </View>
           {/* Separator */}
           <View style={styles.separator} />
@@ -145,7 +152,7 @@ const SigupScreen = () => {
                 }
                 isChecked={checked}
                 onClick={() => setChecked(!checked)}
-                style={{flex: 1, paddingVertical: 25}}
+                style={[globalStyle.fontNormal, {flex: 1, paddingVertical: 25}]}
                 checkedCheckBoxColor="#000"
                 uncheckedCheckBoxColor="#C6C6C5"
               />
@@ -153,28 +160,32 @@ const SigupScreen = () => {
             {/* Button group */}
             <View style={styles.buttonGroup}>
               {/* Form for Next Step */}
-              <ButtonAnimated
+              <Button
                 disabled={!checked}
                 onPress={() => _handleSignUp()}
-                style={[globalStyle.primaryButton, {marginBottom: 5}]}>
+                style={[
+                  !checked
+                    ? globalStyle.buttonDisable
+                    : globalStyle.buttonPrimary,
+                  {marginBottom: 5},
+                ]}>
                 <Text
                   style={[
-                    globalStyle.textWhite,
-                    globalStyle.textBold,
-                    globalStyle.textCenter,
+                    globalStyle.fontBold,
+                    {textAlign: 'center', color: '#fff'},
                   ]}>
                   Next Step
                 </Text>
-              </ButtonAnimated>
+              </Button>
               {/* Form for already exist button */}
-              <ButtonAnimated
+              <Button
                 type="transparent"
                 onPress={() => Actions.Signin()}
                 style={[globalStyle.buttonTransparent, {marginTop: 5}]}>
-                <Text style={[globalStyle.textCenter, {color: color.darkBlue}]}>
+                <Text style={[globalStyle.fontNormal, {color: color.darkBlue, textAlign: 'center'}]}>
                   Already have an account? Sign In
                 </Text>
-              </ButtonAnimated>
+              </Button>
             </View>
           </View>
         </Container>
@@ -189,7 +200,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
   },
   separator: {
     maxWidth: deviceWidth - 280,

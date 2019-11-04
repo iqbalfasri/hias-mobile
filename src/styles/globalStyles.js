@@ -51,6 +51,24 @@ const globalStyles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: 'transparent',
   },
+  buttonFacebook: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    backgroundColor: '#3B5998',
+  },
+  buttonGoogle: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    backgroundColor: '#DD4B39',
+  },
+  buttonDisable: {
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    backgroundColor: '#ababab',
+  },
 
   /**
    * Shadow effect

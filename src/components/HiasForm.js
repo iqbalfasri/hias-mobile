@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {View, TextInput, StyleSheet, Text, ScrollView} from 'react-native';
 import {Container} from './HiasLayout';
 import {deviceWidth} from '../lib';
+import globalStyles from '../styles/globalStyles';
 
 /**
  *
@@ -28,14 +29,14 @@ export const FormWithLabel = props => {
     <ScrollView>
       <Container>
         <View style={[props.style, styles.formGroup]} {...props}>
-          <Text style={styles.formGroupLabel}>{label}</Text>
+          <Text style={[styles.formGroupLabel, globalStyles.fontMedium]}>{label}</Text>
           <TextInput
             keyboardType={type}
             autoCapitalize={'none'}
             autoCompleteType={'off'}
             autoCorrect={false}
             secureTextEntry={isPassword}
-            style={styles.formGroupInput}
+            style={[styles.formGroupInput, globalStyles.fontNormal]}
             placeholder={placeholder}
             {...props}
           />
