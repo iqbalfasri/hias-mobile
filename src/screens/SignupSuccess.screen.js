@@ -32,6 +32,7 @@ const SignupSuccess = () => {
         <View style={styles.buttonGroup}>
           {/* Button for continue */}
           <Button
+            activeOpacity={0.8}
             style={[globalStyle.buttonPrimary, {marginBottom: 5}]}
             onPress={() => Actions.HomeStack()}>
             <Text
@@ -44,7 +45,7 @@ const SignupSuccess = () => {
           </Button>
           {/* Button for signin */}
           <Button
-            type="transparent"
+            activeOpacity={0.8}
             style={[globalStyle.buttonTransparent, {marginTop: 5}]}>
             <Text
               style={[

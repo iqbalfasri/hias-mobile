@@ -161,6 +161,7 @@ const SigupScreen = () => {
             <View style={styles.buttonGroup}>
               {/* Form for Next Step */}
               <Button
+                activeOpacity={0.8}
                 disabled={!checked}
                 onPress={() => _handleSignUp()}
                 style={[
@@ -179,6 +180,7 @@ const SigupScreen = () => {
               </Button>
               {/* Form for already exist button */}
               <Button
+                activeOpacity={0.8}
                 onPress={() => Actions.Signin()}
                 style={[globalStyle.buttonTransparent, {marginTop: 5}]}>
                 <Text

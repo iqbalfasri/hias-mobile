@@ -104,6 +104,7 @@ const SigninScreen = () => {
             {/* Form for button */}
             <View style={styles.formGroup}>
               <Button
+                activeOpacity={0.8}
                 style={[globalStyles.buttonTransparent, { paddingHorizontal: null }]}
                 onPress={() => localStorage.removeItem('TOKEN')}>
                 <Text
@@ -114,6 +115,7 @@ const SigninScreen = () => {
             </View>
             <View style={styles.formGroup}>
               <Button
+                activeOpacity={0.8}
                 onPress={() => _handleSignin()}
                 style={globalStyles.buttonPrimary}>
                 <Text
@@ -154,6 +156,7 @@ const SigninScreen = () => {
             {/* Form for social media */}
             <View style={styles.formGroup}>
               <Button
+                activeOpacity={0.8}
                 onPress={() => Actions.HomeStack()}
                 style={globalStyles.buttonFacebook}>
                 <Text style={[styles.textWhite, globalStyles.fontNormal]}>
@@ -163,6 +166,7 @@ const SigninScreen = () => {
             </View>
             <View style={styles.formGroup}>
               <Button
+                activeOpacity={0.8}
                 onPress={() => Actions.HomeStack()}
                 style={globalStyles.buttonGoogle}>
                 <Text style={[styles.textWhite, globalStyles.fontNormal]}>
@@ -173,6 +177,7 @@ const SigninScreen = () => {
             {/* Form for create account */}
             <View style={styles.formGroup}>
               <Button
+                activeOpacity={0.8}
                 onPress={() => Actions.Signup()}
                 style={globalStyles.buttonTransparent}>
                 <Text

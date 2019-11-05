@@ -50,6 +50,7 @@ const SliderInfopage = () => {
             marginVertical: 30,
           }}>
           <Button
+            activeOpacity={0.8}
             onPress={() => Actions.Signin()}
             style={globalStyles.buttonWhite}>
             <Text
@@ -63,6 +64,7 @@ const SliderInfopage = () => {
             </Text>
           </Button>
           <Button
+            activeOpacity={0.8}
             onPress={() => Actions.HomeStack()}
             style={globalStyles.buttonTransparent}>
             <Text
