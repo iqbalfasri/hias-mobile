@@ -104,7 +104,7 @@ const SigninScreen = () => {
             {/* Form for button */}
             <View style={styles.formGroup}>
               <Button
-                style={globalStyles.buttonTransparent}
+                style={[globalStyles.buttonTransparent, { paddingHorizontal: null }]}
                 onPress={() => localStorage.removeItem('TOKEN')}>
                 <Text
                   style={[styles.customButtonForget, globalStyles.fontNormal]}>
