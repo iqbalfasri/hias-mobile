@@ -19,7 +19,7 @@ const Splashpage = () => {
     const getLocalData = localStorage.getItem('TOKEN');
     const getUserId = localStorage.getItem(KEY_STORAGE.USER_ID);
     getLocalData.then(token => {
-      console.log(token)
+      console.log(token);
       setTimeout(() => {
         if (token !== null) {
           Actions.HomeStack();

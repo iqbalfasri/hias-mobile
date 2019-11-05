@@ -45,7 +45,9 @@ function ThirdSubCategory(props) {
       try {
         const response = await fetch(
           UrlAPI(
-            `/product/thirdSubCategoryBySecondMainCategoryId/${props.secondSubCategoryId}`,
+            `/product/thirdSubCategoryBySecondMainCategoryId/${
+              props.secondSubCategoryId
+            }`,
           ),
         );
         const responseJson = await response.json();
@@ -63,7 +65,7 @@ function ThirdSubCategory(props) {
     return () => {
       return;
     };
-  }, []);
+  }, [props.secondSubCategoryId]);
 
   const renderCategory = () => {
     if (loading) {

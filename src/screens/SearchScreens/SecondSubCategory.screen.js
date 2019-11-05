@@ -62,7 +62,7 @@ function SecondSubCategory(props) {
     return () => {
       return;
     };
-  }, []);
+  }, [props.subCategoryId]);
 
   const renderCategory = () => {
     if (loading) {

@@ -29,7 +29,9 @@ export const FormWithLabel = props => {
     <ScrollView>
       <Container>
         <View style={[props.style, styles.formGroup]} {...props}>
-          <Text style={[styles.formGroupLabel, globalStyles.fontMedium]}>{label}</Text>
+          <Text style={[styles.formGroupLabel, globalStyles.fontMedium]}>
+            {label}
+          </Text>
           <TextInput
             keyboardType={type}
             autoCapitalize={'none'}

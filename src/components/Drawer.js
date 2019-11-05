@@ -77,7 +77,9 @@ const Drawer = () => {
         style={{
           marginVertical: 50,
         }}>
-        <ButtonAnimated onPress={() => _handleLogout()} style={styles.logoutButton}>
+        <ButtonAnimated
+          onPress={() => _handleLogout()}
+          style={styles.logoutButton}>
           <Text style={styles.logoutText}>Logout</Text>
         </ButtonAnimated>
       </View>

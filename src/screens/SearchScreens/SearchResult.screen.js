@@ -12,11 +12,10 @@ import {
 import {Icon} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 
-
-import TopBar from '../../components/HiasTopBar'
+import TopBar from '../../components/HiasTopBar';
 import {Layout} from '../../components/HiasLayout';
 import Button from '../../components/HiasButton';
-import {UrlAPI, deviceHeight, getShortString} from '../../lib'
+import {UrlAPI, deviceHeight, getShortString} from '../../lib';
 import SkeletonPlaceholder from '../../components/SkeletonPlaceholder';
 import globalStyles from '../../styles/globalStyles';
 
@@ -74,12 +73,12 @@ const SearchResult = props => {
       let response = await fetch(UrlAPI(`/product/categoryId/${category_id}`));
       let {data, success, error} = await response.json();
 
-      console.log(data)
+      console.log(data);
       setSearchResult(data);
     }
 
     getSearch();
-  }, []);
+  }, [category_id]);
 
   return (
     <Layout>

@@ -61,13 +61,13 @@ function BillingDetail(props) {
           {/* <View style={styles.orderItemWrapper}>
             <Text style={styles.orderItemTitle}>Billing Items</Text> */}
 
-            {/* Order items card */}
-            {/* <ItemCard />
+          {/* Order items card */}
+          {/* <ItemCard />
             <ItemCard />
           </View> */}
 
           {/* Coupon code form */}
-          <View></View>
+          <View />
 
           {/* Detail order */}
           <View style={styles.detailOrderWrapper}>

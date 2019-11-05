@@ -14,7 +14,7 @@ import globalStyle, {color} from '../styles/globalStyles';
 
 import {isAndroid, requireLogin} from '../lib';
 import TopBar from './HiasTopBar';
-import { ButtonAnimated } from './HiasButton';
+import {ButtonAnimated} from './HiasButton';
 
 class CustomTabBar extends Component {
   render() {

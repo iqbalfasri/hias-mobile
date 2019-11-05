@@ -47,7 +47,7 @@ const ProductDetail = props => {
     }
 
     getDetailProduct();
-  }, []);
+  }, [id_product]);
 
   const _handleAddToCart = async () => {
     try {

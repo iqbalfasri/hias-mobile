@@ -79,7 +79,9 @@ const SigninScreen = () => {
           <View style={{marginVertical: 40}}>
             {/* Form for email */}
             <View style={styles.formGroup}>
-              <Text style={[styles.formGroupLabel, globalStyles.fontMedium]}>Email address</Text>
+              <Text style={[styles.formGroupLabel, globalStyles.fontMedium]}>
+                Email address
+              </Text>
               <TextInput
                 autoCapitalize="none"
                 style={[styles.formGroupInput, globalStyles.fontNormal]}
@@ -89,7 +91,9 @@ const SigninScreen = () => {
             </View>
             {/* Form for password */}
             <View style={styles.formGroup}>
-              <Text style={[styles.formGroupLabel, globalStyles.fontMedium]}>Password</Text>
+              <Text style={[styles.formGroupLabel, globalStyles.fontMedium]}>
+                Password
+              </Text>
               <TextInput
                 secureTextEntry={true}
                 style={[styles.formGroupInput, globalStyles.fontNormal]}
@@ -102,7 +106,8 @@ const SigninScreen = () => {
               <Button
                 style={globalStyles.buttonTransparent}
                 onPress={() => localStorage.removeItem('TOKEN')}>
-                <Text style={[styles.customButtonForget, globalStyles.fontNormal]}>
+                <Text
+                  style={[styles.customButtonForget, globalStyles.fontNormal]}>
                   Forgot your password?
                 </Text>
               </Button>
@@ -151,14 +156,18 @@ const SigninScreen = () => {
               <Button
                 onPress={() => Actions.HomeStack()}
                 style={globalStyles.buttonFacebook}>
-                <Text style={[styles.textWhite, globalStyles.fontNormal]}>Sign in with Facebook</Text>
+                <Text style={[styles.textWhite, globalStyles.fontNormal]}>
+                  Sign in with Facebook
+                </Text>
               </Button>
             </View>
             <View style={styles.formGroup}>
               <Button
                 onPress={() => Actions.HomeStack()}
                 style={globalStyles.buttonGoogle}>
-                <Text style={[styles.textWhite, globalStyles.fontNormal]}>Sign in with Google</Text>
+                <Text style={[styles.textWhite, globalStyles.fontNormal]}>
+                  Sign in with Google
+                </Text>
               </Button>
             </View>
             {/* Form for create account */}
@@ -166,7 +175,8 @@ const SigninScreen = () => {
               <Button
                 onPress={() => Actions.Signup()}
                 style={globalStyles.buttonTransparent}>
-                <Text style={[styles.customButtonRegist, globalStyles.fontNormal]}>
+                <Text
+                  style={[styles.customButtonRegist, globalStyles.fontNormal]}>
                   Create a new account
                 </Text>
               </Button>

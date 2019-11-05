@@ -6,7 +6,6 @@ import RadioForm, {
   RadioButtonLabel,
 } from 'react-native-simple-radio-button';
 
-
 // refrensi buat bikin radio button
 // https://stackoverflow.com/questions/31889921/how-to-implement-radio-button-in-react-native
 
@@ -81,7 +80,9 @@ class AddressOrder extends Component {
             radio_props={data}
             initial={0}
             onPress={value =>
-              this.setState({value}, () => alert(JSON.stringify(this.state.value)))
+              this.setState({value}, () =>
+                alert(JSON.stringify(this.state.value)),
+              )
             }
           />
         </View>

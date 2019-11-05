@@ -179,10 +179,13 @@ const SigupScreen = () => {
               </Button>
               {/* Form for already exist button */}
               <Button
-                type="transparent"
                 onPress={() => Actions.Signin()}
                 style={[globalStyle.buttonTransparent, {marginTop: 5}]}>
-                <Text style={[globalStyle.fontNormal, {color: color.darkBlue, textAlign: 'center'}]}>
+                <Text
+                  style={[
+                    globalStyle.fontNormal,
+                    {color: color.darkBlue, textAlign: 'center'},
+                  ]}>
                   Already have an account? Sign In
                 </Text>
               </Button>

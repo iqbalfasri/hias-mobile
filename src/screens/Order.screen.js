@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 
 // module component
 import TopBar from '../components/HiasTopBar';
-import { Layout } from '../components/HiasLayout'
+import {Layout} from '../components/HiasLayout';
 
 class OrderScreen extends React.Component {
   constructor(props) {

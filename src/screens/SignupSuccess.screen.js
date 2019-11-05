@@ -34,13 +34,23 @@ const SignupSuccess = () => {
           <Button
             style={[globalStyle.buttonPrimary, {marginBottom: 5}]}
             onPress={() => Actions.HomeStack()}>
-            <Text style={[globalStyle.fontBold, { textAlign: 'center', color: "#fff" }]}>CONTINUE</Text>
+            <Text
+              style={[
+                globalStyle.fontBold,
+                {textAlign: 'center', color: '#fff'},
+              ]}>
+              CONTINUE
+            </Text>
           </Button>
           {/* Button for signin */}
           <Button
             type="transparent"
             style={[globalStyle.buttonTransparent, {marginTop: 5}]}>
-            <Text style={[globalStyle.fontNormal, {color: color.darkBlue, textAlign: 'center'}]}>
+            <Text
+              style={[
+                globalStyle.fontNormal,
+                {color: color.darkBlue, textAlign: 'center'},
+              ]}>
               Already have an account? Sign In
             </Text>
           </Button>

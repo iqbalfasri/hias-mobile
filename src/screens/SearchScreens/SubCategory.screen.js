@@ -60,7 +60,7 @@ function SearchSubCategory(props) {
     return () => {
       return;
     };
-  }, []);
+  }, [props.idMainCategory]);
 
   const renderCategory = () => {
     if (loading) {
