@@ -24,6 +24,7 @@ import {
 } from '../lib';
 import Button from '../components/HiasButton';
 import {Actions} from 'react-native-router-flux';
+import {getDeviceHeight} from '../lib/utils';
 
 const exampleDataCart = {
   image: require('../assets/images/products/sofa1.jpg'),
@@ -33,7 +34,6 @@ const exampleDataCart = {
 };
 
 // Images
-const productSofa = require('../assets/images/products/sofa1.jpg');
 
 const QtyButton = props => {
   return (
@@ -162,12 +162,33 @@ const Cart = props => {
     };
   }, [length]);
 
+  function renderEmptyCart() {
+    const emptyCartImg = require('../assets/images/empty-cart.png');
+    return (
+      <View
+        style={{
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Image style={{width: 250, height: 250, marginTop: 150}} source={emptyCartImg} />
+        <Text style={[globalStyle.fontMedium, {textAlign: 'center', fontSize: 18}]}>
+          Keranjangmu masih kosong.
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <Layout>
       <TopBar title="Cart" />
       <ScrollView>
         <Container>
-          <CartCard data={cartItems} />
+          {cartItems == undefined ? (
+            renderEmptyCart()
+          ) : (
+            <CartCard data={cartItems} />
+          )}
         </Container>
       </ScrollView>
       <View

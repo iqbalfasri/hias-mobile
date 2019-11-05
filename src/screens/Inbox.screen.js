@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import globalStyles from '../styles/globalStyles';
 
 function Inbox(props) {
-  const inboxImage = require('../assets/images/inbox-illustration.png');
+  const inboxImage = require('../assets/images/inbox-construct.png');
   return (
     <View style={styles.fullScreen}>
       <View style={styles.imageWrapper}>
@@ -11,9 +12,7 @@ function Inbox(props) {
           source={inboxImage}
         />
       </View>
-      <View style={styles.textWrapper}>
-        <Text style={styles.text}>Fiturnya masih dibuat</Text>
-      </View>
+      <Text style={[styles.text, globalStyles.fontMedium]}>Fiturnya masih dibuat</Text>
     </View>
   );
 }
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   imageWrapper: {
-    width: 205.5,
+    width: 250,
     height: 250,
   },
   textWrapper: {
@@ -37,9 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 22,
-    color: '#333',
-    fontWeight: 'bold',
+    fontSize: 18,
   },
 });
 
