@@ -6,13 +6,13 @@ import {
   StyleSheet,
   TouchableOpacity as Button,
 } from 'react-native';
-// import {CheckBox} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 import CheckBox from 'react-native-check-box';
 
-// Own component
 import {FormWithLabel} from '../components/HiasForm';
 import {Container, Layout} from '../components/HiasLayout';
+import LoadingModal from '../components/Modal/LoadingModal';
+
 import {
   deviceWidth,
   UrlAPI,
@@ -30,6 +30,7 @@ const SigupScreen = () => {
   const [phoneNumer, setPhoneNumber] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [checked, setChecked] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   // function for handle signup
   _handleSignUp = async () => {
@@ -41,6 +42,8 @@ const SigupScreen = () => {
         password: confirmPassword,
         telp: phoneNumer,
       };
+
+      setModalVisible(true);
 
       let response = await fetch(
         UrlAPI('/register'),
@@ -59,6 +62,9 @@ const SigupScreen = () => {
       localStorage.saveItem(KEY_STORAGE.USER_ID, user.id);
 
       if (success) {
+        // close modal
+        setModalVisible(false);
+
         // Regis cart, baru nanti redierect success
         _registCartId(user.id);
       } else {
@@ -95,6 +101,10 @@ const SigupScreen = () => {
       alert('Server Internal error');
     }
   };
+
+  function renderLoadingModal() {
+    return <LoadingModal isVisible={modalVisible} />;
+  }
 
   return (
     <Layout>
@@ -195,6 +205,9 @@ const SigupScreen = () => {
           </View>
         </Container>
       </ScrollView>
+      {/* Modal */}
+      {renderLoadingModal()}
+      {/* End Modal */}
     </Layout>
   );
 };

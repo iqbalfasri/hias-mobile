@@ -44,7 +44,7 @@ const SignupSuccess = () => {
             </Text>
           </Button>
           {/* Button for signin */}
-          <Button
+          {/* <Button
             activeOpacity={0.8}
             style={[globalStyle.buttonTransparent, {marginTop: 5}]}>
             <Text
@@ -54,7 +54,7 @@ const SignupSuccess = () => {
               ]}>
               Already have an account? Sign In
             </Text>
-          </Button>
+          </Button> */}
         </View>
       </Container>
     </Layout>

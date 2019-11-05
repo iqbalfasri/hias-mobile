@@ -11,7 +11,9 @@ import {
   TouchableOpacity as Button,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-// import Button, {ButtonAnimated} from '../components/HiasButton';
+
+import LoadingModal from '../components/Modal/LoadingModal';
+
 import globalStyles from '../styles/globalStyles';
 import {
   deviceWidth,
@@ -28,6 +30,7 @@ const isIos = Platform.OS == 'ios';
 const SigninScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   _handleSignin = async () => {
     try {
@@ -41,6 +44,7 @@ const SigninScreen = () => {
       } else if (password === '' || password === null) {
         alert('Password belum diisi');
       } else {
+        setModalVisible(true);
         let response = await fetch(
           UrlAPI('/authenticate/login'),
           requestParameter(params, 'POST'),
@@ -58,8 +62,13 @@ const SigninScreen = () => {
           // save user data to local storage
           localStorage.saveItem(KEY_STORAGE.USER_DATA, data.login.user);
 
+          // Close modal
+          setModalVisible(false);
+
           // redirect to home screen
-          Actions.HomeStack();
+          setTimeout(() => {
+            Actions.HomeStack();
+          }, 300);
         } else {
           alert(error.errorMessage);
         }
@@ -68,6 +77,10 @@ const SigninScreen = () => {
       alert('Email atau Password salah');
       console.log(error, 'Error catch');
     }
+  };
+
+  const renderLoadingModal = () => {
+    return <LoadingModal isVisible={modalVisible} />;
   };
 
   return (
@@ -105,7 +118,10 @@ const SigninScreen = () => {
             <View style={styles.formGroup}>
               <Button
                 activeOpacity={0.8}
-                style={[globalStyles.buttonTransparent, { paddingHorizontal: null }]}
+                style={[
+                  globalStyles.buttonTransparent,
+                  {paddingHorizontal: null},
+                ]}
                 onPress={() => localStorage.removeItem('TOKEN')}>
                 <Text
                   style={[styles.customButtonForget, globalStyles.fontNormal]}>
@@ -189,6 +205,10 @@ const SigninScreen = () => {
           </View>
         </View>
       </ScrollView>
+
+      {/* Modal */}
+      {renderLoadingModal()}
+      {/* End Modal */}
     </Fragment>
   );
 };

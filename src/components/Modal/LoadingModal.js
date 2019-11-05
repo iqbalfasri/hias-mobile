@@ -9,8 +9,8 @@ function LoadingModal(props) {
     <Overlay
       width="auto"
       height="auto"
-      fullScreen={props.isFullScreen}
       visible={props.isVisible}
+      fullScreen={props.isFullScreen}
       windowBackgroundColor="rgba(0, 0, 0, 0.7)">
       <View style={styles.loadingWrapper}>
         <ActivityIndicator color={color.primaryColor} />

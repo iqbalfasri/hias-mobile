@@ -52,7 +52,7 @@ const App = props => {
 
   return (
     <Fragment>
-      <StatusBar />
+      <StatusBar backgroundColor="#000" barStyle="light-content" />
       <Router {...props}>
         <Scene key="root">
           <Scene
