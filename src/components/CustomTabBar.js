@@ -6,16 +6,17 @@ import {
   StyleSheet,
   Alert,
   SafeAreaView,
+  ColorPropType,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import {Icon} from 'react-native-elements';
-import {Icon as NewIcon} from 'react-native-eva-icons';
+import {Icon} from 'react-native-eva-icons';
+
+import TopBar from './HiasTopBar';
+import {ButtonAnimated} from './HiasButton';
 
 import globalStyle, {color} from '../styles/globalStyles';
 
-import {isAndroid, requireLogin} from '../lib';
-import TopBar from './HiasTopBar';
-import {ButtonAnimated} from './HiasButton';
+import {isAndroid} from '../lib/utils';
 
 class CustomTabBar extends Component {
   render() {
@@ -24,59 +25,87 @@ class CustomTabBar extends Component {
     const SCENE_KEY = {
       Home: 'HomeStack',
       Cart: 'Cart',
+      ORDER_STATUS: 'OrderStatus',
       Inbox: 'Inbox',
     };
 
-    _renderIcon = elementKey => {
+    renderIcon = (elementKey, index) => {
       switch (elementKey) {
         case SCENE_KEY.Home:
-          return 'home-outline';
+          if (index == activeTabIndex) {
+            return (
+              <Icon
+                width={24}
+                height={24}
+                name="home"
+                fill={color.primaryColor}
+              />
+            );
+          }
+          return (
+            <Icon width={24} height={24} name="home-outline" fill="#545454" />
+          );
 
         case SCENE_KEY.Cart:
-          return 'archive-outline';
+          if (index == activeTabIndex) {
+            return (
+              <Icon
+                width={24}
+                height={24}
+                name="archive"
+                fill={color.primaryColor}
+              />
+            );
+          }
+          return <Icon width={24} height={24} name="archive" fill="#545454" />;
 
         case SCENE_KEY.Inbox:
-          return 'inbox-outline';
+          if (index == activeTabIndex) {
+            return (
+              <Icon
+                width={24}
+                height={24}
+                name="inbox"
+                fill={color.primaryColor}
+              />
+            );
+          }
+          return (
+            <Icon width={24} height={24} name="inbox-outline" fill="#545454" />
+          );
 
         default:
           return null;
       }
     };
 
-    _activeScreen = index => {
-      if (index == activeTabIndex) {
-        return color.primaryColor;
-      }
-
-      // Semi dark / abu2
-      return '#545454';
-    };
-
     return (
-      <View
-        style={[styles.tabBarWrapper, globalStyle.elevationShadowStyleTop(2)]}>
-        {state.routes.map((element, index) => {
-          return (
-            <ButtonAnimated
-              key={element.key}
-              onPress={() => {
-                Actions[element.key]();
-              }}>
-              <NewIcon
-                width={24}
-                height={24}
-                // color={_activeScreen(index)}
-                // type="feather"
-                name={_renderIcon(element.key)}
-              />
-            </ButtonAnimated>
-          );
-        })}
-        {/* This button for open drawer */}
-        <ButtonAnimated onPress={() => Actions.drawerOpen()}>
-          <NewIcon width={24} height={24} name="menu-outline" />
-        </ButtonAnimated>
-      </View>
+      <SafeAreaView style={{backgroundColor: '#fff'}}>
+        <View
+          style={[
+            styles.tabBarWrapper,
+            globalStyle.elevationShadowStyleTop(2),
+          ]}>
+          {state.routes.map((element, index) => {
+            return (
+              <ButtonAnimated
+                style={styles.iconTabBar}
+                key={element.key}
+                onPress={() => {
+                  Actions[element.key]();
+                }}>
+                {renderIcon(element.key, index)}
+              </ButtonAnimated>
+            );
+          })}
+          {/* This button for open drawer */}
+          <ButtonAnimated
+            style={styles.iconTabBar}
+            onPress={() => Actions.drawerOpen()}>
+            <Icon width={24} height={24} name="menu-outline" />
+          </ButtonAnimated>
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -125,9 +154,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#fff',
-    paddingHorizontal: isAndroid ? 30 : 30,
-    paddingBottom: isAndroid ? 20 : 50,
-    paddingTop: isAndroid ? 20 : 30,
+    paddingVertical: 20,
+    // paddingHorizontal: 30,
   },
   topBarWrapper: {
     flexDirection: 'row',
@@ -139,6 +167,10 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     backgroundColor: '#fff',
     borderBottomWidth: 2,
+  },
+  iconTabBar: {
+    flex: 1,
+    alignItems: 'center',
   },
 });
 

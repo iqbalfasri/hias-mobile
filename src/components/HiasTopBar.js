@@ -2,14 +2,15 @@ import React, {useEffect, Fragment} from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
+  TouchableOpacity as Button,
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import {Icon, Header} from 'react-native-elements';
+import {Icon} from 'react-native-eva-icons';
 
-// Own component
+import globalStyle from '../styles/globalStyles'
+
 import {isAndroid, deviceWidth} from '../lib';
 
 /**
@@ -18,15 +19,15 @@ import {isAndroid, deviceWidth} from '../lib';
 const BackButton = props => {
   const {hideBackButton} = props;
   return !hideBackButton ? (
-    <TouchableOpacity
+    <Button
+      activeOpacity={0.5}
       style={{width: 100}}
       onPress={() => Actions.pop()}
-      style={{}}>
-      <Icon size={16} name="chevron-left" type="font-awesome" />
-      {/* <Text>{'<'}</Text> */}
-    </TouchableOpacity>
+      style={styles.leftBar}>
+      <Icon name="arrow-back-outline" width={24} height={24} />
+    </Button>
   ) : (
-    <View style={{width: 50, backgroundColor: 'transparent'}} />
+    <View style={{flex: 1, backgroundColor: 'transparent'}} />
   );
 };
 
@@ -35,7 +36,7 @@ const BackButton = props => {
  */
 const Title = props => (
   <View style={styles.titleWrapper}>
-    <Text style={styles.titleText}>{props.title}</Text>
+    <Text style={[styles.titleText, globalStyle.fontBold]}>{props.title}</Text>
   </View>
 );
 
@@ -43,20 +44,13 @@ const Title = props => (
  * Render right icon
  */
 const RightIcon = props => (
-  <View
-    style={{width: 30, flexDirection: 'row', justifyContent: 'space-between'}}>
-    <Icon
-      onPress={() => Actions.push('Wishlist')}
-      name="heart"
-      type="evilicon"
-      size={24}
-    />
-    <Icon
-      onPress={() => Actions.Cart()}
-      name="cart"
-      type="evilicon"
-      size={24}
-    />
+  <View style={styles.rightBar}>
+    <Button activeOpacity={0.5} onPress={() => Actions.push('Wishlist')}>
+      <Icon name="heart-outline" width={24} height={24} />
+    </Button>
+    <Button activeOpacity={0.5} onPress={() => Actions.Cart()}>
+      <Icon name="shopping-bag-outline" width={24} height={24} />
+    </Button>
   </View>
 );
 
@@ -92,14 +86,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: '8.5%',
   },
   titleWrapper: {
-    flex: 1,
+    flex: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },
   titleText: {
     color: '#000',
     fontSize: 16,
-    fontWeight: 'bold',
+  },
+  rightBar: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  leftBar: {
+    flex: 1,
+    alignItems: 'flex-start',
   },
 });
 
