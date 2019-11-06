@@ -25,7 +25,7 @@ class CustomTabBar extends Component {
     const SCENE_KEY = {
       Home: 'HomeStack',
       Cart: 'Cart',
-      ORDER_STATUS: 'OrderStatus',
+      ORDER_STATUS: 'orderStackBar',
       Inbox: 'Inbox',
     };
 
@@ -46,7 +46,7 @@ class CustomTabBar extends Component {
             <Icon width={24} height={24} name="home-outline" fill="#545454" />
           );
 
-        case SCENE_KEY.Cart:
+        case SCENE_KEY.ORDER_STATUS:
           if (index == activeTabIndex) {
             return (
               <Icon

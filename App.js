@@ -1,5 +1,11 @@
 import React, {Fragment, useEffect} from 'react';
-import {StatusBar, Text, Slider, AsyncStorage} from 'react-native';
+import {
+  StatusBar,
+  Text,
+  Slider,
+  AsyncStorage,
+  SafeAreaView,
+} from 'react-native';
 import {
   Router,
   Scene,
@@ -37,6 +43,10 @@ import AddressOrderScreen from './src/screens/AddressOrder.screen';
 import BillingOrderScreen from './src/screens/BillingDetailOrder.screen';
 import PaymentOrderScreen from './src/screens/PaymentOrder.screen';
 import StatusOrderScreen from './src/screens/StatusOrder.screen';
+
+// Order Status
+import OrderStatusOnProgressScreen from './src/screens/OrderStatusOnProgress.screen';
+import OrderStatusHistoryScreen from './src/screens/OrderStatusHistory.screen';
 
 // Search
 import SearchScreen from './src/screens/SearchScreens/Search.screen';
@@ -124,6 +134,7 @@ const App = props => {
                 <Scene key="HotProducts" component={HotProducts} hideNavBar />
                 <Scene key="BestProducts" component={BestProdcuts} hideNavBar />
                 <Scene key="Wishlist" component={Wishlist} hideNavBar />
+                <Scene key="Cart" component={CartScreen} hideNavBar />
 
                 {/* Search Category */}
                 <Stack key="SearchStack">
@@ -152,7 +163,31 @@ const App = props => {
                 </Stack>
               </Stack>
 
-              <Scene key="Cart" component={CartScreen} hideNavBar />
+              <Scene
+                tabs
+                showLabel={true}
+                key="orderStackBar"
+                tabBarPosition="top"
+                tabBarStyle={{backgroundColor: 'red'}}
+                tabBarComponent={CustomTopBar}
+                hideNavBar>
+                <Scene
+                  initial
+                  hideNavBar
+                  title="On Progress"
+                  key="OrderStatusOnProgress"
+                  component={OrderStatusOnProgressScreen}
+                />
+
+                <Scene
+                  initial
+                  hideNavBar
+                  title="History"
+                  key="OrderStatusHistory"
+                  component={OrderStatusHistoryScreen}
+                />
+              </Scene>
+
               <Scene key="Inbox" component={InboxScreen} hideNavBar />
             </Scene>
 

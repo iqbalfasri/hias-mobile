@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 
-function OrderStatusOnHistory(props) {
+function OrderStatusOnProgress(props) {
   useEffect(() => {
-    alert("Page OrderStatusOnHistory")
+    alert("Page OrderStatusOnProgress")
   })
   return (
     <SafeAreaView>
       <View>
-        <Text>OrderStatusOnHistory</Text>
+        <Text>OrderStatusOnProgress</Text>
       </View>
     </SafeAreaView>
   );
 }
 
-export default OrderStatusOnHistory;
+export default OrderStatusOnProgress;

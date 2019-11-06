@@ -205,11 +205,13 @@ const Cart = props => {
           alignItems: 'center',
           padding: 25,
         }}>
-        <View style={{paddingHorizontal: 30}}>
-          <ButtonAnimated onPress={() => _handleOrder()}>
+        <Container>
+          <TouchableOpacity
+            style={globalStyle.buttonPrimary}
+            onPress={() => _handleOrder()}>
             <Text style={{textAlign: 'center', color: '#fff'}}>ORDER</Text>
-          </ButtonAnimated>
-        </View>
+          </TouchableOpacity>
+        </Container>
       </View>
     </Layout>
   );
