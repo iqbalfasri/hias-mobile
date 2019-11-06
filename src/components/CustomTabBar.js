@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Icon} from 'react-native-elements';
+import {Icon as NewIcon} from 'react-native-eva-icons';
 
 import globalStyle, {color} from '../styles/globalStyles';
 
@@ -29,13 +30,13 @@ class CustomTabBar extends Component {
     _renderIcon = elementKey => {
       switch (elementKey) {
         case SCENE_KEY.Home:
-          return 'home';
+          return 'home-outline';
 
         case SCENE_KEY.Cart:
-          return 'shopping-bag';
+          return 'archive-outline';
 
         case SCENE_KEY.Inbox:
-          return 'inbox';
+          return 'inbox-outline';
 
         default:
           return null;
@@ -61,9 +62,11 @@ class CustomTabBar extends Component {
               onPress={() => {
                 Actions[element.key]();
               }}>
-              <Icon
-                color={_activeScreen(index)}
-                type="feather"
+              <NewIcon
+                width={24}
+                height={24}
+                // color={_activeScreen(index)}
+                // type="feather"
                 name={_renderIcon(element.key)}
               />
             </ButtonAnimated>
@@ -71,7 +74,7 @@ class CustomTabBar extends Component {
         })}
         {/* This button for open drawer */}
         <ButtonAnimated onPress={() => Actions.drawerOpen()}>
-          <Icon type="feather" name="menu" />
+          <NewIcon width={24} height={24} name="menu-outline" />
         </ButtonAnimated>
       </View>
     );

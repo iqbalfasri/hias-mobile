@@ -68,8 +68,9 @@ const SigninScreen = () => {
           // redirect to home screen
           setTimeout(() => {
             Actions.HomeStack();
-          }, 300);
+          }, 100);
         } else {
+          setModalVisible(false)
           alert(error.errorMessage);
         }
       }
