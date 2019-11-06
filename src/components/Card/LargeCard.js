@@ -12,7 +12,7 @@ import {Actions} from 'react-native-router-flux';
 
 import globalStyles from '../../styles/globalStyles';
 
-import { getShortString, getDeviceHeight, toRupiah } from '../../lib/utils'
+import {getShortString, getDeviceHeight, toRupiah} from '../../lib/utils';
 
 function LargeCard(props) {
   const {data} = props;
@@ -33,7 +33,9 @@ function LargeCard(props) {
               {getShortString(data.productName, 16)}
             </Text>
             <View style={styles.productDetailInfo}>
-              <Text style={[styles.productPrice, globalStyles.fontMedium]}>Rp {toRupiah(data.price)}</Text>
+              <Text style={[styles.productPrice, globalStyles.fontMedium]}>
+                Rp {toRupiah(data.price)}
+              </Text>
               <Icon
                 color="#969696"
                 style={{alignSelf: 'center'}}

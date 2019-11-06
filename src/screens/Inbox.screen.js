@@ -12,7 +12,9 @@ function Inbox(props) {
           source={inboxImage}
         />
       </View>
-      <Text style={[styles.text, globalStyles.fontMedium]}>Fiturnya masih dibuat</Text>
+      <Text style={[styles.text, globalStyles.fontMedium]}>
+        Fiturnya masih dibuat
+      </Text>
     </View>
   );
 }

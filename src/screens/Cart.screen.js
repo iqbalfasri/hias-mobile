@@ -171,8 +171,12 @@ const Cart = props => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Image style={{width: 250, height: 250, marginTop: 150}} source={emptyCartImg} />
-        <Text style={[globalStyle.fontMedium, {textAlign: 'center', fontSize: 18}]}>
+        <Image
+          style={{width: 250, height: 250, marginTop: 150}}
+          source={emptyCartImg}
+        />
+        <Text
+          style={[globalStyle.fontMedium, {textAlign: 'center', fontSize: 18}]}>
           Keranjangmu masih kosong.
         </Text>
       </View>
