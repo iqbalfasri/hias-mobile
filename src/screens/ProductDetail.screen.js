@@ -12,15 +12,16 @@ import {
 import {Icon} from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import Collapsible from 'react-native-collapsible';
-import {Actions} from 'react-native-router-flux';
-import {Header} from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
+
+import { toRupiah } from '../lib/utils'
+
 import {
   deviceWidth,
   UrlAPI,
   requestParameter,
   localStorage,
   KEY_STORAGE,
-  toRupiah,
 } from '../lib';
 
 // Own component
