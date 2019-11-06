@@ -4,13 +4,11 @@ import {Icon} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 
 // Own component
-import Button, {ButtonAnimated} from '../components/HiasButton';
+import {ButtonAnimated} from '../components/HiasButton';
 
-import {toRupiah} from '../lib/utils';
+import globalStyles, {color} from '../styles/globalStyles';
 
-import {color} from '../styles/globalStyles';
-import {deviceWidth, getShortString} from '../lib';
-import globalStyles from '../styles/globalStyles';
+import {toRupiah, getShortString, getDeviceWidth} from '../lib/utils';
 
 const Card = props => {
   if (props.data.length === 0) {
@@ -41,11 +39,13 @@ const Card = props => {
         <RenderBadgesRate bestProduct={data.bestProduct} />
       </View>
       <View style={{flexDirection: 'column', paddingVertical: 13}}>
-        <Text style={{fontSize: 16, color: '#2C272D', fontWeight: 'bold'}}>
+        <Text style={[globalStyles.fontBold, {fontSize: 16, color: '#2C272D'}]}>
           {getShortString(data.productName, 20)}
         </Text>
         <View style={styles.infoProductWrapper}>
-          <Text style={styles.price}>{`Rp ${toRupiah(data.price)}`}</Text>
+          <Text style={[globalStyles.fontNormal, {lineHeight: 28}]}>
+            {`Rp ${toRupiah(data.price)}`}
+          </Text>
           <Icon
             style={{alignSelf: 'center'}}
             name="heart"
@@ -128,7 +128,7 @@ RenderBadgesRate.defaultProps = {
 
 const styles = StyleSheet.create({
   cardWrapper: {
-    width: deviceWidth / 3,
+    width: getDeviceWidth / 3,
     marginRight: 20,
   },
   imageProductWrapper: {

@@ -4,25 +4,75 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TextInput,
   StatusBar,
-  TouchableOpacity,
+  TouchableOpacity as Button,
 } from 'react-native';
-import {SearchBar, Icon} from 'react-native-elements';
+import {Icon} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 
-// Own component
 import Card from '../components/HiasCard';
 import Carousel from '../components/HiasCarousel';
 import TopBar from '../components/HiasTopBar';
-import {Container, Layout} from '../components/HiasLayout';
-import Button, {ButtonAnimated} from '../components/HiasButton';
+import {Layout} from '../components/HiasLayout';
 
-// Skeleton placeholder
-import Skeleton from '../components/SkeletonPlaceholder';
+import globalStyle from '../styles/globalStyles';
 
-// api
 import {fetchBestSeller, fetchHotProduct} from '../lib/api';
+
+const renderHotItems = hotItems => {
+  return (
+    <View>
+      <Button
+        activeOpacity={0.5}
+        onPress={() => Actions.HotProducts()}
+        style={styles.buttonSeeAll}>
+        <Text style={[styles.titleSeeAll, globalStyle.fontMedium]}>
+          Hot Items
+        </Text>
+        <Text style={[styles.seeAllText, globalStyle.fontNormal]}>See all</Text>
+      </Button>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <View style={styles.rowProductsWrapper}>
+          <Card data={hotItems} />
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
+
+const renderBestSeller = bestItems => {
+  return (
+    <View>
+      <Button
+        activeOpacity={0.5}
+        onPress={() => Actions.BestProducts({test: 'Halo'})}
+        style={styles.buttonSeeAll}>
+        <Text style={[styles.titleSeeAll, globalStyle.fontMedium]}>
+          Best Seller
+        </Text>
+        <Text style={[styles.seeAllText, globalStyle.fontNormal]}>See all</Text>
+      </Button>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <View style={styles.rowProductsWrapper}>
+          <Card data={bestItems} />
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
+
+const renderSearch = () => {
+  return (
+    <Button style={styles.searchBar} onPress={() => Actions.SearchStack()}>
+      <View style={styles.searchIcon}>
+        <Icon color="#9F9F9F" size={16} name="search" type="font-awesome" />
+      </View>
+      <View style={styles.searchInput}>
+        <Text style={{color: '#9F9F9F'}}>Search</Text>
+      </View>
+    </Button>
+  );
+};
 
 function Home(props) {
   const [hotItems, setHotItems] = useState([]);
@@ -56,98 +106,15 @@ function Home(props) {
     <Layout>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <TopBar hideBackButton={true} title="Home" />
-      {_renderSearch()}
+      {renderSearch()}
       <ScrollView>
         <Carousel />
-        {_renderHotItems(hotItems)}
-        {_renderBestSeller(bestSeller)}
+        {renderHotItems(hotItems)}
+        {renderBestSeller(bestSeller)}
       </ScrollView>
     </Layout>
   );
 }
-
-/**
- * Hot items
- */
-const _renderHotItems = hotItems => {
-  return (
-    <View>
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => Actions.HotProducts({test: 'Halo'})}
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingHorizontal: 30,
-          paddingBottom: 10,
-        }}>
-        <Text style={{fontSize: 16, fontWeight: 'bold'}}>Hot Items</Text>
-        <Text style={{fontSize: 12}}>See all</Text>
-      </TouchableOpacity>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <View
-          style={{
-            flexDirection: 'row',
-            backgroundColor: 'white',
-            paddingHorizontal: 30,
-            paddingTop: 5,
-            paddingBottom: 30,
-          }}>
-          <Card data={hotItems} />
-        </View>
-      </ScrollView>
-    </View>
-  );
-};
-
-/**
- * Hot items
- */
-const _renderBestSeller = bestItems => {
-  return (
-    <View>
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => Actions.BestProducts({test: 'Halo'})}
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingHorizontal: 30,
-          paddingBottom: 10,
-        }}>
-        <Text style={{fontSize: 16, fontWeight: 'bold'}}>Best Seller</Text>
-        <Text style={{fontSize: 12}}>See all</Text>
-      </TouchableOpacity>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <View
-          style={{
-            flexDirection: 'row',
-            backgroundColor: 'white',
-            paddingHorizontal: 30,
-            paddingTop: 5,
-            paddingBottom: 30,
-          }}>
-          <Card data={bestItems} />
-        </View>
-      </ScrollView>
-    </View>
-  );
-};
-
-const _renderSearch = () => {
-  return (
-    <Button style={styles.searchBar} onPress={() => Actions.SearchStack()}>
-      <View style={styles.searchIcon}>
-        <Icon color="#9F9F9F" size={16} name="search" type="font-awesome" />
-      </View>
-      <View style={styles.searchInput}>
-        <Text style={{color: '#9F9F9F'}}>Search</Text>
-      </View>
-    </Button>
-  );
-};
 
 const styles = StyleSheet.create({
   screen: {
@@ -173,6 +140,26 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     paddingHorizontal: 8,
+  },
+  buttonSeeAll: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 30,
+    paddingBottom: 10,
+  },
+  rowProductsWrapper: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    paddingHorizontal: 30,
+    paddingTop: 5,
+    paddingBottom: 30,
+  },
+  titleSeeAll: {
+    fontSize: 16,
+  },
+  seeAllText: {
+    fontSize: 12,
   },
 });
 
