@@ -1,70 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TextInput,
-  StatusBar,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import {Icon} from 'react-native-elements';
+import {View, StyleSheet, ScrollView, Image} from 'react-native';
 
 import TopBar from '../components/HiasTopBar';
 import {Layout} from '../components/HiasLayout';
-import Button from '../components/HiasButton';
-import {UrlAPI, deviceWidth, deviceHeight, getShortString} from '../lib';
-import SkeletonPlaceholder from '../components/SkeletonPlaceholder';
-import globalStyles from '../styles/globalStyles';
-import {Actions} from 'react-native-router-flux';
+import LargeCard from '../components/Card/LargeCard';
 
-const LoadSkeleton = () => {
-  return (
-    <SkeletonPlaceholder>
-      <Text>Yuhu</Text>
-    </SkeletonPlaceholder>
-  );
-};
-
-const ProductCard = props => {
-  const {data} = props;
-
-  const sofa1 = require('../assets/images/products/sofa1.jpg');
-
-  return (
-    <React.Fragment>
-      {data.map(data => (
-        <Button
-          key={data.id}
-          type="transparent"
-          style={styles.cardWrapper}
-          onPress={() => Actions.ProductDetail({id_product: data.id})}>
-          <View
-            style={[globalStyles.elevationShadowStyle(5), styles.imageWrapper]}>
-            <Image style={styles.imageProduct} source={{uri: data.thumbnail}} />
-          </View>
-          <View style={styles.productInfoWrapper}>
-            <Text style={styles.productTitle}>
-              {getShortString(data.productName, 16)}
-            </Text>
-            <View style={styles.productDetailInfo}>
-              <Text style={styles.productPrice}>Rp {data.price}</Text>
-              <Icon
-                color="#969696"
-                style={{alignSelf: 'center'}}
-                name="heart"
-                type="evilicon"
-                size={28}
-                onPress={() => alert('liked')}
-              />
-            </View>
-          </View>
-        </Button>
-      ))}
-    </React.Fragment>
-  );
-};
+import {UrlAPI, deviceHeight} from '../lib';
 
 const HotProducts = props => {
   const [hotProducts, setHotProducts] = useState([]);
@@ -87,9 +28,7 @@ const HotProducts = props => {
       <TopBar title="Hot Items" />
       <ScrollView>
         <View style={styles.container}>
-          <View style={styles.cardContainer}>
-            <ProductCard data={hotProducts} />
-          </View>
+          <LargeCard data={hotProducts} />
         </View>
       </ScrollView>
     </Layout>
