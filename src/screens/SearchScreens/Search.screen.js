@@ -4,22 +4,20 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
+  TouchableOpacity as Button,
   ScrollView,
 } from 'react-native';
+import {Icon} from 'react-native-eva-icons';
+import {Actions} from 'react-native-router-flux';
 
-// module component
-import {Icon} from 'react-native-elements';
+import SkeletonPlaceholder from '../../components/SkeletonPlaceholder';
 
-// own component
-import Button from '../../components/HiasButton';
 import {Layout} from '../../components/HiasLayout';
 import TopBar from '../../components/HiasTopBar';
 
-// libs
+import globalStyle from '../../styles/globalStyles';
+
 import {UrlAPI} from '../../lib';
-import {Actions} from 'react-native-router-flux';
-import SkeletonPlaceholder from '../../components/SkeletonPlaceholder';
 
 function RenderSkeleton() {
   return (
@@ -72,7 +70,7 @@ function Search(props) {
           {mainCategory.map((category, i) => {
             let isLastItem = mainCategory.length - 1 === i;
             return (
-              <TouchableOpacity
+              <Button
                 key={category.id}
                 onPress={() =>
                   Actions.SubCategory({
@@ -84,8 +82,10 @@ function Search(props) {
                   styles.listCategory,
                   {borderBottomWidth: isLastItem ? 0.5 : 0},
                 ]}>
-                <Text>{category.mainCategoryName}</Text>
-              </TouchableOpacity>
+                <Text style={globalStyle.fontNormal}>
+                  {category.mainCategoryName}
+                </Text>
+              </Button>
             );
           })}
         </React.Fragment>
@@ -99,10 +99,10 @@ function Search(props) {
       {/* Search form */}
       <View style={styles.searchBar}>
         <View style={styles.searchIcon}>
-          <Icon color="#9F9F9F" size={16} name="search" type="font-awesome" />
+          <Icon name="search-outline" fill="#9F9F9F" width={18} height={18} />
         </View>
         <View style={styles.searchInput}>
-          <TextInput placeholder="Search" />
+          <TextInput style={globalStyle.fontNormal} placeholder="Search" />
         </View>
       </View>
 
@@ -110,7 +110,8 @@ function Search(props) {
       <ScrollView>
         <View>
           <View style={styles.productCategoryTitleWrapper}>
-            <Text style={styles.productCategoryTitleText}>
+            <Text
+              style={[styles.productCategoryTitleText, globalStyle.fontMedium]}>
               Product Category
             </Text>
           </View>

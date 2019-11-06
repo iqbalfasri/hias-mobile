@@ -12,9 +12,9 @@ import {
 import {Icon} from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import Collapsible from 'react-native-collapsible';
-import { Actions } from 'react-native-router-flux';
+import {Actions} from 'react-native-router-flux';
 
-import { toRupiah } from '../lib/utils'
+import {toRupiah} from '../lib/utils';
 
 import {
   deviceWidth,
@@ -28,6 +28,8 @@ import {
 import TopBar from '../components/HiasTopBar';
 import {Layout} from '../components/HiasLayout';
 import Button, {ButtonAnimated} from '../components/HiasButton';
+
+import globalStyle from '../styles/globalStyles';
 
 const sofa1 = require('../assets/images/products/sofa1.jpg');
 
@@ -134,12 +136,15 @@ const ProductDetail = props => {
                 <Text style={styles.productInfoDesc}>{product.overview}</Text>
                 <View style={{paddingVertical: 15}}>
                   <Text
-                    style={{
-                      textAlign: 'center',
-                      fontSize: 16,
-                      fontWeight: 'bold',
-                      color: '#000',
-                    }}>
+                    style={[
+                      globalStyle.fontBold,
+                      {
+                        textAlign: 'center',
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        color: '#000',
+                      },
+                    ]}>
                     {`Rp ${toRupiah(product.price)}`}
                   </Text>
                 </View>
@@ -159,7 +164,9 @@ const ProductDetail = props => {
                       backgroundColor: '#292929',
                     }}
                     type="transparent">
-                    <Text style={{color: '#fff'}}>ADD TO REGISTRY</Text>
+                    <Text style={[globalStyle.fontNormal, {color: '#fff'}]}>
+                      ADD TO REGISTRY
+                    </Text>
                   </ButtonAnimated>
 
                   <ButtonAnimated
@@ -171,7 +178,11 @@ const ProductDetail = props => {
                       backgroundColor: '#00B1DB',
                     }}
                     type="transparent">
-                    <Text style={{color: '#fff', textAlign: 'center'}}>
+                    <Text
+                      style={[
+                        globalStyle.fontNormal,
+                        {color: '#fff', textAlign: 'center'},
+                      ]}>
                       ADD TO CART
                     </Text>
                   </ButtonAnimated>
@@ -195,14 +206,18 @@ const ProductDetail = props => {
                     alignItems: 'center',
                     paddingHorizontal: 30,
                   }}>
-                  <Text style={{fontWeight: 'bold'}}>DESCRIPTION DETAIL</Text>
+                  <Text style={globalStyle.fontBold}>DESCRIPTION DETAIL</Text>
                   <Icon type="feather" name="chevron-down" />
                 </View>
               </Button>
 
               <View style={{paddingHorizontal: 30, paddingVertical: 15}}>
                 <Collapsible collapsed={collapsed}>
-                  <Text style={{fontSize: 12, lineHeight: 18}}>
+                  <Text
+                    style={[
+                      globalStyle.fontNormal,
+                      {fontSize: 12, lineHeight: 18},
+                    ]}>
                     {product.description}
                   </Text>
                 </Collapsible>

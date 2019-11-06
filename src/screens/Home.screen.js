@@ -7,7 +7,7 @@ import {
   StatusBar,
   TouchableOpacity as Button,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
+import {Icon} from 'react-native-eva-icons';
 import {Actions} from 'react-native-router-flux';
 
 import Card from '../components/HiasCard';
@@ -65,10 +65,10 @@ const renderSearch = () => {
   return (
     <Button style={styles.searchBar} onPress={() => Actions.SearchStack()}>
       <View style={styles.searchIcon}>
-        <Icon color="#9F9F9F" size={16} name="search" type="font-awesome" />
+        <Icon name="search-outline" fill="#9F9F9F" width={18} height={18} />
       </View>
       <View style={styles.searchInput}>
-        <Text style={{color: '#9F9F9F'}}>Search</Text>
+        <Text style={[globalStyle.fontNormal, {color: '#9F9F9F', padding: null}]}>Search</Text>
       </View>
     </Button>
   );
