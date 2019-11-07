@@ -8,7 +8,8 @@
     "lint": "eslint . --fix;exit 0",
     "run-android": "react-native run-android",
     "run-ios": "react-native run-ios",
-    "clean:android": "cd android && ./gradlew clean && cd ../"
+    "clean:android": "cd android && ./gradlew clean && cd ../",
+    "release:android": "cd android && ./gradlew assembleRelease && cd ../"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.2",
@@ -19,10 +20,13 @@
     "react-native-collapsible": "^1.5.1",
     "react-native-elements": "^1.2.1",
     "react-native-eva-icons": "^1.2.1",
+    "react-native-gesture-handler": "^1.5.0",
+    "react-native-reanimated": "^1.4.0",
     "react-native-router-flux": "^4.0.6",
     "react-native-simple-radio-button": "^2.7.4",
     "react-native-svg": "^9.13.3",
     "react-native-swiper": "^1.5.14",
+    "react-native-tab-view": "^2.10.0",
     "react-native-vector-icons": "^6.6.0",
     "styled-components": "^4.3.2"
   },

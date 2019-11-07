@@ -45,6 +45,7 @@ import PaymentOrderScreen from './src/screens/PaymentOrder.screen';
 import StatusOrderScreen from './src/screens/StatusOrder.screen';
 
 // Order Status
+import OrderStatusScreen from './src/screens/OrderStatus.screen';
 import OrderStatusOnProgressScreen from './src/screens/OrderStatusOnProgress.screen';
 import OrderStatusHistoryScreen from './src/screens/OrderStatusHistory.screen';
 
@@ -165,6 +166,13 @@ const App = props => {
               </Stack>
 
               <Scene
+                hideNavBar
+                key="orderNavBar"
+                title="Order Status"
+                component={OrderStatusScreen}
+              />
+
+              {/* <Scene
                 tabs
                 showLabel={true}
                 key="orderNavBar"
@@ -186,7 +194,7 @@ const App = props => {
                   key="OrderStatusHistory"
                   component={OrderStatusHistoryScreen}
                 />
-              </Scene>
+              </Scene> */}
 
               <Scene key="Inbox" component={InboxScreen} hideNavBar />
             </Scene>

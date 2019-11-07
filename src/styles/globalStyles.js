@@ -87,7 +87,7 @@ const globalStyles = StyleSheet.create({
   },
   elevationShadowStyleTop: elevation => {
     if (isAndroid) {
-      return {elevation};
+      return {elevation: elevation * 5};
     } else {
       return {
         shadowColor: '#000',

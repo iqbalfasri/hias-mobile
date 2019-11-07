@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 25,
   },
   topBarButton: {
-    flex: 1,
     paddingVertical: 20,
     backgroundColor: '#fff',
     borderBottomWidth: 2,

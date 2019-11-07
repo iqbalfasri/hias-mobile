@@ -63,7 +63,7 @@ export default class CustomNavBar extends React.Component {
   _renderMiddle() {
     return (
       <View style={styles.navBarItem}>
-        <Text>{this.state.title}</Text>
+        <Text>{this.props.title}</Text>
       </View>
     );
   }
