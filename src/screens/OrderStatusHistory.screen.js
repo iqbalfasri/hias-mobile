@@ -3,7 +3,7 @@ import {View, Text, SafeAreaView} from 'react-native';
 
 function OrderStatusOnHistory(props) {
   useEffect(() => {
-    alert("Page OrderStatusOnHistory")
+    console.log("Page OrderStatusOnHistory")
   })
   return (
     <SafeAreaView>

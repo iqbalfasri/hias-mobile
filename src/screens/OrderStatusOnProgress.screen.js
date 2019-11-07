@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
+import TopBar from '../components/HiasTopBar';
 
 function OrderStatusOnProgress(props) {
   useEffect(() => {
-    alert("Page OrderStatusOnProgress")
+    console.log("Page OrderStatusOnProgress")
   })
   return (
     <SafeAreaView>

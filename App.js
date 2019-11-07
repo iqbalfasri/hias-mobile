@@ -54,6 +54,8 @@ import SubCategory from './src/screens/SearchScreens/SubCategory.screen';
 import SecondSubCategory from './src/screens/SearchScreens/SecondSubCategory.screen';
 import ThirdSubCategory from './src/screens/SearchScreens/ThirdSubCategory.screen';
 import SearchResult from './src/screens/SearchScreens/SearchResult.screen';
+import CustomNavBar from './src/components/Layout/NavBar';
+import TopBar from './src/components/HiasTopBar';
 
 // FIXME: Refactore route
 const App = props => {
@@ -100,41 +102,40 @@ const App = props => {
             hideNavBar
           />
 
-          <Scene key="Order" component={OrderScreen} hideNavBar />
-
           {/* Main */}
           <Scene
-            type={ActionConst.RESET}
             drawer
             drawerPosition="right"
             contentComponent={DrawerContent}
             drawerWidth={250}
-            hideDrawerButton={true}
-            hideNavBar={true}>
+            hideNavBar
+            hideDrawerButton={true}>
             {/* Tabbar Scene Stack */}
             <Scene
               tabs
               key="tabbar"
               tabBarComponent={CustomTabBar}
-              type={ActionConst.RESET}
-              hideNavBar>
+              type={ActionConst.RESET}>
               <Stack key="HomeStack" hideNavBar title="Home">
                 <Scene
                   key="Home"
                   type={ActionConst.RESET}
                   component={HomeScreen}
                   initial
-                  hideNavBar
                 />
                 <Scene
+                  title={'Detail'}
+                  navBar={CustomNavBar}
                   key="ProductDetail"
                   component={ProductDetailScreen}
                   hideNavBar
                 />
+
                 <Scene key="HotProducts" component={HotProducts} hideNavBar />
                 <Scene key="BestProducts" component={BestProdcuts} hideNavBar />
                 <Scene key="Wishlist" component={Wishlist} hideNavBar />
                 <Scene key="Cart" component={CartScreen} hideNavBar />
+                <Scene key="Order" component={OrderScreen} hideNavBar />
 
                 {/* Search Category */}
                 <Stack key="SearchStack">
@@ -166,12 +167,11 @@ const App = props => {
               <Scene
                 tabs
                 showLabel={true}
-                key="orderStackBar"
+                key="orderNavBar"
                 tabBarPosition="top"
-                tabBarStyle={{backgroundColor: 'red'}}
-                tabBarComponent={CustomTopBar}
-                hideNavBar>
+                tabStyle={{backgroundColor: 'red'}}>
                 <Scene
+                  lazy
                   initial
                   hideNavBar
                   title="On Progress"
@@ -180,7 +180,7 @@ const App = props => {
                 />
 
                 <Scene
-                  initial
+                  lazy
                   hideNavBar
                   title="History"
                   key="OrderStatusHistory"
@@ -200,29 +200,33 @@ const App = props => {
               tabBarComponent={CustomTopBar}
               hideNavBar>
               <Scene
-                key="AddressDetail"
-                component={AddressOrderScreen}
+                lazy
                 initial
                 hideNavBar
                 title="Address"
+                key="AddressDetail"
+                component={AddressOrderScreen}
               />
               <Scene
+                lazy
+                hideNavBar
                 key="BillingDetail"
-                component={BillingOrderScreen}
-                hideNavBar
                 title="Billing Detail"
+                component={BillingOrderScreen}
               />
               <Scene
+                lazy
+                hideNavBar
                 key="Payment"
-                component={PaymentOrderScreen}
-                hideNavBar
                 title="Payment"
+                component={PaymentOrderScreen}
               />
               <Scene
-                key="OrderStatus"
-                component={StatusOrderScreen}
+                lazy
                 hideNavBar
+                key="OrderStatus"
                 title="Order Status"
+                component={StatusOrderScreen}
               />
             </Scene>
           </Scene>

@@ -25,7 +25,7 @@ class CustomTabBar extends Component {
     const SCENE_KEY = {
       Home: 'HomeStack',
       Cart: 'Cart',
-      ORDER_STATUS: 'orderStackBar',
+      ORDER_STATUS: 'orderNavBar',
       Inbox: 'Inbox',
     };
 
@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 25,
   },
   topBarButton: {
+    flex: 1,
     paddingVertical: 20,
     backgroundColor: '#fff',
     borderBottomWidth: 2,
