@@ -7,7 +7,7 @@ import {
   TouchableOpacity as Button,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
-import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import {TabView} from 'react-native-tab-view';
 
 import TopBar from '../components/HiasTopBar';
 
@@ -17,18 +17,6 @@ import OrderStatusOnProgress from '../screens/OrderStatusOnProgress.screen';
 import globalStyle from '../styles/globalStyles';
 
 import {getDeviceWidth} from '../lib/utils';
-
-const FirstScene = () => (
-  <View>
-    <Text>First</Text>
-  </View>
-);
-
-const SeconScene = () => (
-  <View>
-    <Text>Secod</Text>
-  </View>
-);
 
 class OrderStatus extends React.Component {
   state = {
@@ -41,10 +29,6 @@ class OrderStatus extends React.Component {
 
   handleChangeIndex = index => this.setState({index});
 
-  // renderScene = SceneMap({
-  //   orderHistory: firsScene,
-  //   orderProgress: secondScene,
-  // });
   renderScene = ({route, jumpTo}) => {
     switch (route.key) {
       case 'orderProgress':
@@ -61,7 +45,6 @@ class OrderStatus extends React.Component {
   renderTabBar = props => {
     const {routes, index} = props.navigationState;
     let activeIndex = index;
-    const inputRange = routes.map((x, i) => i);
 
     return (
       <View style={styles.topBarWrapper}>

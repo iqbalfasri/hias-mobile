@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity as Button} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 // own component
@@ -7,6 +7,7 @@ import {ButtonAnimated} from '../components/HiasButton';
 
 // lib
 import {localStorage, KEY_STORAGE} from '../lib';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Drawer = () => {
   const _handleLogout = () => {
@@ -43,10 +44,16 @@ const Drawer = () => {
           </View>
         </View>
         <View style={styles.bottomDrawer}>
-          <Text
-            style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
-            Category
-          </Text>
+          <TouchableOpacity onPress={() => Actions.SearchStack()}>
+            <Text
+              style={{
+                paddingVertical: 10,
+                fontSize: 16,
+                paddingHorizontal: 10,
+              }}>
+              Category
+            </Text>
+          </TouchableOpacity>
           {/* <Text
             style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
             Blog

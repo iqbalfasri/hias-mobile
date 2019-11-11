@@ -5,9 +5,10 @@ export const color = {
   white: '#ffff',
   primaryColor: '#00B1DB',
   darkBlue: '#4F6AA3',
-  orange: '#FE7865',
+  orange: '#F28000',
   dark: '#292929',
   red: '#E93E08',
+  softGreen: '#87C6BE',
 };
 
 const globalStyles = StyleSheet.create({

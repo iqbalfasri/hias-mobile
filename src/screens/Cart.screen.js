@@ -5,15 +5,15 @@ import {
   StyleSheet,
   ScrollView,
   Image,
-  TouchableOpacity,
+  TouchableOpacity as Button,
 } from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
-// Own component
-import {Container} from '../styles/styled';
+import Container from '../components/Layout/Container';
 import {Layout} from '../components/HiasLayout';
 import TopBar from '../components/HiasTopBar';
 import globalStyle from '../styles/globalStyles';
-import {ButtonAnimated} from '../components/HiasButton';
+
 import {
   requestParameter,
   localStorage,
@@ -22,8 +22,7 @@ import {
   getShortString,
   requireLogin,
 } from '../lib';
-import Button from '../components/HiasButton';
-import {Actions} from 'react-native-router-flux';
+
 import {getDeviceHeight} from '../lib/utils';
 
 const exampleDataCart = {
@@ -206,11 +205,12 @@ const Cart = props => {
           padding: 25,
         }}>
         <Container>
-          <TouchableOpacity
+          <Button
+            activeOpacity={0.5}
             style={globalStyle.buttonPrimary}
             onPress={() => _handleOrder()}>
             <Text style={{textAlign: 'center', color: '#fff'}}>ORDER</Text>
-          </TouchableOpacity>
+          </Button>
         </Container>
       </View>
     </Layout>

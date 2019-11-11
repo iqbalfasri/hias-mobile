@@ -3,18 +3,18 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  TouchableOpacity as Button,
   StatusBarStyle,
   StatusBar,
   ScrollView,
   Image,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
+import {Icon} from 'react-native-eva-icons';
 import Swiper from 'react-native-swiper';
 import Collapsible from 'react-native-collapsible';
 import {Actions} from 'react-native-router-flux';
 
-import {toRupiah} from '../lib/utils';
+import {toRupiah, getDeviceWidth} from '../lib/utils';
 
 import {
   deviceWidth,
@@ -27,9 +27,9 @@ import {
 // Own component
 import TopBar from '../components/HiasTopBar';
 import {Layout} from '../components/HiasLayout';
-import Button, {ButtonAnimated} from '../components/HiasButton';
+import {ButtonAnimated} from '../components/HiasButton';
 
-import globalStyle from '../styles/globalStyles';
+import globalStyle, {color} from '../styles/globalStyles';
 
 const sofa1 = require('../assets/images/products/sofa1.jpg');
 
@@ -77,6 +77,72 @@ const ProductDetail = props => {
     } catch (error) {
       alert('Server internal error');
     }
+  };
+
+  // Add to wishlist button
+  const AddToWishList = () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          top: 30,
+          left: 0,
+        }}>
+        <Button onPress={() => alert('Liked')}>
+          <Icon
+            onPress={() => alert('Icon Liked')}
+            width={28}
+            height={28}
+            name="heart-outline"
+          />
+        </Button>
+      </View>
+    );
+  };
+
+  // this function to create modal button for preview image products
+  const PreviewImage = () => {
+    return;
+  };
+
+  // color option selection
+  const ColorOptions = () => {
+    return (
+      <View style={styles.colorOptionsWrapper}>
+        <View>
+          <Text
+            style={[globalStyle.fontNormal, {color: '#9191AF', fontSize: 15}]}>
+            Color Options
+          </Text>
+        </View>
+        <View style={styles.optionDotWrapper}>
+          <View style={[styles.optionDot, {backgroundColor: color.red}]} />
+          <View style={[styles.optionDot, {backgroundColor: color.darkBlue}]} />
+          <View style={[styles.optionDot, {backgroundColor: color.dark}]} />
+          <View style={[styles.optionDot, {backgroundColor: color.orange}]} />
+        </View>
+      </View>
+    );
+  };
+
+  // tone option selection
+  const ToneOptions = () => {
+    return (
+      <View style={styles.toneOptionsWrapper}>
+        <View>
+          <Text
+            style={[globalStyle.fontNormal, {color: '#9191AF', fontSize: 15}]}>
+            Tone Options
+          </Text>
+        </View>
+        <View style={styles.optionDotWrapper}>
+          <View style={[styles.optionDot, {backgroundColor: color.red}]} />
+          <View style={[styles.optionDot, {backgroundColor: color.darkBlue}]} />
+          <View style={[styles.optionDot, {backgroundColor: color.dark}]} />
+          <View style={[styles.optionDot, {backgroundColor: color.orange}]} />
+        </View>
+      </View>
+    );
   };
 
   const DetailProduct = ({data}) => {
@@ -130,11 +196,15 @@ const ProductDetail = props => {
 
               {/* Product info */}
               <View style={styles.productInfoWrapper}>
-                <Text style={styles.productInfoTitle}>
-                  {product.productName}
-                </Text>
-                <Text style={styles.productInfoDesc}>{product.overview}</Text>
-                <View style={{paddingVertical: 15}}>
+                {/* Add to wishlist Button */}
+                <AddToWishList />
+                {/* END: Add to wishlist button */}
+                <View style={{alignItems: 'center'}}>
+                  <Text style={[styles.productInfoTitle, globalStyle.fontBold]}>
+                    {product.productName}
+                  </Text>
+                </View>
+                <View style={{paddingVertical: 10}}>
                   <Text
                     style={[
                       globalStyle.fontBold,
@@ -142,45 +212,27 @@ const ProductDetail = props => {
                         textAlign: 'center',
                         fontSize: 16,
                         fontWeight: 'bold',
-                        color: '#000',
+                        color: color.orange,
                       },
                     ]}>
                     {`Rp ${toRupiah(product.price)}`}
                   </Text>
                 </View>
-                {/* Button group */}
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    padding: 10,
-                    justifyContent: 'space-between',
-                  }}>
-                  <ButtonAnimated
-                    style={{
-                      paddingHorizontal: 13,
-                      paddingVertical: 13,
-                      width: null,
-                      borderRadius: 5,
-                      backgroundColor: '#292929',
-                    }}
-                    type="transparent">
-                    <Text style={[globalStyle.fontNormal, {color: '#fff'}]}>
-                      ADD TO REGISTRY
-                    </Text>
-                  </ButtonAnimated>
 
+                {/* Options color and tone */}
+                <View style={styles.optionsWrapper}>
+                  <ColorOptions />
+                  <ToneOptions />
+                </View>
+
+                {/* Button group */}
+                <View>
                   <ButtonAnimated
                     onPress={() => _handleAddToCart()}
-                    style={{
-                      paddingHorizontal: 25,
-                      paddingVertical: 13,
-                      borderRadius: 5,
-                      backgroundColor: '#00B1DB',
-                    }}
-                    type="transparent">
+                    style={globalStyle.buttonPrimary}>
                     <Text
                       style={[
-                        globalStyle.fontNormal,
+                        globalStyle.fontMedium,
                         {color: '#fff', textAlign: 'center'},
                       ]}>
                       ADD TO CART
@@ -207,7 +259,7 @@ const ProductDetail = props => {
                     paddingHorizontal: 30,
                   }}>
                   <Text style={globalStyle.fontBold}>DESCRIPTION DETAIL</Text>
-                  <Icon type="feather" name="chevron-down" />
+                  <Icon width={24} height={24} name="chevron-down-outline" />
                 </View>
               </Button>
 
@@ -280,6 +332,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: 'bold',
     paddingBottom: 15,
+    maxWidth: getDeviceWidth - 120,
   },
   productInfoDesc: {
     textAlign: 'center',
@@ -287,6 +340,31 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#000',
     lineHeight: 20,
+  },
+  optionsWrapper: {
+    flexDirection: 'row',
+    marginVertical: 25,
+    justifyContent: 'space-around',
+    // backgroundColor: 'red',
+  },
+  optionDot: {
+    width: 15,
+    height: 15,
+    borderRadius: 15 / 2,
+    marginRight: 8,
+  },
+  optionDotWrapper: {
+    flexDirection: 'row',
+    paddingVertical: 10,
+    // backgroundColor: 'yellow',
+  },
+  colorOptionsWrapper: {
+    // backgroundColor: 'red',
+    // flex: 1,
+  },
+  toneOptionsWrapper: {
+    // backgroundColor: 'yellow',
+    // flex: 1,
   },
 });
 

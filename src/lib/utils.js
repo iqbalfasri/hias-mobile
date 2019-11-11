@@ -1,4 +1,5 @@
 import {Dimensions, Platform} from 'react-native';
+import axios from 'axios';
 
 // get device width
 export const getDeviceWidth = Dimensions.get('window').width;
@@ -27,4 +28,16 @@ export const getShortString = (longString, maxLength) => {
 export const requireLogin = () => {
   // TODO: do this when localstorage already finish
   return;
+};
+
+// with params request
+export const withParams = (requestObj, method = 'GET') => {
+  return axios({method: method})
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      console.log('Something went error when request data with object');
+      throw err;
+    });
 };
