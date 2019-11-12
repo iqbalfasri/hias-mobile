@@ -24,17 +24,21 @@ import {
   KEY_STORAGE,
 } from '../lib';
 
-// Own component
 import TopBar from '../components/HiasTopBar';
 import {Layout} from '../components/HiasLayout';
 import {ButtonAnimated} from '../components/HiasButton';
 
+import Card from '../components/HiasCard';
+
 import globalStyle, {color} from '../styles/globalStyles';
+
+import {fetchBestSeller} from '../lib/api';
 
 const sofa1 = require('../assets/images/products/sofa1.jpg');
 
 const ProductDetail = props => {
   const [detailProduct, setDetailProduct] = useState([]);
+  const [otherVarian, setOtherVarian] = useState([]);
 
   // collapse state
   const [collapsed, setCollapsed] = useState(true);
@@ -47,18 +51,29 @@ const ProductDetail = props => {
   const {id_product} = props;
 
   useEffect(() => {
-    async function getDetailProduct() {
-      let response = await fetch(UrlAPI(`/product/${id_product}`));
-      let {data, success, error} = await response.json();
-      if (!success) {
-        alert('Server internal error');
-      }
+    _getDetailProduct();
+    _getOtherVarian();
+  }, [id_product]);
 
-      setDetailProduct(data);
+  async function _getDetailProduct() {
+    let response = await fetch(UrlAPI(`/product/${id_product}`));
+    let {data, success, error} = await response.json();
+    if (!success) {
+      alert('Server internal error');
     }
 
-    getDetailProduct();
-  }, [id_product]);
+    setDetailProduct(data);
+  }
+
+  async function _getOtherVarian() {
+    fetchBestSeller()
+      .then(res => {
+        setOtherVarian(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   const _handleAddToCart = async () => {
     try {
@@ -78,7 +93,7 @@ const ProductDetail = props => {
       const responseJson = await response.json();
       if (responseJson.success) {
         alert('Berhasil tambah cart');
-        Actions.Cart();
+        // Actions.Cart();
       } else {
         alert('Ada masalah saat tambah cart');
       }
@@ -294,6 +309,39 @@ const ProductDetail = props => {
     );
   };
 
+  // Other varian products
+  const OtherVarian = () => {
+    return (
+      <>
+        <Button
+          activeOpacity={0.5}
+          style={styles.collapsedButton}
+          onPress={() => setDeliveryCollapsed(!deliveryCollapsed)}>
+          <View style={styles.collapsedButtonContent}>
+            <Text style={globalStyle.fontBold}>OTHER VARIAN</Text>
+            <Icon width={24} height={24} name="chevron-down-outline" />
+          </View>
+        </Button>
+
+        <View style={{paddingHorizontal: 30, paddingVertical: 15}}>
+          <Collapsible collapsed={deliveryCollapsed}>
+            {/* FIXME: buat sementara menggunakan data bestSeller */}
+            <ScrollView horizontal style={{padding: 5}}>
+              <View style={styles.detailsRow}>
+                <Card data={otherVarian} />
+              </View>
+            </ScrollView>
+          </Collapsible>
+        </View>
+      </>
+    );
+  };
+
+  // Customer Review
+  const CustomerReview = () => {
+    return <></>;
+  };
+
   const DetailProduct = ({data}) => {
     // FIXME: SELANJUTNYA BUATKAN SKELETON UNTUK HANDLE LOAD DATA
     if (data.length == null || data == null || data == undefined) {
@@ -413,6 +461,10 @@ const ProductDetail = props => {
             {/* Delivery Service */}
             <DeliverService />
             {/* END: Delivery Service */}
+
+            {/* Other Varian */}
+            <OtherVarian />
+            {/* END: Other Varian */}
           </React.Fragment>
         ))}
       </React.Fragment>
