@@ -23,7 +23,7 @@ import {
   requireLogin,
 } from '../lib';
 
-import {getDeviceHeight} from '../lib/utils';
+import {getDeviceHeight, toRupiah} from '../lib/utils';
 
 const exampleDataCart = {
   image: require('../assets/images/products/sofa1.jpg'),
@@ -37,17 +37,15 @@ const exampleDataCart = {
 const QtyButton = props => {
   return (
     <View style={styles.qtyWrapper}>
-      <TouchableOpacity onPress={() => props.addQty} style={styles.qtyButton}>
+      <Button onPress={() => props.addQty} style={styles.qtyButton}>
         <Text>+</Text>
-      </TouchableOpacity>
+      </Button>
       <Text style={{fontSize: 10, color: '#6979F8', fontWeight: 'bold'}}>
         {props.qty}
       </Text>
-      <TouchableOpacity
-        onPress={() => props.removeQty}
-        style={styles.qtyButton}>
+      <Button onPress={() => props.removeQty} style={styles.qtyButton}>
         <Text>-</Text>
-      </TouchableOpacity>
+      </Button>
     </View>
   );
 };
@@ -57,15 +55,13 @@ const CartCard = props => {
   const {data} = props;
 
   const handleAddQty = () => {
-    alert('ASU');
     setQty(qty + 1);
   };
 
   return (
-    <React.Fragment>
+    <>
       {data !== undefined
         ? data.map((item, index) => {
-            console.log(item, 'Item card');
             return (
               <View
                 key={index}
@@ -85,7 +81,7 @@ const CartCard = props => {
                     <Text style={styles.productInfoTitle}>
                       {getShortString(item.name, 10)}
                     </Text>
-                    <Text style={styles.productInfoSubTitle}>{item.price}</Text>
+                    <Text style={styles.productInfoSubTitle}>Rp {toRupiah(item.price)}</Text>
                   </View>
                   <View>
                     <QtyButton
@@ -99,7 +95,7 @@ const CartCard = props => {
             );
           })
         : null}
-    </React.Fragment>
+    </>
   );
 };
 
@@ -186,23 +182,21 @@ const Cart = props => {
     <Layout>
       <TopBar title="Cart" />
       <ScrollView>
-        <Container>
+        <View style={{paddingHorizontal: 30}}>
           {cartItems == undefined ? (
             renderEmptyCart()
           ) : (
-            <CartCard data={cartItems} />
+            <>
+              <CartCard data={cartItems} />
+            </>
           )}
-        </Container>
+        </View>
       </ScrollView>
       <View
         style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
           justifyContent: 'center',
           alignItems: 'center',
-          padding: 25,
+          padding: 15,
         }}>
         <Container>
           <Button
@@ -221,13 +215,11 @@ const styles = StyleSheet.create({
   productThumbnail: {
     width: 70,
     height: 70,
-    backgroundColor: 'red',
-    // overflow: 'hidden',
     position: 'relative',
   },
   productWrapper: {
     backgroundColor: '#fff',
-    flex: 1,
+    // flex: 1,
     padding: 15,
     marginVertical: 10,
     borderRadius: 10,
