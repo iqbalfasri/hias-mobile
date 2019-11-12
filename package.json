@@ -7,7 +7,7 @@
     "test": "jest",
     "lint": "eslint . --fix;exit 0",
     "run-android": "react-native run-android",
-    "run-ios": "react-native run-ios",
+    "run-ios": "react-native run-ios --simulator='iPhone 8'",
     "clean:android": "cd android && ./gradlew clean && cd ../",
     "release:android": "cd android && ./gradlew assembleRelease && cd ../"
   },

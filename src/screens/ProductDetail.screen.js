@@ -35,7 +35,15 @@ const sofa1 = require('../assets/images/products/sofa1.jpg');
 
 const ProductDetail = props => {
   const [detailProduct, setDetailProduct] = useState([]);
+
+  // collapse state
   const [collapsed, setCollapsed] = useState(true);
+  const [overviewCollapsed, setOverviewCollapsed] = useState(false);
+  const [detailCollapsed, setDetailCollapsed] = useState(false);
+  const [deliveryCollapsed, setDeliveryCollapsed] = useState(false);
+  const [varianCollapsed, setVarianCollapsed] = useState(false);
+  const [reviewCollapsed, setReviewCollapsed] = useState(false);
+
   const {id_product} = props;
 
   useEffect(() => {
@@ -82,13 +90,8 @@ const ProductDetail = props => {
   // Add to wishlist button
   const AddToWishList = () => {
     return (
-      <View
-        style={{
-          position: 'absolute',
-          top: 30,
-          left: 0,
-        }}>
-        <Button onPress={() => alert('Liked')}>
+      <View style={styles.wishListButton}>
+        <Button style={{width: 28, height: 28}} onPress={() => alert('Liked')}>
           <Icon
             onPress={() => alert('Icon Liked')}
             width={28}
@@ -102,7 +105,18 @@ const ProductDetail = props => {
 
   // this function to create modal button for preview image products
   const PreviewImage = () => {
-    return;
+    return (
+      <View style={styles.previewImageWrapper}>
+        <Button
+          activeOpacity={0.5}
+          style={[
+            styles.previewImageButton,
+            globalStyle.elevationShadowStyle(3),
+          ]}>
+          <Icon fill="#fff" width={22} height={22} name="grid-outline" />
+        </Button>
+      </View>
+    );
   };
 
   // color option selection
@@ -142,6 +156,141 @@ const ProductDetail = props => {
           <View style={[styles.optionDot, {backgroundColor: color.orange}]} />
         </View>
       </View>
+    );
+  };
+
+  // Overview collapsed
+  const OverView = ({description}) => {
+    return (
+      <>
+        <Button
+          activeOpacity={0.5}
+          style={styles.collapsedButton}
+          onPress={() => setOverviewCollapsed(!overviewCollapsed)}>
+          <View style={styles.collapsedButtonContent}>
+            <Text style={globalStyle.fontBold}>OVERVIEW</Text>
+            <Icon width={24} height={24} name="chevron-down-outline" />
+          </View>
+        </Button>
+
+        <View style={{paddingHorizontal: 30, paddingVertical: 15}}>
+          <Collapsible collapsed={overviewCollapsed}>
+            <Text
+              style={[globalStyle.fontNormal, {fontSize: 12, lineHeight: 18}]}>
+              {description}
+            </Text>
+          </Collapsible>
+        </View>
+      </>
+    );
+  };
+
+  // Details collapsed
+  const Details = ({sku, dimensions}) => {
+    return (
+      <>
+        <Button
+          activeOpacity={0.5}
+          style={styles.collapsedButton}
+          onPress={() => setDetailCollapsed(!detailCollapsed)}>
+          <View style={styles.collapsedButtonContent}>
+            <Text style={globalStyle.fontBold}>DETAILS</Text>
+            <Icon width={24} height={24} name="chevron-down-outline" />
+          </View>
+        </Button>
+
+        <View style={{paddingHorizontal: 30, paddingVertical: 15}}>
+          <Collapsible collapsed={detailCollapsed}>
+            <View style={styles.detailsRow}>
+              <Text style={[globalStyle.fontMedium, {fontSize: 10, flex: 1}]}>
+                SKU
+              </Text>
+              <Text style={[globalStyle.fontNormal, {fontSize: 10, flex: 1}]}>
+                {sku}
+              </Text>
+            </View>
+
+            <View style={styles.detailsRow}>
+              <Text style={[globalStyle.fontMedium, {fontSize: 10, flex: 1}]}>
+                Ukuran
+              </Text>
+              <Text style={[globalStyle.fontNormal, {fontSize: 10, flex: 1}]}>
+                {dimensions}
+              </Text>
+            </View>
+
+            <View style={styles.detailsRow}>
+              <Text style={[globalStyle.fontMedium, {fontSize: 10, flex: 1}]}>
+                Material
+              </Text>
+              <Text style={[globalStyle.fontNormal, {fontSize: 10, flex: 1}]}>
+                Polywood
+              </Text>
+            </View>
+
+            <View style={styles.detailsRow}>
+              <Text style={[globalStyle.fontMedium, {fontSize: 10, flex: 1}]}>
+                Material Dudukan
+              </Text>
+              <Text style={[globalStyle.fontNormal, {fontSize: 10, flex: 1}]}>
+                Busa
+              </Text>
+            </View>
+
+            <View style={styles.detailsRow}>
+              <Text style={[globalStyle.fontMedium, {fontSize: 10, flex: 1}]}>
+                Gaya
+              </Text>
+              <Text style={[globalStyle.fontNormal, {fontSize: 10, flex: 1}]}>
+                Urban Elegan
+              </Text>
+            </View>
+
+            <View style={styles.detailsRow}>
+              <Text style={[globalStyle.fontMedium, {fontSize: 10, flex: 1}]}>
+                Cara Perawatan
+              </Text>
+              <Text
+                style={[
+                  globalStyle.fontNormal,
+                  {fontSize: 10, flex: 1, lineHeight: 16},
+                ]}>
+                {
+                  'Bersihkan dengan lap kering \nuntuk bagian kayu, dan lap basah \nuntuk bagian kulit.'
+                }
+              </Text>
+            </View>
+          </Collapsible>
+        </View>
+      </>
+    );
+  };
+
+  // delivery service collapsed
+  const DeliverService = () => {
+    const jne = require('../assets/images/jne.png');
+    return (
+      <>
+        <Button
+          activeOpacity={0.5}
+          style={styles.collapsedButton}
+          onPress={() => setDeliveryCollapsed(!deliveryCollapsed)}>
+          <View style={styles.collapsedButtonContent}>
+            <Text style={globalStyle.fontBold}>DELIVERY SERVICES</Text>
+            <Icon width={24} height={24} name="chevron-down-outline" />
+          </View>
+        </Button>
+
+        <View style={{paddingHorizontal: 30, paddingVertical: 15}}>
+          <Collapsible collapsed={deliveryCollapsed}>
+            <View style={styles.detailsRow}>
+              <Image source={jne} />
+              <Image source={jne} />
+              <Image source={jne} />
+            </View>
+          </Collapsible>
+        </View>
+      </>
     );
   };
 
@@ -199,18 +348,26 @@ const ProductDetail = props => {
                 {/* Add to wishlist Button */}
                 <AddToWishList />
                 {/* END: Add to wishlist button */}
+
+                {/* Title Product */}
                 <View style={{alignItems: 'center'}}>
                   <Text style={[styles.productInfoTitle, globalStyle.fontBold]}>
                     {product.productName}
                   </Text>
                 </View>
+                {/* END: Title Product */}
+
+                {/* Button Preview Image */}
+                <PreviewImage />
+                {/* END: Button Preview Image */}
+
                 <View style={{paddingVertical: 10}}>
                   <Text
                     style={[
                       globalStyle.fontBold,
                       {
                         textAlign: 'center',
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: 'bold',
                         color: color.orange,
                       },
@@ -241,40 +398,21 @@ const ProductDetail = props => {
                 </View>
               </View>
             </View>
-            <View>
-              <Button
-                style={{
-                  paddingVertical: 15,
-                  borderTopWidth: 0.5,
-                  borderBottomWidth: 0.5,
-                  borderColor: '#222',
-                  width: '100%',
-                }}
-                onPress={() => setCollapsed(!collapsed)}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    paddingHorizontal: 30,
-                  }}>
-                  <Text style={globalStyle.fontBold}>DESCRIPTION DETAIL</Text>
-                  <Icon width={24} height={24} name="chevron-down-outline" />
-                </View>
-              </Button>
 
-              <View style={{paddingHorizontal: 30, paddingVertical: 15}}>
-                <Collapsible collapsed={collapsed}>
-                  <Text
-                    style={[
-                      globalStyle.fontNormal,
-                      {fontSize: 12, lineHeight: 18},
-                    ]}>
-                    {product.description}
-                  </Text>
-                </Collapsible>
-              </View>
-            </View>
+            {/* Overview */}
+            <OverView description={product.description} />
+            {/* END: Overview */}
+
+            {/* Details */}
+            <Details
+              sku={product.productCode}
+              dimensions={product.dimensions}
+            />
+            {/* END: Details */}
+
+            {/* Delivery Service */}
+            <DeliverService />
+            {/* END: Delivery Service */}
           </React.Fragment>
         ))}
       </React.Fragment>
@@ -365,6 +503,46 @@ const styles = StyleSheet.create({
   toneOptionsWrapper: {
     // backgroundColor: 'yellow',
     // flex: 1,
+  },
+  wishListButton: {
+    position: 'absolute',
+    top: 30,
+    left: 0,
+  },
+  previewImageWrapper: {
+    top: -25,
+    right: 0,
+    position: 'absolute',
+  },
+  previewImageButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 50 / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: color.softGreen,
+  },
+
+  // Collapsed style
+  collapsedButton: {
+    paddingVertical: 15,
+    borderTopWidth: 0.5,
+    borderBottomWidth: 0.5,
+    borderColor: '#222',
+    width: '100%',
+  },
+  collapsedButtonContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 30,
+  },
+
+  // details
+  detailsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 15,
   },
 });
 
