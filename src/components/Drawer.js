@@ -69,7 +69,9 @@ const Drawer = () => {
           </View>
         </View>
         <View style={styles.bottomDrawer}>
-          <TouchableOpacity onPress={() => Actions.SearchStack()}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => Actions.SearchStack()}>
             <Text
               style={{
                 paddingVertical: 10,
@@ -79,30 +81,18 @@ const Drawer = () => {
               Category
             </Text>
           </TouchableOpacity>
-          {/* <Text
-            style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
-            Blog
-          </Text> */}
-          <Text
-            style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
-            My Wallet
-          </Text>
-          <Text
-            style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
-            Inspiration
-          </Text>
-          {/* <Text
-            style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
-            Hias Bisnis Unit
-          </Text> */}
-          <Text
-            style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
-            Careers
-          </Text>
-          <Text
-            style={{paddingVertical: 10, fontSize: 16, paddingHorizontal: 10}}>
-            Store Locator
-          </Text>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => Actions.Inspiration()}>
+            <Text
+              style={{
+                paddingVertical: 10,
+                fontSize: 16,
+                paddingHorizontal: 10,
+              }}>
+              Inspiration
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View

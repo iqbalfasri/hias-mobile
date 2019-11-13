@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import {deviceWidth} from '../../lib';
+import {getDeviceWidth} from '../../lib/utils';
 
 const Container = props => (
   <View {...props} style={styles.container}>
@@ -11,7 +11,8 @@ const Container = props => (
 
 const styles = StyleSheet.create({
   container: {
-    width: deviceWidth - 70,
+    width: getDeviceWidth - 70,
+    alignSelf: 'center',
   },
 });
 

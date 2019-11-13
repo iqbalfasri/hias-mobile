@@ -1,17 +1,10 @@
 import React, {Fragment, useEffect} from 'react';
-import {
-  StatusBar,
-  Text,
-  Slider,
-  AsyncStorage,
-  SafeAreaView,
-} from 'react-native';
+import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import {
   Router,
   Scene,
   ActionConst,
   Actions,
-  Tabs,
   Stack,
 } from 'react-native-router-flux';
 
@@ -56,9 +49,13 @@ import SecondSubCategory from './src/screens/SearchScreens/SecondSubCategory.scr
 import ThirdSubCategory from './src/screens/SearchScreens/ThirdSubCategory.screen';
 import SearchResult from './src/screens/SearchScreens/SearchResult.screen';
 import CustomNavBar from './src/components/Layout/NavBar';
-import TopBar from './src/components/HiasTopBar';
+
+// Webview
 import WebViewScreen from './src/screens/Webview.screen';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+
+// Inpiration
+import InspirationScreen from './src/screens/Inspiration.screen';
+
 import globalStyles from './src/styles/globalStyles';
 
 // FIXME: Refactore route
@@ -140,6 +137,11 @@ const App = props => {
                 <Scene key="Wishlist" component={Wishlist} hideNavBar />
                 <Scene key="Cart" component={CartScreen} hideNavBar />
                 <Scene key="Order" component={OrderScreen} hideNavBar />
+                <Scene
+                  key="Inspiration"
+                  component={InspirationScreen}
+                  hideNavBar
+                />
 
                 {/* Search Category */}
                 <Stack key="SearchStack">
