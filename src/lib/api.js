@@ -85,6 +85,21 @@ export const fetchUserProfile = token => {
   return axios
     .get(`${BASE_URL}/member/meProfile`, {
       headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+    .then(res => {
+      return res.data;
+    });
+};
+
+// fetch get cart by cart id / user id
+export const fetchGetCart = (cartId, token) => {
+  return axios
+    .get(`${BASE_URL}/product/${cartId}/getCartByUserId`, {
+      headers: {
         Authorization: 'Bearer ' + token,
       },
     })
