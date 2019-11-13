@@ -14,7 +14,7 @@ import LoadingModal from '../components/Modal/LoadingModal';
 import Container from '../components/Layout/Container';
 import {Layout} from '../components/HiasLayout';
 import TopBar from '../components/HiasTopBar';
-import globalStyle from '../styles/globalStyles';
+import globalStyle, {color} from '../styles/globalStyles';
 
 import {
   requestParameter,
@@ -27,6 +27,8 @@ import {
 
 import {toRupiah} from '../lib/utils';
 import {fetchGetCart} from '../lib/api';
+import globalStyles from '../styles/globalStyles';
+import {Icon} from 'react-native-eva-icons';
 
 const exampleDataCart = {
   image: require('../assets/images/products/sofa1.jpg'),
@@ -53,65 +55,16 @@ const QtyButton = props => {
   );
 };
 
-const CartCard = props => {
-  const [qty, setQty] = useState(1);
-  const {data} = props;
-
-  const handleAddQty = () => {
-    setQty(qty + 1);
-  };
-
-  return (
-    <>
-      {data !== undefined
-        ? data.map((item, index) => {
-            return (
-              <View
-                key={index}
-                style={[
-                  styles.productWrapper,
-                  globalStyle.elevationShadowStyle(5),
-                ]}
-                {...props}>
-                <View style={styles.productDetailWrapper}>
-                  <View style={styles.productThumbnail}>
-                    <Image
-                      style={{flex: 1, width: null, height: null}}
-                      source={{uri: item.thumbnail}}
-                    />
-                  </View>
-                  <View style={styles.productInfo}>
-                    <Text style={styles.productInfoTitle}>
-                      {getShortString(item.name, 10)}
-                    </Text>
-                    <Text style={styles.productInfoSubTitle}>
-                      Rp {toRupiah(item.price)}
-                    </Text>
-                  </View>
-                  <View>
-                    <QtyButton
-                      addQty={() => handleAddQty}
-                      removeQty={() => setQty(qty - 1)}
-                      qty={item.qty}
-                    />
-                  </View>
-                </View>
-              </View>
-            );
-          })
-        : null}
-    </>
-  );
-};
-
 const _handleOrder = async () => {
   Actions.toptabbar();
 };
 
 const Cart = props => {
-  const [cartItems, setCartItems] = useState([]);
   const [length, setLength] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  const [cartsQuantity, setCartsQuantity] = useState([]);
+  const [staticQuantity, setStaticQuantity] = useState(1);
 
   useEffect(() => {
     _getCart();
@@ -121,9 +74,9 @@ const Cart = props => {
     };
   }, [length]);
 
+  // Function to get cart
   const _getCart = async () => {
     try {
-      // fetch cart
       const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
       const getCartId = await localStorage.getItem(KEY_STORAGE.USER_ID);
 
@@ -146,6 +99,18 @@ const Cart = props => {
       console.log(error);
     }
   };
+
+  // Function to change qty
+  const _onChangeQuantity = (e, index) => {
+    const quantity = cartsQuantity;
+    // quantity[index] =
+  };
+
+  function _handleAddQuantity(productId, index) {
+    const items = cartItems;
+    const qty = items[index].qty;
+    console.log(qty, index);
+  }
 
   function renderEmptyCart() {
     const emptyCartImg = require('../assets/images/empty-cart.png');
@@ -177,7 +142,66 @@ const Cart = props => {
             renderEmptyCart()
           ) : (
             <>
-              <CartCard data={cartItems} />
+              {cartItems !== undefined
+                ? cartItems.map((item, index) => {
+                    const quantity = cartsQuantity[index] || 1;
+                    return (
+                      <View
+                        key={index}
+                        style={[
+                          styles.productWrapper,
+                          globalStyle.elevationShadowStyle(5),
+                        ]}
+                        {...props}>
+                        <View style={styles.productDetailWrapper}>
+                          <View style={styles.productThumbnail}>
+                            <Image
+                              style={{flex: 1, width: null, height: null}}
+                              source={{uri: item.thumbnail}}
+                            />
+                          </View>
+                          <View style={styles.productInfo}>
+                            <Text style={styles.productInfoTitle}>
+                              {getShortString(item.name, 10)}
+                            </Text>
+                            <Text style={styles.productInfoSubTitle}>
+                              Rp {toRupiah(quantity * item.price)}
+                            </Text>
+                          </View>
+                          {/* QUANTITY */}
+                          <View>
+                            <View style={styles.qtyWrapper}>
+                              <Button
+                                onPress={() =>
+                                  _handleAddQuantity(item.productId, index)
+                                }
+                                style={styles.qtyButton}>
+                                <Icon width={10} height={10} name="plus" />
+                              </Button>
+                              <Text
+                                style={[
+                                  globalStyles.fontMedium,
+                                  {
+                                    fontSize: 10,
+                                    color: color.darkBlue,
+                                    alignSelf: 'center',
+                                  },
+                                ]}>
+                                {quantity}
+                              </Text>
+                              <Button
+                                onPress={() => alert('remove')}
+                                style={styles.qtyButton}>
+                                <Icon width={10} height={10} name="minus" />
+                              </Button>
+                            </View>
+                          </View>
+                          {/* END: QUANTITY */}
+                        </View>
+                      </View>
+                    );
+                  })
+                : null}
             </>
           )}
         </View>
@@ -213,7 +237,8 @@ const styles = StyleSheet.create({
   productWrapper: {
     backgroundColor: '#fff',
     // flex: 1,
-    padding: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     marginVertical: 10,
     borderRadius: 10,
   },
