@@ -81,7 +81,9 @@ const CartCard = props => {
                     <Text style={styles.productInfoTitle}>
                       {getShortString(item.name, 10)}
                     </Text>
-                    <Text style={styles.productInfoSubTitle}>Rp {toRupiah(item.price)}</Text>
+                    <Text style={styles.productInfoSubTitle}>
+                      Rp {toRupiah(item.price)}
+                    </Text>
                   </View>
                   <View>
                     <QtyButton
@@ -106,18 +108,11 @@ const _handleOrder = async () => {
 const Cart = props => {
   const [cartItems, setCartItems] = useState([]);
   const [length, setLength] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getCart() {
       try {
-        // Check if user not login
-        // if (requireLogin()) {
-        //   Actions.Signin();
-        //   return;
-        // }
-
-        // console.log(requireLogin(), 'require login');
-
         // fetch cart
         const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
         const getCartId = await localStorage.getItem(KEY_STORAGE.USER_ID);

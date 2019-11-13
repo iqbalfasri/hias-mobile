@@ -1,31 +1,48 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity as Button} from 'react-native';
 import {Actions} from 'react-native-router-flux';
-
-// own component
-import {ButtonAnimated} from '../components/HiasButton';
-
-// lib
-import {localStorage, KEY_STORAGE} from '../lib';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
+import {ButtonAnimated} from '../components/HiasButton';
+
+import {localStorage, KEY_STORAGE} from '../lib';
+
+import {fetchUserProfile} from '../lib/api';
+
 const Drawer = () => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    _getProfile();
+  }, []);
+
+  const _getProfile = async () => {
+    try {
+      const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
+      const {data} = await fetchUserProfile(getToken);
+      const {user} = data.login;
+      setUser(user);
+    } catch (error) {
+      console.error(error, 'Error get user profile');
+    }
+  };
+
   const _handleLogout = () => {
-    // localStorage.removeItem(KEY_STORAGE.TOKEN);
-    // localStorage.removeItem(KEY_STORAGE.USER_ID);
+    localStorage.removeItem(KEY_STORAGE.TOKEN);
+    localStorage.removeItem(KEY_STORAGE.USER_ID);
 
     // FIXME:
     // when success remove local storage
     // redirect to splash screen, or
     // to signin screen
-    // Actions.Splash();
-    Actions.WebView({
-      uri: 'https://my.ipaymu.com/payment/47F1B77B-B797-444C-A737-9A0C4B30A351',
-      title: 'Pembayaran',
-      onDonePress: function() {
-        Actions.orderNavBar();
-      },
-    });
+    Actions.Splash();
+    // Actions.WebView({
+    //   uri: 'https://my.ipaymu.com/payment/47F1B77B-B797-444C-A737-9A0C4B30A351',
+    //   title: 'Pembayaran',
+    //   onDonePress: function() {
+    //     Actions.orderNavBar();
+    //   },
+    // });
     return;
   };
 
@@ -44,7 +61,7 @@ const Drawer = () => {
           />
           <View>
             <Text style={[styles.drawerText, {lineHeight: 16, fontSize: 16}]}>
-              John Doe
+              {user.fullName}
             </Text>
             <Text style={[styles.drawerText, {lineHeight: 24, fontSize: 12}]}>
               Balance: IDR 999.000

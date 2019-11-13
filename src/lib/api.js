@@ -79,3 +79,16 @@ export const fetchSearchByName = productName => {
       return res.data;
     });
 };
+
+// feth user profile
+export const fetchUserProfile = token => {
+  return axios
+    .get(`${BASE_URL}/member/meProfile`, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    })
+    .then(res => {
+      return res.data;
+    });
+};
