@@ -100,6 +100,23 @@ export const fetchGetCart = (cartId, token) => {
   return axios
     .get(`${BASE_URL}/product/${cartId}/getCartByUserId`, {
       headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+    .then(res => {
+      return res.data;
+    });
+};
+
+// fetch get address by user id
+export const fetchGetAddress = (userId, token) => {
+  return axios
+    .get(`${BASE_URL}/product/${userId}/getUserAddressByUserId`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
       },
     })

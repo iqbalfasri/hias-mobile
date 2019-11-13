@@ -150,7 +150,7 @@ const Cart = props => {
                         key={index}
                         style={[
                           styles.productWrapper,
-                          globalStyle.elevationShadowStyle(5),
+                          globalStyle.elevationShadowStyle(1.5),
                         ]}
                         {...props}>
                         <View style={styles.productDetailWrapper}>

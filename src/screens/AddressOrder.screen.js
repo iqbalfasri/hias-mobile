@@ -8,83 +8,109 @@ import RadioForm, {
 
 // refrensi buat bikin radio button
 // https://stackoverflow.com/questions/31889921/how-to-implement-radio-button-in-react-native
+// https://reactnativecode.com/custom-radio-button-group-component/
 
-// Own component
 import {Layout} from '../components/HiasLayout';
 import TopBar from '../components/HiasTopBar';
 import {Actions} from 'react-native-router-flux';
 
-const temproraryData = [
-  {
-    id: 1,
-    first_name: 'John',
-    last_name: 'Black',
-    company_name: 'Hias House',
-    town_city: 'DKI Jakarta',
-    post_code: '1234',
-    address:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting indu',
-    email: 'johnblack@gmail.com',
-    phone_number: '08960542423',
-  },
-];
+import {localStorage, KEY_STORAGE} from '../lib';
+import {fetchGetAddress} from '../lib/api';
+import {getDeviceWidth} from '../lib/utils';
+import globalStyles, {color} from '../styles/globalStyles';
 
-const data = [
-  {
-    label: 'jln kubis III dalam B',
-    value: {
-      firstName: 'daffaa',
-      lastName: 'akhlaric',
-      country: 'indonesia',
-      address: 'jln kubis III dalam B',
-      city: 'akhlaric@gmail.com',
-      phone: '087757185033',
-      company: null,
-      postCode: '15368',
-      idAddress: 3,
-      email: 'akhlaric@gmail.com',
-    },
-  },
-  {
-    label: 'jln kubis III dalam A',
-    value: {
-      firstName: 'daffaa',
-      lastName: 'akhlaric',
-      country: 'indonesia',
-      address: 'jln kubis III dalam A',
-      city: 'akhlaric@gmail.com',
-      phone: '087757185033',
-      company: null,
-      postCode: '15368',
-      idAddress: 3,
-      email: 'akhlaric@gmail.com',
-    },
-  },
-];
 class AddressOrder extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: null,
+      radioData: [],
+      selectedValue: 0,
+      selectedIndex: 0,
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this._getAddress();
+  }
+
+  async _getAddress() {
+    try {
+      const {radioData} = this.state;
+      const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
+      const getUserId = await localStorage.getItem(KEY_STORAGE.USER_ID);
+
+      const {data} = await fetchGetAddress(8, getToken);
+      data.map((data, index) => {
+        radioData.push({
+          label: `${data.firstName} ${data.lastName} \n${data.address} \n${data.phone}`,
+          value: data,
+        });
+      });
+
+      // radioData.push(obj);
+
+      this.setState({
+        radioData,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   render() {
+    const {radioData} = this.state;
     return (
       <Layout>
         <View style={styles.addressRow}>
-          <RadioForm
-            radio_props={data}
-            initial={0}
-            onPress={value =>
-              this.setState({value}, () =>
-                alert(JSON.stringify(this.state.value)),
-              )
-            }
-          />
+          <RadioForm buttonColor={color.primaryColor}>
+            {radioData.map((object, index) => {
+              const onPress = (value, index) => {
+                this.setState({
+                  selectedValue: value,
+                  selectedIndex: index,
+                });
+              };
+              return (
+                <RadioButton
+                  wrapStyle={{
+                    width: getDeviceWidth,
+                    paddingHorizontal: 30,
+                    paddingBottom: 15,
+                  }}
+                  labelHorizontal={true}
+                  key={index}>
+                  <RadioButtonInput
+                    buttonInnerColor={color.primaryColor}
+                    buttonOuterColor={color.primaryColor}
+                    buttonOuterSize={18}
+                    buttonSize={12}
+                    obj={object}
+                    index={index}
+                    isSelected={this.state.selectedIndex === index}
+                    onPress={onPress}
+                    buttonWrapStyle={{marginRight: 25, alignSelf: 'center'}}
+                  />
+                  <RadioButtonLabel
+                    obj={object}
+                    index={index}
+                    labelHorizontal={true}
+                    onPress={onPress}
+                    labelStyle={[globalStyles.fontNormal, {fontSize: 12, lineHeight: 14}]}
+                    labelWrapStyle={{
+                      width: getDeviceWidth - 120,
+                      borderWidth: 1,
+                      borderColor: '#979797',
+                      borderRadius: 5,
+                      backgroundColor: '#fff',
+                      padding: 15,
+                    }}
+                  />
+                </RadioButton>
+              );
+            })}
+          </RadioForm>
+          {/* <Text>Selected Data: {this.state.radioData[this.state.selectedIndex].label}</Text> */}
         </View>
       </Layout>
     );
@@ -94,6 +120,7 @@ class AddressOrder extends Component {
 const styles = StyleSheet.create({
   addressRow: {
     flexDirection: 'row',
+    paddingVertical: 20,
   },
 });
 

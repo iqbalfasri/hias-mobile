@@ -27,7 +27,7 @@ const Card = props => {
       {...props}>
       <View
         style={[
-          globalStyles.elevationShadowStyle(5),
+          globalStyles.elevationShadowStyle(1.5),
           styles.imageProductWrapper,
         ]}>
         {/* TODO: change hardcode image source */}
