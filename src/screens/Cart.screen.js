@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
+import LoadingModal from '../components/Modal/LoadingModal';
+
 import Container from '../components/Layout/Container';
 import {Layout} from '../components/HiasLayout';
 import TopBar from '../components/HiasTopBar';
@@ -23,7 +25,8 @@ import {
   requireLogin,
 } from '../lib';
 
-import {getDeviceHeight, toRupiah} from '../lib/utils';
+import {toRupiah} from '../lib/utils';
+import {fetchGetCart} from '../lib/api';
 
 const exampleDataCart = {
   image: require('../assets/images/products/sofa1.jpg'),
@@ -111,46 +114,38 @@ const Cart = props => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function getCart() {
-      try {
-        // fetch cart
-        const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
-        const getCartId = await localStorage.getItem(KEY_STORAGE.USER_ID);
-
-        let response = await fetch(
-          UrlAPI(`/product/${getCartId}/getCartByUserId`),
-          {
-            method: 'GET',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${getToken}`,
-            },
-          },
-        );
-
-        let responseJson = await response.json();
-        let {data, success} = responseJson;
-        let {listItems} = data;
-
-        setCartItems(listItems);
-        if (listItems.length === undefined) {
-          return;
-        }
-        setLength(listItems.length);
-
-        console.log(Object.values(listItems).length, 'val');
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    getCart();
+    _getCart();
 
     return () => {
       return;
     };
   }, [length]);
+
+  const _getCart = async () => {
+    try {
+      // fetch cart
+      const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
+      const getCartId = await localStorage.getItem(KEY_STORAGE.USER_ID);
+
+      setLoading(true);
+
+      const {data, success} = await fetchGetCart(getCartId, getToken);
+      const {listItems} = data;
+      if (success) {
+        setLoading(false);
+      }
+
+      setLoading(false);
+
+      setCartItems(listItems);
+      if (listItems.length === undefined) {
+        return;
+      }
+      setLength(listItems.length);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   function renderEmptyCart() {
     const emptyCartImg = require('../assets/images/empty-cart.png');
@@ -202,6 +197,9 @@ const Cart = props => {
           </Button>
         </Container>
       </View>
+      {/* Loading Modal */}
+      <LoadingModal isVisible={loading} />
+      {/* END: Loading Modal */}
     </Layout>
   );
 };
