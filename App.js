@@ -57,6 +57,9 @@ import ThirdSubCategory from './src/screens/SearchScreens/ThirdSubCategory.scree
 import SearchResult from './src/screens/SearchScreens/SearchResult.screen';
 import CustomNavBar from './src/components/Layout/NavBar';
 import TopBar from './src/components/HiasTopBar';
+import WebViewScreen from './src/screens/Webview.screen';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import globalStyles from './src/styles/globalStyles';
 
 // FIXME: Refactore route
 const App = props => {
@@ -240,6 +243,27 @@ const App = props => {
               />
             </Scene>
           </Scene>
+
+          {/* WEBVIEW */}
+          <Scene
+            title={props.title}
+            titleStyle={[globalStyles.fontMedium, {fontSize: 16}]}
+            renderRightButton={() => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    Actions.orderNavBar();
+                  }}>
+                  <Text style={[globalStyles.fontMedium, {fontSize: 16}]}>
+                    Selesai
+                  </Text>
+                </TouchableOpacity>
+              );
+            }}
+            key="WebView"
+            component={WebViewScreen}
+          />
+          {/* END: WEBVIEW */}
         </Scene>
       </Router>
     </Fragment>

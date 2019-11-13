@@ -11,14 +11,22 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Drawer = () => {
   const _handleLogout = () => {
-    localStorage.removeItem(KEY_STORAGE.TOKEN);
-    localStorage.removeItem(KEY_STORAGE.USER_ID);
+    // localStorage.removeItem(KEY_STORAGE.TOKEN);
+    // localStorage.removeItem(KEY_STORAGE.USER_ID);
 
     // FIXME:
     // when success remove local storage
     // redirect to splash screen, or
     // to signin screen
-    Actions.Splash();
+    // Actions.Splash();
+    Actions.WebView({
+      uri: 'https://my.ipaymu.com/payment/47F1B77B-B797-444C-A737-9A0C4B30A351',
+      title: 'Pembayaran',
+      onDonePress: function() {
+        Actions.orderNavBar();
+      },
+    });
+    return;
   };
 
   return (
