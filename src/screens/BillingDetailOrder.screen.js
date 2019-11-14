@@ -1,112 +1,63 @@
-import React from 'react';
-import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, ScrollView, TouchableOpacity as Button} from 'react-native';
 
 import {Actions} from 'react-native-router-flux';
 
-// Own component
-import Button from '../components/HiasButton';
-import {Layout} from '../components/HiasLayout';
-import globalStyles from '../styles/globalStyles';
+import Layout from '../components/Layout/Layout';
 import Container from '../components/Layout/Container';
 
-/**
- * Component for detail item products
- * @param {*} props receive all props
- */
-function ItemCard(props) {
-  return (
-    <View style={[styles.orderItemCard, globalStyles.elevationShadowStyle(3)]}>
-      {/* Item Image */}
-      <View style={styles.itemImageWrapper}>
-        <Image
-          style={styles.itemImage}
-          source={require('../assets/images/products/sofa1.jpg')}
-        />
-      </View>
+import globalStyles from '../styles/globalStyles';
 
-      {/* Item detail */}
-      <View style={styles.itemDetail}>
-        <Text style={styles.itemName}>Relaxing Chair</Text>
-        <Text style={styles.itemPrice}>IDR 999.000</Text>
-        <Text style={styles.itemAmount}>1 Item</Text>
-      </View>
-    </View>
-  );
-}
-
-/**
- * Main Screen
- */
-function BillingDetail(props) {
-  return (
-    <Layout>
-      <ScrollView>
-        <View style={styles.wrapper}>
-          {/* Shiping address */}
-          <View>
-            <Text style={styles.shipingAddressTextTitle}>Shipping Address</Text>
-            {/* Shipping address card */}
-            <View
-              style={[
-                styles.shipingAddressCard,
-                globalStyles.elevationShadowStyle(3),
-              ]}>
-              <Text style={styles.shipingAddressTextName}>Nama pembeli</Text>
-              <Text style={styles.shipingAddressTextAddress}>
-                {props.addressData}
+class BillingDetail extends Component {
+  render() {
+    return (
+      <Layout>
+        <ScrollView>
+          <View style={styles.wrapper}>
+            <>
+              <Text style={[styles.shipingAddressTextTitle, globalStyles.fontNormal]}>
+                Shiping Address
               </Text>
-            </View>
+
+              <View
+                style={[
+                  styles.shipingAddressCard,
+                  globalStyles.elevationShadowStyle(1.5),
+                ]}>
+                <Text style={[styles.shipingAddressTextName, globalStyles.fontMedium]}>Nama pembeli</Text>
+                <Text style={[styles.shipingAddressTextAddress, globalStyles.fontNormal]}>
+                  Alamat pembeli
+                </Text>
+              </View>
+            </>
+
+            <>
+              <View style={styles.detailOrderWrapper}>
+                <View style={[styles.detailOrderRows, {paddingTop: 30}]}>
+                  <Text style={globalStyles.fontBold}>Shiping </Text>
+                  <Text style={globalStyles.fontNormal}>IDR 12.000</Text>
+                </View>
+                <View style={[styles.detailOrderRows]}>
+                  <Text style={globalStyles.fontBold}>Total</Text>
+                  <Text style={globalStyles.fontNormal}>IDR 3.598.000</Text>
+                </View>
+              </View>
+            </>
           </View>
+        </ScrollView>
 
-          {/*Order items */}
-          {/* <View style={styles.orderItemWrapper}>
-            <Text style={styles.orderItemTitle}>Billing Items</Text> */}
-
-          {/* Order items card */}
-          {/* <ItemCard />
-            <ItemCard />
-          </View> */}
-
-          {/* Coupon code form */}
-          <View />
-
-          {/* Detail order */}
-          <View style={styles.detailOrderWrapper}>
-            {/* <View style={styles.detailOrderRows}>
-              <Text>Subtotal</Text>
-              <Text>IDR 3.598.000</Text>
-            </View>
-            <View style={styles.detailOrderRows}>
-              <Text>Discount</Text>
-              <Text>IDR 0</Text>
-            </View>
-            <View style={styles.detailOrderRows}>
-              <Text>Shipping</Text>
-              <Text>Free</Text>
-            </View> */}
-            <View style={[styles.detailOrderRows, {paddingVertical: 50}]}>
-              <Text style={{fontWeight: 'bold'}}>Total</Text>
-              <Text>IDR 3.598.000</Text>
-            </View>
-          </View>
+        <View style={styles.buttonBottom}>
+          <Container>
+            <Button
+              style={globalStyles.buttonPrimary}
+              onPress={() => Actions.jump('Payment')}>
+              <Text style={{textAlign: 'center', color: '#fff'}}>Next</Text>
+            </Button>
+          </Container>
         </View>
-      </ScrollView>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: 15,
-        }}>
-        <Container>
-          <Button
-            style={globalStyles.buttonPrimary}
-            onPress={() => Actions.jump('Payment')}>
-            <Text style={{textAlign: 'center', color: '#fff'}}>Next</Text>
-          </Button>
-        </Container>
-      </View>
-    </Layout>
-  );
+      </Layout>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -196,6 +147,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 5,
+  },
+  buttonBottom: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 15,
   },
 });
 
