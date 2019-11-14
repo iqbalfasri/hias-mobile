@@ -5,9 +5,12 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import {ButtonAnimated} from '../components/HiasButton';
 
-import {localStorage, KEY_STORAGE} from '../lib';
+import {color} from '../styles/globalStyles';
 
+import {requireLogin} from '../lib/utils';
+import Storage, {STORAGE_KEY} from '../lib/storage';
 import {fetchUserProfile} from '../lib/api';
+// import {localStorage, KEY_STORAGE} from '../lib';
 
 const Drawer = () => {
   const [user, setUser] = useState({});
@@ -18,7 +21,7 @@ const Drawer = () => {
 
   const _getProfile = async () => {
     try {
-      const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
+      const getToken = await Storage.getItem(STORAGE_KEY.TOKEN);
       const {data} = await fetchUserProfile(getToken);
       const {user} = data.login;
       setUser(user);
@@ -28,8 +31,8 @@ const Drawer = () => {
   };
 
   const _handleLogout = () => {
-    localStorage.removeItem(KEY_STORAGE.TOKEN);
-    localStorage.removeItem(KEY_STORAGE.USER_ID);
+    Storage.removeItem(STORAGE_KEY.TOKEN);
+    Storage.removeItem(STORAGE_KEY.USER_ID);
 
     // FIXME:
     // when success remove local storage

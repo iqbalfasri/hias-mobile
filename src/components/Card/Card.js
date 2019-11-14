@@ -21,7 +21,7 @@ class Card extends Component {
           return (
             <ButtonAnimated key={data.id}>
               <View style={styles.cardWrapper}>
-                <Image  />
+                <Image />
               </View>
             </ButtonAnimated>
           );

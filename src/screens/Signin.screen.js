@@ -23,11 +23,14 @@ import {
   KEY_STORAGE,
 } from '../lib';
 
+import Storage, { STORAGE_KEY } from '../lib/storage'
+
+
 const OnlyLogo = require('../assets/images/only-logo.png');
 
 const isIos = Platform.OS == 'ios';
 
-const SigninScreen = () => {
+const SigninScreen = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -54,13 +57,13 @@ const SigninScreen = () => {
 
         if (success) {
           // save token to local storage
-          localStorage.saveItem(KEY_STORAGE.TOKEN, data.login.token);
+          Storage.saveItem(KEY_STORAGE.TOKEN, data.login.token);
 
           // save user id to local storage
-          localStorage.saveItem(KEY_STORAGE.USER_ID, data.login.user.id);
+          Storage.saveItem(KEY_STORAGE.USER_ID, data.login.user.id);
 
           // save user data to local storage
-          localStorage.saveItem(KEY_STORAGE.USER_DATA, data.login.user);
+          Storage.saveItem(KEY_STORAGE.USER_DATA, data.login.user);
 
           // Close modal
           setModalVisible(false);
@@ -70,7 +73,7 @@ const SigninScreen = () => {
             Actions.HomeStack();
           }, 100);
         } else {
-          setModalVisible(false)
+          setModalVisible(false);
           alert(error.errorMessage);
         }
       }

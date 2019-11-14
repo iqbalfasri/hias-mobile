@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView, TouchableOpacity as Button} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity as Button,
+} from 'react-native';
 
 import {Actions} from 'react-native-router-flux';
 
@@ -15,7 +21,11 @@ class BillingDetail extends Component {
         <ScrollView>
           <View style={styles.wrapper}>
             <>
-              <Text style={[styles.shipingAddressTextTitle, globalStyles.fontNormal]}>
+              <Text
+                style={[
+                  styles.shipingAddressTextTitle,
+                  globalStyles.fontNormal,
+                ]}>
                 Shiping Address
               </Text>
 
@@ -24,8 +34,18 @@ class BillingDetail extends Component {
                   styles.shipingAddressCard,
                   globalStyles.elevationShadowStyle(1.5),
                 ]}>
-                <Text style={[styles.shipingAddressTextName, globalStyles.fontMedium]}>Nama pembeli</Text>
-                <Text style={[styles.shipingAddressTextAddress, globalStyles.fontNormal]}>
+                <Text
+                  style={[
+                    styles.shipingAddressTextName,
+                    globalStyles.fontMedium,
+                  ]}>
+                  Nama pembeli
+                </Text>
+                <Text
+                  style={[
+                    styles.shipingAddressTextAddress,
+                    globalStyles.fontNormal,
+                  ]}>
                   Alamat pembeli
                 </Text>
               </View>

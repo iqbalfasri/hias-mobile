@@ -1,6 +1,8 @@
 import {Dimensions, Platform} from 'react-native';
 import axios from 'axios';
 
+import Storage, {STORAGE_KEY} from '../lib/storage';
+
 // get device width
 export const getDeviceWidth = Dimensions.get('window').width;
 
@@ -25,9 +27,12 @@ export const getShortString = (longString, maxLength) => {
 };
 
 // require login method
-export const requireLogin = () => {
+export const requireLogin = async () => {
   // TODO: do this when localstorage already finish
-  return;
+  const {TOKEN} = STORAGE_KEY;
+  let token = await Storage.getItem(TOKEN);
+
+  return token == null ? false : true;
 };
 
 // with params request

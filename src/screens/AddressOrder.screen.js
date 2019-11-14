@@ -44,7 +44,9 @@ class AddressOrder extends Component {
       const {data} = await fetchGetAddress(8, getToken);
       data.map((data, index) => {
         radioData.push({
-          label: `${data.firstName} ${data.lastName} \n${data.address} \n${data.phone}`,
+          label: `${data.firstName} ${data.lastName} \n${data.address} \n${
+            data.phone
+          }`,
           value: data,
         });
       });

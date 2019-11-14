@@ -64,7 +64,7 @@ const ProductDetail = props => {
 
     // setDetailProduct(data);
 
-    console.log(data, 'Data')
+    console.log(data, 'Data');
   }
 
   async function _getOtherVarian() {

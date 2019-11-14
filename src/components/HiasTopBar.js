@@ -9,7 +9,7 @@ import {
 import {Actions} from 'react-native-router-flux';
 import {Icon} from 'react-native-eva-icons';
 
-import globalStyle from '../styles/globalStyles'
+import globalStyle from '../styles/globalStyles';
 
 import {isAndroid, deviceWidth} from '../lib';
 
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     // use percent fluid device
     paddingHorizontal: '8.5%',
   },

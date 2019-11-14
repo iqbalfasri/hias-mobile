@@ -68,7 +68,10 @@ const renderSearch = () => {
         <Icon name="search-outline" fill="#9F9F9F" width={18} height={18} />
       </View>
       <View style={styles.searchInput}>
-        <Text style={[globalStyle.fontNormal, {color: '#9F9F9F', padding: null}]}>Search</Text>
+        <Text
+          style={[globalStyle.fontNormal, {color: '#9F9F9F', padding: null}]}>
+          Search
+        </Text>
       </View>
     </Button>
   );
