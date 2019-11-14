@@ -1,4 +1,3 @@
-import React from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const STORAGE_KEY = {
@@ -9,11 +8,29 @@ export const STORAGE_KEY = {
 };
 
 class Localstorage {
-  async saveItem(key, value) {}
+  async saveItem(key, value) {
+    try {
+      await AsyncStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      throw error;
+    }
+  }
 
-  async getItem(key) {}
+  async getItem(key) {
+    try {
+      await JSON.parse(AsyncStorage.getItem(key));
+    } catch (error) {
+      throw error;
+    }
+  }
 
-  async removeItem(key) {}
+  async removeItem(key) {
+    try {
+      await AsyncStorage.removeItem(key);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 const storage = new Localstorage();
