@@ -18,9 +18,9 @@ const Card = props => {
       </View>
     );
   }
-  return props.data.map(data => (
+  return props.data.map((data, index) => (
     <ButtonAnimated
-      key={data.id}
+      key={index}
       type="transparent"
       style={[styles.cardWrapper]}
       onPress={() => Actions.ProductDetail({id_product: data.id})}
