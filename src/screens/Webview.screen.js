@@ -8,12 +8,8 @@ class WebViewScreen extends Component {
     return (
       <>
         <WebView
-          renderLoading={() => (
-            <View
-              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-              <ActivityIndicator />
-            </View>
-          )}
+          startInLoadingState={true}
+          renderLoading={() => <LoadingModal />}
           source={{uri: this.props.uri}}
         />
       </>

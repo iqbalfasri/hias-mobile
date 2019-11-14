@@ -249,6 +249,7 @@ const App = props => {
 
           {/* WEBVIEW */}
           <Scene
+            type={ActionConst.RESET}
             title={props.title}
             titleStyle={[globalStyles.fontMedium, {fontSize: 16}]}
             renderRightButton={() => {

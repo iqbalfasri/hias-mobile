@@ -175,3 +175,23 @@ export const fetchOngkirTIKI = dataObj => {
       return res.data;
     });
 };
+
+// payment iPaymu
+export const paymentIpayMu = detailOrder => {
+  return axios
+    .post('https://my.ipaymu.com/payment.htm', detailOrder, {
+      headers: {'Content-Type': 'application/json'},
+    })
+    .then(res => {
+      return {
+        success: true,
+        data: res.data,
+      };
+    })
+    .catch(error => {
+      return {
+        success: false,
+        error: error,
+      };
+    });
+};

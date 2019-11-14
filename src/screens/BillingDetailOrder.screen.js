@@ -16,7 +16,7 @@ import Container from '../components/Layout/Container';
 import globalStyles, {color} from '../styles/globalStyles';
 
 import {toRupiah, getDeviceWidth} from '../lib/utils';
-import {fetchOngkir} from '../lib/api';
+import {fetchOngkir, paymentIpayMu} from '../lib/api';
 
 function BillingDetail(props) {
   const couriers = ['jne', 'pos', 'tiki'];
@@ -117,6 +117,28 @@ function BillingDetail(props) {
     );
   }
 
+  function _handleCheckout() {
+    const request = {
+      key: '2BC703E2-DD4C-46F4-B9A5-67295C86AB71',
+      action: 'payment',
+      product: 'Example Product',
+      price: '315123',
+      quantity: '1',
+      format: 'json',
+      auto_redirect: '100',
+    };
+
+    paymentIpayMu(request)
+      .then(res => {
+        if (res.success) {
+          Actions.WebView({uri: res.data.url});
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   return (
     <Layout>
       <ScrollView>
@@ -172,8 +194,8 @@ function BillingDetail(props) {
         <Container>
           <Button
             style={globalStyles.buttonPrimary}
-            onPress={() => Actions.jump('Payment')}>
-            <Text style={{textAlign: 'center', color: '#fff'}}>Next</Text>
+            onPress={() => _handleCheckout()}>
+            <Text style={{textAlign: 'center', color: '#fff'}}>CHECKOUT</Text>
           </Button>
         </Container>
       </View>
