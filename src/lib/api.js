@@ -2,6 +2,7 @@ import axios from 'axios';
 
 // base url for development
 const BASE_URL = 'https://api-core-hias.herokuapp.com';
+const BASE_ONGKIR = 'https://api.rajaongkir.com/starter/cost';
 
 // fetch best seller product
 export const fetchBestSeller = () => {
@@ -118,6 +119,56 @@ export const fetchGetAddress = (userId, token) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
+      },
+    })
+    .then(res => {
+      return res.data;
+    });
+};
+
+// Ongkir example data
+const ONGKIR_EXAMPLE = {
+  origin: '155',
+  destination: '153',
+  weight: '302',
+  courier: 'jne',
+};
+
+// cek ongkir jne
+export const fetchOngkir = dataObj => {
+  return axios
+    .post(`${BASE_ONGKIR}`, dataObj, {
+      headers: {
+        'Content-Type': 'application/json',
+        key: 'aa1d866526704ded6b36b17ec3e95126',
+      },
+    })
+    .then(res => {
+      return res.data.rajaongkir.results[0].costs[1].cost[0].value;
+    });
+};
+
+// cek ongkir pos
+export const fetchOngkirPOS = dataObj => {
+  return axios
+    .post(`${BASE_ONGKIR}`, dataObj, {
+      headers: {
+        'Content-Type': 'application/json',
+        key: 'aa1d866526704ded6b36b17ec3e95126',
+      },
+    })
+    .then(res => {
+      return res.data;
+    });
+};
+
+// cek ongkir tiki
+export const fetchOngkirTIKI = dataObj => {
+  return axios
+    .post(`${BASE_ONGKIR}`, dataObj, {
+      headers: {
+        'Content-Type': 'application/json',
+        key: 'aa1d866526704ded6b36b17ec3e95126',
       },
     })
     .then(res => {
