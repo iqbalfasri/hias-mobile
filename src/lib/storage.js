@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-export const STORAGE_KEY = {
+export let STORAGE_KEY = {
   CART: 'CART',
   USER_ID: 'USER_ID',
   USER_DATA: 'USER_DATA',
