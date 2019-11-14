@@ -167,6 +167,9 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     backgroundColor: '#fff',
     borderBottomWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
   iconTabBar: {
     flex: 1,

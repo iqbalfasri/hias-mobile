@@ -7,6 +7,7 @@ import {Actions} from 'react-native-router-flux';
 import Button from '../components/HiasButton';
 import {Layout} from '../components/HiasLayout';
 import globalStyles from '../styles/globalStyles';
+import Container from '../components/Layout/Container';
 
 /**
  * Component for detail item products
@@ -87,16 +88,23 @@ function BillingDetail(props) {
               <Text style={{fontWeight: 'bold'}}>Total</Text>
               <Text>IDR 3.598.000</Text>
             </View>
-            <View style={styles.detailOrderRows}>
-              <Button
-                style={styles.buttonStyle}
-                onPress={() => Actions.jump('Payment')}>
-                <Text style={{textAlign: 'center', color: '#fff'}}>Next</Text>
-              </Button>
-            </View>
           </View>
         </View>
       </ScrollView>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 15,
+        }}>
+        <Container>
+          <Button
+            style={globalStyles.buttonPrimary}
+            onPress={() => Actions.jump('Payment')}>
+            <Text style={{textAlign: 'center', color: '#fff'}}>Next</Text>
+          </Button>
+        </Container>
+      </View>
     </Layout>
   );
 }

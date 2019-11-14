@@ -1,5 +1,6 @@
 import React, {useState, useEffect, Component} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity as Button, StyleSheet} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -11,13 +12,13 @@ import RadioForm, {
 // https://reactnativecode.com/custom-radio-button-group-component/
 
 import {Layout} from '../components/HiasLayout';
-import TopBar from '../components/HiasTopBar';
-import {Actions} from 'react-native-router-flux';
+import Container from '../components/Layout/Container';
 
 import {localStorage, KEY_STORAGE} from '../lib';
 import {fetchGetAddress} from '../lib/api';
 import {getDeviceWidth} from '../lib/utils';
 import globalStyles, {color} from '../styles/globalStyles';
+import {ScrollView} from 'react-native-gesture-handler';
 
 class AddressOrder extends Component {
   constructor(props) {
@@ -62,55 +63,77 @@ class AddressOrder extends Component {
     const {radioData} = this.state;
     return (
       <Layout>
-        <View style={styles.addressRow}>
-          <RadioForm buttonColor={color.primaryColor}>
-            {radioData.map((object, index) => {
-              const onPress = (value, index) => {
-                this.setState({
-                  selectedValue: value,
-                  selectedIndex: index,
-                });
-              };
-              return (
-                <RadioButton
-                  wrapStyle={{
-                    width: getDeviceWidth,
-                    paddingHorizontal: 30,
-                    paddingBottom: 15,
-                  }}
-                  labelHorizontal={true}
-                  key={index}>
-                  <RadioButtonInput
-                    buttonInnerColor={color.primaryColor}
-                    buttonOuterColor={color.primaryColor}
-                    buttonOuterSize={18}
-                    buttonSize={12}
-                    obj={object}
-                    index={index}
-                    isSelected={this.state.selectedIndex === index}
-                    onPress={onPress}
-                    buttonWrapStyle={{marginRight: 25, alignSelf: 'center'}}
-                  />
-                  <RadioButtonLabel
-                    obj={object}
-                    index={index}
-                    labelHorizontal={true}
-                    onPress={onPress}
-                    labelStyle={[globalStyles.fontNormal, {fontSize: 12, lineHeight: 14}]}
-                    labelWrapStyle={{
-                      width: getDeviceWidth - 120,
-                      borderWidth: 1,
-                      borderColor: '#979797',
-                      borderRadius: 5,
-                      backgroundColor: '#fff',
-                      padding: 15,
+        <ScrollView>
+          <View style={styles.addressRow}>
+            <RadioForm buttonColor={color.primaryColor}>
+              {radioData.map((object, index) => {
+                const onPress = (value, index) => {
+                  this.setState({
+                    selectedValue: value,
+                    selectedIndex: index,
+                  });
+                };
+                return (
+                  <RadioButton
+                    wrapStyle={{
+                      width: getDeviceWidth,
+                      paddingHorizontal: 30,
+                      paddingBottom: 15,
                     }}
-                  />
-                </RadioButton>
-              );
-            })}
-          </RadioForm>
-          {/* <Text>Selected Data: {this.state.radioData[this.state.selectedIndex].label}</Text> */}
+                    labelHorizontal={true}
+                    key={index}>
+                    <RadioButtonInput
+                      buttonInnerColor={color.primaryColor}
+                      buttonOuterColor={color.primaryColor}
+                      buttonOuterSize={18}
+                      buttonSize={12}
+                      obj={object}
+                      index={index}
+                      isSelected={this.state.selectedIndex === index}
+                      onPress={onPress}
+                      buttonWrapStyle={{marginRight: 25, alignSelf: 'center'}}
+                    />
+                    <RadioButtonLabel
+                      obj={object}
+                      index={index}
+                      labelHorizontal={true}
+                      onPress={onPress}
+                      labelStyle={[
+                        globalStyles.fontNormal,
+                        {fontSize: 12, lineHeight: 14},
+                      ]}
+                      labelWrapStyle={{
+                        width: getDeviceWidth - 120,
+                        borderWidth: 1,
+                        borderColor: '#979797',
+                        borderRadius: 5,
+                        backgroundColor: '#fff',
+                        padding: 15,
+                      }}
+                    />
+                  </RadioButton>
+                );
+              })}
+            </RadioForm>
+          </View>
+        </ScrollView>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 15,
+          }}>
+          <Container>
+            <Button
+              style={globalStyles.buttonPrimary}
+              onPress={() =>
+                Actions.jump('BillingDetail', {
+                  dataAddress: this.state.selectedValue,
+                })
+              }>
+              <Text style={{textAlign: 'center', color: '#fff'}}>Next</Text>
+            </Button>
+          </Container>
         </View>
       </Layout>
     );

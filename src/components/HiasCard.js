@@ -63,34 +63,42 @@ export const LargeCard = props => {
   const {data} = props;
   return (
     <React.Fragment>
-      {data.map(data => (
-        <ButtonAnimated
-          key={data.id}
-          type="transparent"
-          style={styles.cardWrapper}
-          onPress={() => Actions.ProductDetail({id_product: data.id})}>
-          <View
-            style={[globalStyles.elevationShadowStyle(5), styles.imageWrapper]}>
-            <Image style={styles.imageProduct} source={{uri: data.thumbnail}} />
-          </View>
-          <View style={styles.productInfoWrapper}>
-            <Text style={styles.productTitle}>
-              {getShortString(data.productName, 16)}
-            </Text>
-            <View style={styles.productDetailInfo}>
-              <Text style={styles.productPrice}>Rp {data.price}</Text>
-              <Icon
-                color="#969696"
-                style={{alignSelf: 'center'}}
-                name="heart"
-                type="evilicon"
-                size={28}
-                onPress={() => alert('liked')}
+      {data.map(data => {
+        return (
+          <ButtonAnimated
+            key={data.id}
+            type="transparent"
+            style={styles.cardWrapper}
+            onPress={() => Actions.ProductDetail({id_product: data.productId})}>
+            <View
+              style={[
+                globalStyles.elevationShadowStyle(5),
+                styles.imageWrapper,
+              ]}>
+              <Image
+                style={styles.imageProduct}
+                source={{uri: data.thumbnail}}
               />
             </View>
-          </View>
-        </ButtonAnimated>
-      ))}
+            <View style={styles.productInfoWrapper}>
+              <Text style={styles.productTitle}>
+                {getShortString(data.productName, 16)}
+              </Text>
+              <View style={styles.productDetailInfo}>
+                <Text style={styles.productPrice}>Rp {data.price}</Text>
+                <Icon
+                  color="#969696"
+                  style={{alignSelf: 'center'}}
+                  name="heart"
+                  type="evilicon"
+                  size={28}
+                  onPress={() => alert('liked')}
+                />
+              </View>
+            </View>
+          </ButtonAnimated>
+        );
+      })}
     </React.Fragment>
   );
 };

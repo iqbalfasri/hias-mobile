@@ -212,6 +212,7 @@ const App = props => {
               showLabel={true}
               key="toptabbar"
               tabBarPosition="top"
+              swipeEnabled={false}
               tabBarComponent={CustomTopBar}
               hideNavBar>
               <Scene
@@ -229,7 +230,7 @@ const App = props => {
                 title="Billing Detail"
                 component={BillingOrderScreen}
               />
-              <Scene
+              {/* <Scene
                 lazy
                 hideNavBar
                 key="Payment"
@@ -242,7 +243,7 @@ const App = props => {
                 key="OrderStatus"
                 title="Order Status"
                 component={StatusOrderScreen}
-              />
+              /> */}
             </Scene>
           </Scene>
 
