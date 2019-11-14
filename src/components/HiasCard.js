@@ -23,7 +23,9 @@ const Card = props => {
       key={index}
       type="transparent"
       style={[styles.cardWrapper]}
-      onPress={() => Actions.ProductDetail({id_product: data.id})}
+      onPress={() =>
+        Actions.ProductDetail({id_product: data.id || data.productId})
+      }
       {...props}>
       <View
         style={[

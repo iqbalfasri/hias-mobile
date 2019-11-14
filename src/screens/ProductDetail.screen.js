@@ -62,7 +62,7 @@ const ProductDetail = props => {
       alert('Server internal error');
     }
 
-    // setDetailProduct(data);
+    setDetailProduct(data);
 
     console.log(data, 'Data');
   }
