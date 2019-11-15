@@ -8,6 +8,7 @@ import {
   StatusBar,
   ScrollView,
   Image,
+  Modal,
 } from 'react-native';
 import {Icon} from 'react-native-eva-icons';
 import Swiper from 'react-native-swiper';
@@ -47,6 +48,7 @@ const ProductDetail = props => {
   const [deliveryCollapsed, setDeliveryCollapsed] = useState(false);
   const [varianCollapsed, setVarianCollapsed] = useState(false);
   const [reviewCollapsed, setReviewCollapsed] = useState(false);
+  const [modalImagePreview, setModalImagePreview] = useState(false);
 
   const {id_product} = props;
 
@@ -120,11 +122,17 @@ const ProductDetail = props => {
     );
   };
 
+
+  function _handlePreviewImage() {
+    
+  }
+
   // this function to create modal button for preview image products
   const PreviewImage = () => {
     return (
       <View style={styles.previewImageWrapper}>
         <Button
+          onPress={() => _handlePreviewImage()}
           activeOpacity={0.5}
           style={[
             styles.previewImageButton,
