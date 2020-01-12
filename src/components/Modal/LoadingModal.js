@@ -1,8 +1,17 @@
-import React, {Component, useState} from 'react';
-import {ActivityIndicator, View, Text, StyleSheet} from 'react-native';
+import React from 'react';
+import { ActivityIndicator, View, Text, StyleSheet } from 'react-native';
+import Modal from 'react-native-modal';
 import {Overlay} from 'react-native-elements';
 
 import globalStyles, {color} from '../../styles/globalStyles';
+
+function LoadingModalNew() {
+  return (
+    <Modal isVisible={true}>
+
+    </Modal>
+  )
+}
 
 function LoadingModal(props) {
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Fragment, useEffect} from 'react';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import {
@@ -12,7 +13,7 @@ import SplashScreen from './src/screens/Splash.screen';
 import SliderInfoScreen from './src/screens/SliderInfo.screen';
 import SigninScreen from './src/screens/Signin.screen';
 import SignupScreen from './src/screens/Signup.screen';
-import SignupVerifScreen from './src/screens/_SignupVerif.screen';
+// import SignupVerifScreen from './src/screens/_SignupVerif.screen';
 import SignupSuccessScreen from './src/screens/SignupSuccess.screen';
 import ProductDetailScreen from './src/screens/ProductDetail.screen';
 import OrderScreen from './src/screens/Order.screen';
@@ -34,13 +35,13 @@ import Wishlist from './src/screens/Wishlist.screen';
 // Orders
 import AddressOrderScreen from './src/screens/AddressOrder.screen';
 import BillingOrderScreen from './src/screens/BillingDetailOrder.screen';
-import PaymentOrderScreen from './src/screens/PaymentOrder.screen';
-import StatusOrderScreen from './src/screens/StatusOrder.screen';
+// import PaymentOrderScreen from './src/screens/PaymentOrder.screen';
+// import StatusOrderScreen from './src/screens/StatusOrder.screen';
 
 // Order Status
 import OrderStatusScreen from './src/screens/OrderStatus.screen';
-import OrderStatusOnProgressScreen from './src/screens/OrderStatusOnProgress.screen';
-import OrderStatusHistoryScreen from './src/screens/OrderStatusHistory.screen';
+// import OrderStatusOnProgressScreen from './src/screens/OrderStatusOnProgress.screen';
+// import OrderStatusHistoryScreen from './src/screens/OrderStatusHistory.screen';
 
 // Search
 import SearchScreen from './src/screens/SearchScreens/Search.screen';

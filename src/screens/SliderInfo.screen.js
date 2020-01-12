@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   Dimensions,
   Image,
   TouchableOpacity as Button,
+  BackHandler
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 

@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
+import Modal from 'react-native-modal';
+
 import LoadingModal from '../components/Modal/LoadingModal';
 
 import Container from '../components/Layout/Container';
@@ -216,13 +218,18 @@ const Cart = props => {
           <Button
             activeOpacity={0.5}
             style={globalStyle.buttonPrimary}
-            onPress={() => _handleOrder()}>
+            onPress={() => setLoading(!loading)}>
             <Text style={{textAlign: 'center', color: '#fff'}}>ORDER</Text>
           </Button>
         </Container>
       </View>
       {/* Loading Modal */}
-      <LoadingModal isVisible={loading} />
+      {/* <LoadingModal isVisible={loading} /> */}
+      <Modal isVisible={loading}>
+        <View style={{flex: 1}}>
+          <Text>Hello!</Text>
+        </View>
+      </Modal>
       {/* END: Loading Modal */}
     </Layout>
   );

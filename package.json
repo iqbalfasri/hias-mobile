@@ -9,7 +9,7 @@
     "run-android": "react-native run-android",
     "run-ios": "react-native run-ios --simulator='iPhone 6s'",
     "clean:android": "cd android && ./gradlew clean && cd ../",
-    "release:android": "cd android && ./gradlew assembleRelease && cd ../"
+    "release:android": "cd android && ./gradlew bundleRelease && cd ../"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.2",
@@ -21,6 +21,7 @@
     "react-native-elements": "^1.2.1",
     "react-native-eva-icons": "^1.2.1",
     "react-native-gesture-handler": "^1.5.0",
+    "react-native-modal": "^11.5.3",
     "react-native-reanimated": "^1.4.0",
     "react-native-router-flux": "^4.0.6",
     "react-native-simple-radio-button": "^2.7.4",

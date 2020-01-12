@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // base url for development
-const BASE_URL = 'https://api-core-hias.herokuapp.com';
+const BASE_URL = 'https://api-corehias.herokuapp.com';
 const BASE_ONGKIR = 'https://api.rajaongkir.com/starter/cost';
 
 // fetch best seller product
