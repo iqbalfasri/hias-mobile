@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable no-undef */
 import React, {useState} from 'react';
 import {
   View,
@@ -5,13 +7,14 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity as Button,
+  Alert,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import CheckBox from 'react-native-check-box';
 
 import {FormWithLabel} from '../components/HiasForm';
 import {Container, Layout} from '../components/HiasLayout';
-import LoadingModal from '../components/Modal/LoadingModal';
+import HIASLoadingModal from '../components/HIASLoadingModal';
 
 import {
   deviceWidth,
@@ -33,8 +36,21 @@ const SigupScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   // function for handle signup
-  _handleSignUp = async () => {
+  const _handleSignUp = async () => {
     try {
+      // Cek jika ada form yang belum diisi
+      if (!name || !email || !password || !phoneNumer) {
+        Alert.alert('Form wajib disini');
+        return;
+      }
+
+      // Cek jika password yang dimasukan
+      // tidak sama dengan 'confirm' password
+      if (password !== confirmPassword) {
+        Alert.alert('Password yang dimasukan tidak sama');
+        return;
+      }
+
       const params = {
         name: name,
         email: email,
@@ -69,11 +85,11 @@ const SigupScreen = () => {
         _registCartId(user.id);
       } else {
         // if username / email is already exist
-        alert(error.errorMessage);
+        Alert.alert(error.errorMessage);
       }
     } catch (error) {
       console.log(error);
-      alert('Server internal error');
+      Alert.alert('Server internal error');
     }
   };
 
@@ -101,10 +117,6 @@ const SigupScreen = () => {
       alert('Server Internal error');
     }
   };
-
-  function renderLoadingModal() {
-    return <LoadingModal isVisible={modalVisible} />;
-  }
 
   return (
     <Layout>
@@ -206,7 +218,7 @@ const SigupScreen = () => {
         </Container>
       </ScrollView>
       {/* Modal */}
-      {renderLoadingModal()}
+      {modalVisible && <HIASLoadingModal isVisible={modalVisible} />}
       {/* End Modal */}
     </Layout>
   );

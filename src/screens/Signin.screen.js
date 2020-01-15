@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-import LoadingModal from '../components/Modal/LoadingModal';
+import HIASLoadingModal from '../components/HIASLoadingModal';
 
 import globalStyles from '../styles/globalStyles';
 import {
@@ -35,7 +35,7 @@ const SigninScreen = props => {
   const [password, setPassword] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
-  _handleSignin = async () => {
+  const _handleSignin = async () => {
     try {
       const params = {
         username: email,
@@ -79,12 +79,8 @@ const SigninScreen = props => {
       }
     } catch (error) {
       alert('Email atau Password salah');
-      console.log(error, 'Error catch');
+      // setModalVisible(false);
     }
-  };
-
-  const renderLoadingModal = () => {
-    return <LoadingModal isVisible={modalVisible} />;
   };
 
   return (
@@ -211,7 +207,7 @@ const SigninScreen = props => {
       </ScrollView>
 
       {/* Modal */}
-      {renderLoadingModal()}
+      {modalVisible && <HIASLoadingModal isVisible={modalVisible} />}
       {/* End Modal */}
     </Fragment>
   );
