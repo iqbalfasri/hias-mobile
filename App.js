@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {Fragment, useEffect} from 'react';
+import React from 'react';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import {
   Router,
@@ -59,13 +59,15 @@ import InspirationScreen from './src/screens/Inspiration.screen';
 
 import globalStyles from './src/styles/globalStyles';
 
+import ContextProvider from './src/context/provider';
+
 // FIXME: Refactore route
 const App = props => {
   // for hide warning
   console.disableYellowBox = true;
 
   return (
-    <Fragment>
+    <ContextProvider>
       <StatusBar backgroundColor="#000" barStyle="light-content" />
       <Router {...props}>
         <Scene key="root">
@@ -271,7 +273,7 @@ const App = props => {
           {/* END: WEBVIEW */}
         </Scene>
       </Router>
-    </Fragment>
+    </ContextProvider>
   );
 };
 

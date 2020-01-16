@@ -6,43 +6,50 @@ import {Layout} from '../components/HiasLayout';
 import TopBar from '../components/HiasTopBar';
 import Button from '../components/HiasButton';
 import {UrlAPI, localStorage, KEY_STORAGE, requestParameter} from '../lib';
+import {fetchWishlist} from '../lib/api';
+
+import styles from '../styles';
+
+import LargeCard from '../components/Card/LargeCard';
+import {withContext} from '../context/withContext';
 
 function Wishlist(props) {
-  const [wishlist, setWishlist] = useState([]);
+  const {setWishlist, wishlist} = props.store;
 
   useEffect(() => {
-    async function getWishlist() {
+    const getWishlist = async () => {
       try {
-        const getUserId = await localStorage.getItem(KEY_STORAGE.USER_ID);
-        const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
-
-        let response = await fetch(
-          `/product/wishList/${getUserId}`,
-          requestParameter(null, 'GET', getToken),
-        );
-
-        let responseJson = await response.json();
-        alert(responseJson, 'Data wishlist');
-      } catch (error) {}
-    }
-
-    getWishlist();
-
-    return () => {
-      return;
+        let userId = await localStorage.getItem(KEY_STORAGE.USER_ID);
+        let token = await localStorage.getItem(KEY_STORAGE.TOKEN);
+        let {data} = await fetchWishlist(userId, token);
+        // console.log(getWish);
+        setWishlist(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
-  }, [wishlist]);
+    getWishlist();
+  }, []);
+
+  // useEffect(() => {
+  //   productStore.subscribe(setProductState);
+  //   productStore.init();
+  // }, []);
+
+  // useEffect(() => {
+  //   productStore.getWishlist();
+  // }, []);
 
   return (
     <Layout>
       <TopBar title="Wishlist" />
       <ScrollView>
-        <Text>Wishlist</Text>
+        <View style={styles.container}>
+          <LargeCard data={wishlist} />
+        </View>
       </ScrollView>
     </Layout>
   );
 }
 
-const styles = StyleSheet.create({});
-
-export default Wishlist;
+export default withContext(Wishlist);

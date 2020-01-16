@@ -9,9 +9,7 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
-import Modal from 'react-native-modal';
-
-import LoadingModal from '../components/Modal/LoadingModal';
+import HIASLoadingModal from '../components/HIASLoadingModal';
 
 import Container from '../components/Layout/Container';
 import {Layout} from '../components/HiasLayout';
@@ -31,15 +29,6 @@ import {toRupiah} from '../lib/utils';
 import {fetchGetCart} from '../lib/api';
 import globalStyles from '../styles/globalStyles';
 import {Icon} from 'react-native-eva-icons';
-
-const exampleDataCart = {
-  image: require('../assets/images/products/sofa1.jpg'),
-  product_name: 'Valencia Sofa',
-  price: 'Rp 2.949.000',
-  qty: 1,
-};
-
-// Images
 
 const QtyButton = props => {
   return (
@@ -224,12 +213,7 @@ const Cart = props => {
         </Container>
       </View>
       {/* Loading Modal */}
-      {/* <LoadingModal isVisible={loading} /> */}
-      <Modal isVisible={loading}>
-        <View style={{flex: 1}}>
-          <Text>Hello!</Text>
-        </View>
-      </Modal>
+      {loading && <HIASLoadingModal isVisible={loading} />}
       {/* END: Loading Modal */}
     </Layout>
   );

@@ -18,6 +18,7 @@ import {UrlAPI, deviceWidth, deviceHeight, getShortString} from '../lib';
 import SkeletonPlaceholder from '../components/SkeletonPlaceholder';
 import globalStyles from '../styles/globalStyles';
 import {Actions} from 'react-native-router-flux';
+import { LargeCard } from '../components/HiasCard';
 
 const LoadSkeleton = () => {
   return (
@@ -88,7 +89,7 @@ const BestProduct = props => {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.cardContainer}>
-            <ProductCard data={bestProduct} />
+            <LargeCard data={bestProduct} />
           </View>
         </View>
       </ScrollView>

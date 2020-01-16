@@ -122,10 +122,7 @@ const ProductDetail = props => {
     );
   };
 
-
-  function _handlePreviewImage() {
-    
-  }
+  function _handlePreviewImage() {}
 
   // this function to create modal button for preview image products
   const PreviewImage = () => {
@@ -333,10 +330,13 @@ const ProductDetail = props => {
           </View>
         </Button>
 
-        <View style={{paddingHorizontal: 30, paddingVertical: 15}}>
+        <View style={{paddingVertical: 15}}>
           <Collapsible collapsed={deliveryCollapsed}>
             {/* FIXME: buat sementara menggunakan data bestSeller */}
-            <ScrollView horizontal style={{padding: 5}}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={{paddingHorizontal: 30}}>
               <View style={styles.detailsRow}>
                 <Card data={otherVarian} />
               </View>
@@ -365,39 +365,32 @@ const ProductDetail = props => {
               {/* Image slider */}
               <View style={styles.imageSliderWrapper}>
                 <Swiper
+                  style={{zIndex: -1}}
                   activeDotColor="#fff"
                   dotColor="transparent"
                   dotStyle={{borderColor: '#fff', borderWidth: 1}}
                   height={200}
                   containerStyle={{width: deviceWidth}}>
-                  <View style={styles.slideContent}>
-                    <View style={styles.overlay} />
-                    <Image
-                      source={sofa1}
-                      style={{flex: 1, width: '60%', height: null, zIndex: -1}}
-                    />
-                  </View>
-                  <View style={styles.slideContent}>
-                    <View style={styles.overlay} />
-                    <Image
-                      source={sofa1}
-                      style={{flex: 1, width: '60%', height: null, zIndex: -1}}
-                    />
-                  </View>
-                  <View style={styles.slideContent}>
-                    <View style={styles.overlay} />
-                    <Image
-                      source={sofa1}
-                      style={{flex: 1, width: '60%', height: null, zIndex: -1}}
-                    />
-                  </View>
-                  <View style={styles.slideContent}>
-                    <View style={styles.overlay} />
-                    <Image
-                      source={sofa1}
-                      style={{flex: 1, width: '60%', height: null, zIndex: -1}}
-                    />
-                  </View>
+                  {product.picture &&
+                    product.picture.map((picture, index) => {
+                      return (
+                        <View key={index} style={styles.slideContent}>
+                          <View style={styles.overlay} />
+                          <Image
+                            source={{
+                              uri: `${picture}`,
+                            }}
+                            style={{
+                              flex: 1,
+                              width: null,
+                              height: null,
+                              zIndex: 0,
+                              resizeMode: 'contain',
+                            }}
+                          />
+                        </View>
+                      );
+                    })}
                 </Swiper>
               </View>
 
@@ -502,7 +495,7 @@ const styles = StyleSheet.create({
     height: 200,
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: -1,
+    zIndex: -558,
   },
   slideContent: {
     flex: 1,
@@ -511,7 +504,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     zIndex: -1,
     position: 'relative',
-    padding: 20,
+    // padding: 20,
   },
   overlay: {
     left: 0,

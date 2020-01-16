@@ -21,7 +21,7 @@ export const isAndroid = Platform.OS == 'android';
  * Url api
  */
 export const UrlAPI = endpoint => {
-  const MAIN_URL = 'https://api-core-hias.herokuapp.com';
+  const MAIN_URL = 'https://api-corehias.herokuapp.com';
   return `${MAIN_URL}${endpoint}`;
 };
 

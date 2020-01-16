@@ -13,6 +13,7 @@ import {Actions} from 'react-native-router-flux';
 import globalStyles from '../../styles/globalStyles';
 
 import {getShortString, getDeviceHeight, toRupiah} from '../../lib/utils';
+import { ButtonAnimated } from '../HiasButton';
 
 function LargeCard(props) {
   const {data} = props;
@@ -20,7 +21,7 @@ function LargeCard(props) {
   function eachProduct() {
     return data.map(data => {
       return (
-        <Button
+        <ButtonAnimated
           key={data.id}
           style={styles.cardWrapper}
           onPress={() => Actions.ProductDetail({id_product: data.id})}>
@@ -46,7 +47,7 @@ function LargeCard(props) {
               />
             </View>
           </View>
-        </Button>
+        </ButtonAnimated>
       );
     });
   }
@@ -75,9 +76,13 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   imageProduct: {
-    width: 115,
-    height: 115,
-    alignSelf: 'center',
+    // width: 115,
+    // height: 115,
+    // alignSelf: 'center',
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'contain',
   },
   productInfoWrapper: {
     flexDirection: 'column',

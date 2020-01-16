@@ -126,14 +126,6 @@ export const fetchGetAddress = (userId, token) => {
     });
 };
 
-// Ongkir example data
-const ONGKIR_EXAMPLE = {
-  origin: '155',
-  destination: '153',
-  weight: '302',
-  courier: 'jne',
-};
-
 // cek ongkir jne
 export const fetchOngkir = dataObj => {
   return axios
@@ -194,4 +186,16 @@ export const paymentIpayMu = detailOrder => {
         error: error,
       };
     });
+};
+
+export const fetchWishlist = (userId, token) => {
+  return axios
+    .get(`${BASE_URL}/product/wishList/${userId}`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+    .then(res => res.data);
 };

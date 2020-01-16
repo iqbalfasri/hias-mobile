@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import {WebView} from 'react-native-webview';
-import LoadingModal from '../components/Modal/LoadingModal';
+
+import HIASLoadingModal from '../components/HIASLoadingModal';
 
 class WebViewScreen extends Component {
   render() {
@@ -9,7 +9,7 @@ class WebViewScreen extends Component {
       <>
         <WebView
           startInLoadingState={true}
-          renderLoading={() => <LoadingModal />}
+          renderLoading={() => <HIASLoadingModal />}
           source={{uri: this.props.uri}}
         />
       </>
