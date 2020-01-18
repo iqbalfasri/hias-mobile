@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity as Button,
-} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 
 import {Icon} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
@@ -13,7 +7,7 @@ import {Actions} from 'react-native-router-flux';
 import globalStyles from '../../styles/globalStyles';
 
 import {getShortString, getDeviceHeight, toRupiah} from '../../lib/utils';
-import { ButtonAnimated } from '../HiasButton';
+import {ButtonAnimated} from '../HiasButton';
 
 function LargeCard(props) {
   const {data} = props;
@@ -24,7 +18,7 @@ function LargeCard(props) {
         <ButtonAnimated
           key={data.id}
           style={styles.cardWrapper}
-          onPress={() => Actions.ProductDetail({id_product: data.id})}>
+          onPress={() => Actions.ProductDetail({id_product: data.productId})}>
           <View
             style={[globalStyles.elevationShadowStyle(5), styles.imageWrapper]}>
             <Image style={styles.imageProduct} source={{uri: data.thumbnail}} />
