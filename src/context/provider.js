@@ -9,12 +9,30 @@ export default class ContextProvider extends Component {
 
     this.state = {
       wishlist: [],
+      hotProducts: [],
+      bestProducts: [],
+      cart: [],
       setWishlist: this.setWishlist,
+      setHotProducts: this.setHotProducts,
+      setBestProducts: this.setBestProducts,
+      setCart: this.setCart,
     };
   }
 
   setWishlist = value => {
     this.setState({wishlist: value});
+  };
+
+  setHotProducts = value => {
+    this.setState({hotProducts: value});
+  };
+
+  setBestProducts = value => {
+    this.setState({bestProducts: value});
+  };
+
+  setCart = value => {
+    this.setState({cart: value});
   };
 
   render() {
