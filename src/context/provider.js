@@ -14,6 +14,7 @@ export default class ContextProvider extends Component {
       cart: [],
       hotProductsHome: [],
       bestProductsHome: [],
+      productDetail: null,
     };
 
     this.actions = {
@@ -23,6 +24,7 @@ export default class ContextProvider extends Component {
       setCart: this.setCart,
       setHotProductsHome: this.setHotProductsHome,
       setBestProductsHome: this.setBestProductsHome,
+      setProductDetail: this.setProductDetail,
     };
   }
 
@@ -48,6 +50,10 @@ export default class ContextProvider extends Component {
 
   setCart = value => {
     this.setState({cart: value});
+  };
+
+  setProductDetail = value => {
+    this.setState({productDetail: value});
   };
 
   render() {

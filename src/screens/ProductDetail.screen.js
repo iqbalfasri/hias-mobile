@@ -34,10 +34,9 @@ import Card from '../components/HiasCard';
 import globalStyle, {color} from '../styles/globalStyles';
 
 import {fetchBestSeller} from '../lib/api';
+import HIASImagePreview from '../components/HIASImagePreview';
 
-const sofa1 = require('../assets/images/products/sofa1.jpg');
-
-const ProductDetail = props => {
+function ProductDetail(props) {
   const [detailProduct, setDetailProduct] = useState([]);
   const [otherVarian, setOtherVarian] = useState([]);
 
@@ -122,7 +121,9 @@ const ProductDetail = props => {
     );
   };
 
-  function _handlePreviewImage() {}
+  function _handlePreviewImage() {
+    setModalImagePreview(true);
+  }
 
   // this function to create modal button for preview image products
   const PreviewImage = () => {
@@ -468,10 +469,21 @@ const ProductDetail = props => {
             {/* Other Varian */}
             <OtherVarian />
             {/* END: Other Varian */}
+
+            {/* Modal Image Preview */}
+            <HIASImagePreview
+              isOpen={modalImagePreview}
+              onCloseModal={() => setModalImagePreview(false)}
+            />
+            {/* END: Modal Image Preview */}
           </React.Fragment>
         ))}
       </React.Fragment>
     );
+  };
+
+  const _renderProduct = () => {
+    return <Text>Rendered.</Text>;
   };
 
   return (
@@ -479,11 +491,12 @@ const ProductDetail = props => {
       <StatusBar />
       <TopBar title={null} />
       <ScrollView>
-        <DetailProduct data={detailProduct} />
+        {_renderProduct()}
+        {/* <DetailProduct data={detailProduct} /> */}
       </ScrollView>
     </Layout>
   );
-};
+}
 
 const styles = StyleSheet.create({
   flexScreen: {

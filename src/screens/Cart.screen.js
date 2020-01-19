@@ -29,6 +29,7 @@ import {toRupiah} from '../lib/utils';
 import {fetchGetCart} from '../lib/api';
 import globalStyles from '../styles/globalStyles';
 import {Icon} from 'react-native-eva-icons';
+import {withContext} from '../context/withContext';
 
 const QtyButton = props => {
   return (
@@ -51,19 +52,34 @@ const _handleOrder = async () => {
 };
 
 const Cart = props => {
-  const [length, setLength] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [cartsQuantity, setCartsQuantity] = useState([]);
-  const [staticQuantity, setStaticQuantity] = useState(1);
+  // const [cartItems, setCartItems] = useState([]);
+  // const [cartsQuantity, setCartsQuantity] = useState([]);
+  // const [staticQuantity, setStaticQuantity] = useState(1);
+  // const [cartIsEmpty, setCartIsEmpty] = useState([]);
 
   useEffect(() => {
-    _getCart();
+    /**
+     * TODO: Fix this code with loading process.
+     */
+    const getCart = async () => {
+      try {
+        const userId = await localStorage.getItem(KEY_STORAGE.USER_ID);
+        const token = await localStorage.getItem(KEY_STORAGE.token);
+
+        const {data} = await fetchGetCart(userId, token);
+        props.setCart(data);
+      } catch (error) {
+        console.log(error, 'Error get cart');
+      }
+    };
+
+    getCart();
 
     return () => {
       return;
     };
-  }, [length]);
+  }, []);
 
   // Function to get cart
   const _getCart = async () => {
@@ -129,7 +145,7 @@ const Cart = props => {
       <TopBar title="Cart" />
       <ScrollView>
         <View style={{paddingHorizontal: 30}}>
-          {cartItems == undefined ? (
+          {props.cartItems == undefined ? (
             renderEmptyCart()
           ) : (
             <>
@@ -207,7 +223,7 @@ const Cart = props => {
           <Button
             activeOpacity={0.5}
             style={globalStyle.buttonPrimary}
-            onPress={() => setLoading(!loading)}>
+            onPress={() => Actions.toptabbar()}>
             <Text style={{textAlign: 'center', color: '#fff'}}>ORDER</Text>
           </Button>
         </Container>
@@ -272,4 +288,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Cart;
+export default withContext(Cart);

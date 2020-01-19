@@ -40,6 +40,8 @@ function Wishlist(props) {
   //   productStore.getWishlist();
   // }, []);
 
+  console.log(wishlist)
+
   return (
     <Layout>
       <TopBar title="Wishlist" />

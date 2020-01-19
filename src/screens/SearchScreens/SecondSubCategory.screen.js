@@ -71,6 +71,7 @@ function SecondSubCategory(props) {
       return (
         <React.Fragment>
           {secondSubCategory.map((category, i) => {
+            console.log(category, "Second sub")
             let isLastItem = secondSubCategory.length - 1 === i;
             return (
               <TouchableOpacity

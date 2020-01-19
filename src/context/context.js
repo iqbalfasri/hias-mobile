@@ -8,6 +8,7 @@ export const context = createContext({
     cart: [],
     hotProductHome: [],
     bestProductHome: [],
+    productDetail: null,
   },
 
   actions: {
@@ -17,5 +18,6 @@ export const context = createContext({
     setCart: () => {},
     setHotProductHome: () => {},
     setBestProductHome: () => {},
+    setProductDetail: () => {},
   },
 });
