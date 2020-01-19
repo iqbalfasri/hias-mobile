@@ -6,22 +6,26 @@ import {Layout} from '../components/HiasLayout';
 import LargeCard from '../components/Card/LargeCard';
 
 import {UrlAPI, deviceHeight} from '../lib';
+import {fetchHotProduct} from '../lib/api';
+import {withContext} from '../context/withContext';
 
-const HotProducts = props => {
-  const [hotProducts, setHotProducts] = useState([]);
+function HotProducts(props) {
+  const {hotProducts} = props.store;
+  const {setHotProducts} = props.actions;
 
   useEffect(() => {
-    async function getAllHotProducts() {
-      let response = await fetch(UrlAPI('/product/hotItems'));
-      let {data, success, error} = await response.json();
+    const getAllHotProducts = async () => {
+      try {
+        let {data} = await fetchHotProduct();
 
-      setHotProducts(data);
-    }
+        setHotProducts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
     getAllHotProducts();
   }, []);
-
-  console.log(hotProducts);
 
   return (
     <Layout>
@@ -33,7 +37,7 @@ const HotProducts = props => {
       </ScrollView>
     </Layout>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -86,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HotProducts;
+export default withContext(HotProducts);
