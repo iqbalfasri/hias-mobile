@@ -12,10 +12,17 @@ export default class ContextProvider extends Component {
       hotProducts: [],
       bestProducts: [],
       cart: [],
+      hotProductsHome: [],
+      bestProductsHome: [],
+    };
+
+    this.actions = {
       setWishlist: this.setWishlist,
       setHotProducts: this.setHotProducts,
       setBestProducts: this.setBestProducts,
       setCart: this.setCart,
+      setHotProductsHome: this.setHotProductsHome,
+      setBestProductsHome: this.setBestProductsHome,
     };
   }
 
@@ -31,6 +38,14 @@ export default class ContextProvider extends Component {
     this.setState({bestProducts: value});
   };
 
+  setHotProductsHome = value => {
+    this.setState({hotProductsHome: value});
+  };
+
+  setBestProductsHome = value => {
+    this.setState({bestProductsHome: value});
+  };
+
   setCart = value => {
     this.setState({cart: value});
   };
@@ -41,6 +56,9 @@ export default class ContextProvider extends Component {
         value={{
           store: {
             ...this.state,
+          },
+          actions: {
+            ...this.actions,
           },
         }}>
         {this.props.children}

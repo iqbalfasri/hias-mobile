@@ -3,12 +3,19 @@ import {createContext} from 'react';
 export const context = createContext({
   store: {
     wishlist: [],
-    setWishlist: () => {},
     hotProducts: [],
-    setHotProducts: () => {},
     bestProducts: [],
-    setBestProducts: () => {},
     cart: [],
+    hotProductHome: [],
+    bestProductHome: [],
+  },
+
+  actions: {
+    setWishlist: () => {},
+    setHotProducts: () => {},
+    setBestProducts: () => {},
     setCart: () => {},
+    setHotProductHome: () => {},
+    setBestProductHome: () => {},
   },
 });
