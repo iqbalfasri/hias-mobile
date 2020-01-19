@@ -6,6 +6,7 @@ import {
   ScrollView,
   StatusBar,
   TouchableOpacity as Button,
+  Alert,
 } from 'react-native';
 import {Icon} from 'react-native-eva-icons';
 import {Actions} from 'react-native-router-flux';
@@ -14,6 +15,8 @@ import Card from '../components/HiasCard';
 import Carousel from '../components/HiasCarousel';
 import TopBar from '../components/HiasTopBar';
 import {Layout} from '../components/HiasLayout';
+
+import {withContext} from '../context/withContext';
 
 import globalStyle from '../styles/globalStyles';
 
@@ -78,26 +81,26 @@ const renderSearch = () => {
 };
 
 function Home(props) {
-  const [hotItems, setHotItems] = useState([]);
-  const [bestSeller, setbestSeller] = useState([]);
+  const {actions, store} = props;
+  const {setHotProductsHome, setBestProductsHome} = actions;
 
   useEffect(() => {
     async function getHotItems() {
       let {data, success} = await fetchHotProduct();
       if (!success) {
-        alert('Hot product bermasalah');
+        Alert.alert('Error', 'Hot product bermasalah');
       }
       // set state hot items
-      setHotItems(data);
+      setHotProductsHome(data);
     }
 
     async function getBestSeller() {
       let {data, success} = await fetchBestSeller();
       if (!success) {
-        alert('Best seller error');
+        Alert.alert('Error', 'Best seller error');
       }
       // set state best seller
-      setbestSeller(data);
+      setBestProductsHome(data);
     }
 
     // run function
@@ -112,8 +115,8 @@ function Home(props) {
       {renderSearch()}
       <ScrollView>
         <Carousel />
-        {renderHotItems(hotItems)}
-        {renderBestSeller(bestSeller)}
+        {renderHotItems(store.hotProductsHome)}
+        {renderBestSeller(store.bestProductsHome)}
       </ScrollView>
     </Layout>
   );
@@ -166,4 +169,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default withContext(Home);
