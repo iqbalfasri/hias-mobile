@@ -8,6 +8,7 @@ import {
   StatusBar,
   TouchableOpacity,
   Image,
+  Alert,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
@@ -18,6 +19,8 @@ import Button from '../../components/HiasButton';
 import {UrlAPI, deviceHeight, getShortString} from '../../lib';
 import SkeletonPlaceholder from '../../components/SkeletonPlaceholder';
 import globalStyles from '../../styles/globalStyles';
+import {fetchSearchByName} from '../../lib/api';
+import LargeCard from '../../components/Card/LargeCard';
 
 const LoadSkeleton = () => {
   return (
@@ -66,19 +69,33 @@ const ProductCard = props => {
 
 const SearchResult = props => {
   const [searchResult, setSearchResult] = useState([]);
-  const {category_id} = props;
+  const {category_id, keyword} = props;
 
   useEffect(() => {
-    async function getSearch() {
-      let response = await fetch(UrlAPI(`/product/categoryId/${category_id}`));
-      let {data, success, error} = await response.json();
-
-      console.log(data);
-      setSearchResult(data);
+    // check search
+    if (keyword === undefined) {
+      getSearchWithCategory();
+      return;
     }
 
-    getSearch();
-  }, [category_id]);
+    getSearchWithKeyword();
+  }, [category_id, keyword]);
+
+  async function getSearchWithCategory() {
+    let response = await fetch(UrlAPI(`/product/categoryId/${category_id}`));
+    let {data} = await response.json();
+
+    setSearchResult(data);
+  }
+
+  async function getSearchWithKeyword() {
+    try {
+      let {data} = await fetchSearchByName(keyword);
+      setSearchResult(data);
+    } catch (error) {
+      console.log(error, 'Something went wrong');
+    }
+  }
 
   return (
     <Layout>
@@ -86,7 +103,7 @@ const SearchResult = props => {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.cardContainer}>
-            <ProductCard data={searchResult} />
+            <LargeCard data={searchResult} />
           </View>
         </View>
       </ScrollView>
