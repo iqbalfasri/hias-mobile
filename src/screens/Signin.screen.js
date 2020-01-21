@@ -122,7 +122,7 @@ const SigninScreen = props => {
                   globalStyles.buttonTransparent,
                   {paddingHorizontal: null},
                 ]}
-                onPress={() => localStorage.removeItem('TOKEN')}>
+                onPress={() => Actions.ForgotPassword()}>
                 <Text
                   style={[styles.customButtonForget, globalStyles.fontNormal]}>
                   Forgot your password?

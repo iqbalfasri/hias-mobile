@@ -199,3 +199,16 @@ export const fetchWishlist = (userId, token) => {
     })
     .then(res => res.data);
 };
+
+export const doForgotPassword = email => {
+  let obj = {
+    email: email,
+  };
+  return axios
+    .post(`${BASE_URL}/forgot`, obj, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(res => res.data);
+};

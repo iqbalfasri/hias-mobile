@@ -9,6 +9,7 @@ export const color = {
   dark: '#292929',
   red: '#E93E08',
   softGreen: '#87C6BE',
+  grey: '#878786'
 };
 
 const globalStyles = StyleSheet.create({
@@ -69,6 +70,12 @@ const globalStyles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 5,
     backgroundColor: '#ababab',
+  },
+
+  // View
+  container: {
+    paddingLeft: 30,
+    paddingRight: 30,
   },
 
   /**

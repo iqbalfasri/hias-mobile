@@ -13,6 +13,7 @@ import SplashScreen from './src/screens/Splash.screen';
 import SliderInfoScreen from './src/screens/SliderInfo.screen';
 import SigninScreen from './src/screens/Signin.screen';
 import SignupScreen from './src/screens/Signup.screen';
+import ForgotPassword from './src/screens/ForgotPassword';
 // import SignupVerifScreen from './src/screens/_SignupVerif.screen';
 import SignupSuccessScreen from './src/screens/SignupSuccess.screen';
 import ProductDetailScreen from './src/screens/ProductDetail.screen';
@@ -89,7 +90,7 @@ const App = props => {
           <Scene
             key="Signin"
             component={SigninScreen}
-            type={ActionConst.RESET}
+            // type={ActionConst.RESET}
             hideNavBar
           />
           <Scene
@@ -98,6 +99,7 @@ const App = props => {
             type={ActionConst.RESET}
             hideNavBar
           />
+          <Scene key="ForgotPassword" component={ForgotPassword} hideNavBar />
           {/* <Scene key="SignupVerif" component={SignupVerifScreen} hideNavBar /> */}
           <Scene
             type={ActionConst.RESET}
