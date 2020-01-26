@@ -46,3 +46,8 @@ export const withParams = (requestObj, method = 'GET') => {
       throw err;
     });
 };
+
+// check empty object
+export const isEmptyObject = obj => {
+  return JSON.stringify(obj) === '{}';
+};
