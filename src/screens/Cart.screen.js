@@ -25,7 +25,7 @@ import {
   requireLogin,
 } from '../lib';
 
-import {toRupiah} from '../lib/utils';
+import {toRupiah, isEmptyObject} from '../lib/utils';
 import {fetchGetCart} from '../lib/api';
 import globalStyles from '../styles/globalStyles';
 import {Icon} from 'react-native-eva-icons';
@@ -53,164 +53,79 @@ const _handleOrder = async () => {
 
 const Cart = props => {
   const [loading, setLoading] = useState(false);
-  // const [cartItems, setCartItems] = useState([]);
-  // const [cartsQuantity, setCartsQuantity] = useState([]);
-  // const [staticQuantity, setStaticQuantity] = useState(1);
-  // const [cartIsEmpty, setCartIsEmpty] = useState([]);
+  const carts = props.store.cart;
 
   useEffect(() => {
-    /**
-     * TODO: Fix this code with loading process.
-     */
-    const getCart = async () => {
-      try {
-        const userId = await localStorage.getItem(KEY_STORAGE.USER_ID);
-        const token = await localStorage.getItem(KEY_STORAGE.token);
-
-        const {data} = await fetchGetCart(userId, token);
-        props.setCart(data);
-      } catch (error) {
-        console.log(error, 'Error get cart');
-      }
-    };
-
-    getCart();
-
-    return () => {
-      return;
-    };
+    console.log(props, 'Props');
   }, []);
 
-  // Function to get cart
-  const _getCart = async () => {
-    try {
-      const getToken = await localStorage.getItem(KEY_STORAGE.TOKEN);
-      const getCartId = await localStorage.getItem(KEY_STORAGE.USER_ID);
-
-      setLoading(true);
-
-      const {data, success} = await fetchGetCart(getCartId, getToken);
-      const {listItems} = data;
-      if (success) {
-        setLoading(false);
-      }
-
-      setLoading(false);
-
-      setCartItems(listItems);
-      if (listItems.length === undefined) {
-        return;
-      }
-      setLength(listItems.length);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // Function to change qty
-  const _onChangeQuantity = (e, index) => {
-    const quantity = cartsQuantity;
-    // quantity[index] =
-  };
-
-  function _handleAddQuantity(productId, index) {
-    const items = cartItems;
-    const qty = items[index].qty;
-    console.log(qty, index);
+  if (props.store.cart === null) {
+    return <Text>Cart kosong</Text>;
   }
 
-  function renderEmptyCart() {
-    const emptyCartImg = require('../assets/images/empty-cart.png');
+  const renderEmptyCart = () => {
+    return <Text>Cart anda kosong.</Text>;
+  };
+
+  const renderCartItems = () => {
     return (
-      <View
-        style={{
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Image
-          style={{width: 250, height: 250, marginTop: 150}}
-          source={emptyCartImg}
-        />
-        <Text
-          style={[globalStyle.fontMedium, {textAlign: 'center', fontSize: 18}]}>
-          Keranjangmu masih kosong.
-        </Text>
-      </View>
+      <>
+        {carts.listItems.map((item, index) => (
+          <View
+            key={index}
+            style={[
+              styles.productWrapper,
+              globalStyle.elevationShadowStyle(1.5),
+            ]}>
+            <View style={styles.productDetailWrapper}>
+              <View style={styles.productThumbnail}>
+                <Image
+                  style={{flex: 1, width: null, height: null}}
+                  source={{uri: item.thumbnail}}
+                />
+              </View>
+
+              <View style={[styles.productInfo, {flex: 1}]}>
+                <Text style={styles.productInfoTitle}>
+                  {getShortString(item.name, 22)}
+                </Text>
+                <Text style={styles.productInfoSubTitle}>
+                  Rp {toRupiah(item.qty * item.price)}
+                </Text>
+              </View>
+
+              <View style={styles.qtyWrapper}>
+                <Button style={styles.qtyButton}>
+                  <Icon width={10} height={10} name="plus" />
+                </Button>
+                <Text
+                  style={[
+                    globalStyles.fontMedium,
+                    {
+                      fontSize: 10,
+                      color: color.darkBlue,
+                      alignSelf: 'center',
+                    },
+                  ]}>
+                  {item.qty}
+                </Text>
+                <Button style={styles.qtyButton}>
+                  <Icon width={10} height={10} name="minus" />
+                </Button>
+              </View>
+            </View>
+          </View>
+        ))}
+      </>
     );
-  }
+  };
 
   return (
     <Layout>
       <TopBar title="Cart" />
       <ScrollView>
         <View style={{paddingHorizontal: 30}}>
-          {props.cartItems == undefined ? (
-            renderEmptyCart()
-          ) : (
-            <>
-              {cartItems !== undefined
-                ? cartItems.map((item, index) => {
-                    const quantity = cartsQuantity[index] || 1;
-                    return (
-                      <View
-                        key={index}
-                        style={[
-                          styles.productWrapper,
-                          globalStyle.elevationShadowStyle(1.5),
-                        ]}
-                        {...props}>
-                        <View style={styles.productDetailWrapper}>
-                          <View style={styles.productThumbnail}>
-                            <Image
-                              style={{flex: 1, width: null, height: null}}
-                              source={{uri: item.thumbnail}}
-                            />
-                          </View>
-                          <View style={styles.productInfo}>
-                            <Text style={styles.productInfoTitle}>
-                              {getShortString(item.name, 10)}
-                            </Text>
-                            <Text style={styles.productInfoSubTitle}>
-                              Rp {toRupiah(quantity * item.price)}
-                            </Text>
-                          </View>
-                          {/* QUANTITY */}
-                          <View>
-                            <View style={styles.qtyWrapper}>
-                              <Button
-                                onPress={() =>
-                                  _handleAddQuantity(item.productId, index)
-                                }
-                                style={styles.qtyButton}>
-                                <Icon width={10} height={10} name="plus" />
-                              </Button>
-                              <Text
-                                style={[
-                                  globalStyles.fontMedium,
-                                  {
-                                    fontSize: 10,
-                                    color: color.darkBlue,
-                                    alignSelf: 'center',
-                                  },
-                                ]}>
-                                {quantity}
-                              </Text>
-                              <Button
-                                onPress={() => alert('remove')}
-                                style={styles.qtyButton}>
-                                <Icon width={10} height={10} name="minus" />
-                              </Button>
-                            </View>
-                          </View>
-                          {/* END: QUANTITY */}
-                        </View>
-                      </View>
-                    );
-                  })
-                : null}
-            </>
-          )}
+          {isEmptyObject(carts) ? renderEmptyCart() : renderCartItems()}
         </View>
       </ScrollView>
       <View
@@ -270,7 +185,6 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   qtyWrapper: {
-    flex: 1,
     // backgroundColor: 'red',
     // paddingHorizontal: 20,
     flexDirection: 'column',
