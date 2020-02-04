@@ -1,8 +1,13 @@
 import axios from 'axios';
 
 // base url for development
-const BASE_URL = 'https://api-corehias.herokuapp.com';
+// const BASE_URL = 'http://167.172.237.166:8085';
+const BASE_URL = 'https://apicore-hias.herokuapp.com';
 const BASE_ONGKIR = 'https://api.rajaongkir.com/starter/cost';
+
+export const getBanner = () => {
+  return axios.get(`${BASE_URL}/getAllBanner`).then(res => res.data);
+};
 
 // fetch best seller product
 export const fetchBestSeller = () => {
@@ -90,6 +95,16 @@ export const fetchUserProfile = token => {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
       },
+    })
+    .then(res => {
+      return res.data;
+    });
+};
+
+export const addToCart = async (value, token) => {
+  return axios
+    .post(`${BASE_URL}/product/addItemToCart`, value, {
+      headers: {Authorization: `Bearer ${token}`},
     })
     .then(res => {
       return res.data;
@@ -210,5 +225,11 @@ export const doForgotPassword = email => {
         'Content-Type': 'application/json',
       },
     })
+    .then(res => res.data);
+};
+
+export const doLogin = data => {
+  return axios
+    .post(`${BASE_URL}/authenticate/login`, data)
     .then(res => res.data);
 };

@@ -23,9 +23,10 @@ import {
   UrlAPI,
   getShortString,
   requireLogin,
+  deviceHeight,
 } from '../lib';
 
-import {toRupiah, isEmptyObject} from '../lib/utils';
+import {toRupiah, isEmptyObject, getDeviceHeight} from '../lib/utils';
 import {fetchGetCart} from '../lib/api';
 import globalStyles from '../styles/globalStyles';
 import {Icon} from 'react-native-eva-icons';
@@ -56,16 +57,18 @@ const Cart = props => {
   const carts = props.store.cart;
 
   useEffect(() => {
-    console.log(props, 'Props');
+    console.log(props, 'cart store');
   }, []);
 
-  if (props.store.cart === null) {
-    return <Text>Cart kosong</Text>;
-  }
-
+  // Empty state
   const renderEmptyCart = () => {
-    return <Text>Cart anda kosong.</Text>;
-  };
+    return (
+      <View style={styles.emptyScreen}>
+        <Text style={[styles.emptyTitle, globalStyle.fontBold]}>Your Cart is Empty</Text>
+        <Text style={[styles.emptyDesc, globalStyle.fontNormal]}>{"Looks like you haven't added anything \nto your cart yet"}</Text>
+      </View>
+    )
+  }
 
   const renderCartItems = () => {
     return (
@@ -199,6 +202,25 @@ const styles = StyleSheet.create({
     borderColor: '#ECEBED',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  // Empty state
+  emptyScreen: {
+    flexDirection: 'column',
+    backgroundColor: color.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 170,
+  },
+  emptyTitle: {
+    fontSize: 16,
+    lineHeight: 48,
+    fontWeight: "700",
+    textAlign: 'center',
+  },
+  emptyDesc: {
+    color: "#444",
+    textAlign: 'center',
+    fontSize: 12,
   },
 });
 

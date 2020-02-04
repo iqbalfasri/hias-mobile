@@ -23,8 +23,8 @@ import {
   KEY_STORAGE,
 } from '../lib';
 
-import Storage, { STORAGE_KEY } from '../lib/storage'
-
+import Storage, {STORAGE_KEY} from '../lib/storage';
+import {doLogin} from '../lib/api';
 
 const OnlyLogo = require('../assets/images/only-logo.png');
 
@@ -48,12 +48,10 @@ const SigninScreen = props => {
         alert('Password belum diisi');
       } else {
         setModalVisible(true);
-        let response = await fetch(
-          UrlAPI('/authenticate/login'),
-          requestParameter(params, 'POST'),
-        );
-        let responseJson = await response.json();
-        let {success, error, data} = responseJson;
+        let {success, error, data} = await doLogin(params);
+        // let responseJson = await response.json();
+        // let {success, error, data} = responseJson;
+        // console.log(success, data);
 
         if (success) {
           // save token to local storage
@@ -79,7 +77,7 @@ const SigninScreen = props => {
       }
     } catch (error) {
       alert('Email atau Password salah');
-      // setModalVisible(false);
+      setModalVisible(false);
     }
   };
 
@@ -170,7 +168,7 @@ const SigninScreen = props => {
               />
             </View>
             {/* Form for social media */}
-            <View style={styles.formGroup}>
+            {/* <View style={styles.formGroup}>
               <Button
                 activeOpacity={0.8}
                 onPress={() => Actions.HomeStack()}
@@ -189,7 +187,7 @@ const SigninScreen = props => {
                   Sign in with Google
                 </Text>
               </Button>
-            </View>
+            </View> */}
             {/* Form for create account */}
             <View style={styles.formGroup}>
               <Button

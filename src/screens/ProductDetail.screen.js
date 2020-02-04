@@ -33,7 +33,7 @@ import Card from '../components/HiasCard';
 
 import globalStyle, {color} from '../styles/globalStyles';
 
-import {fetchBestSeller} from '../lib/api';
+import {fetchBestSeller, fetchProductById, addToCart} from '../lib/api';
 import HIASImagePreview from '../components/HIASImagePreview';
 
 function ProductDetail(props) {
@@ -52,21 +52,17 @@ function ProductDetail(props) {
   const {id_product} = props;
 
   useEffect(() => {
-    _getDetailProduct();
-    _getOtherVarian();
+    _getProduct();
   }, [id_product]);
 
-  async function _getDetailProduct() {
-    let response = await fetch(UrlAPI(`/product/${id_product}`));
-    let {data, success, error} = await response.json();
-    if (!success) {
-      alert('Server internal error');
+  const _getProduct = async () => {
+    try {
+      let data = await fetchProductById(id_product);
+      setDetailProduct(data.data)
+    } catch (error) {
+      console.log(error);
     }
-
-    setDetailProduct(data);
-
-    console.log(data, 'Data');
-  }
+  };
 
   async function _getOtherVarian() {
     fetchBestSeller()
@@ -88,19 +84,23 @@ function ProductDetail(props) {
         amount: 1,
       };
 
-      let response = await fetch(
-        UrlAPI('/product/addItemToCart'),
-        requestParameter(params, 'POST', getToken),
-      );
+      const response = await addToCart(params, getToken);
+      console.log(response)
 
-      const responseJson = await response.json();
-      if (responseJson.success) {
-        alert('Berhasil tambah cart');
-        // Actions.Cart();
-      } else {
-        alert('Ada masalah saat tambah cart');
-      }
+      // let response = await fetch(
+      //   UrlAPI('/product/addItemToCart'),
+      //   requestParameter(params, 'POST', getToken),
+      // );
+
+      // const responseJson = await response.json();
+      // if (responseJson.success) {
+      //   alert('Berhasil tambah cart');
+      //   // Actions.Cart();
+      // } else {
+      //   alert('Ada masalah saat tambah cart');
+      // }
     } catch (error) {
+      console.log(error)
       alert('Server internal error');
     }
   };
@@ -491,8 +491,8 @@ function ProductDetail(props) {
       <StatusBar />
       <TopBar title={null} />
       <ScrollView>
-        {_renderProduct()}
-        {/* <DetailProduct data={detailProduct} /> */}
+        {/* {_renderProduct()} */}
+        <DetailProduct data={detailProduct} />
       </ScrollView>
     </Layout>
   );

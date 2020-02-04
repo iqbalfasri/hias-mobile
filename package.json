@@ -9,7 +9,7 @@
     "run-android": "react-native run-android",
     "run-ios": "react-native run-ios --simulator='iPhone 6s'",
     "clean:android": "cd android && ./gradlew clean && cd ../",
-    "release:android": "cd android && ./gradlew bundleRelease && cd ../"
+    "release:android": "cd android && ./gradlew assembleRelease && cd ../"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.2",

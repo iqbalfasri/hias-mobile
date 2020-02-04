@@ -5,10 +5,13 @@ export const context = createContext({
     wishlist: [],
     hotProducts: [],
     bestProducts: [],
-    cart: [],
+    cart: null,
     hotProductHome: [],
     bestProductHome: [],
     productDetail: null,
+    mainCategory: [],
+    subCategory: [],
+    secondSubCategory: [],
   },
 
   actions: {
@@ -19,5 +22,8 @@ export const context = createContext({
     setHotProductHome: () => {},
     setBestProductHome: () => {},
     setProductDetail: () => {},
+    setMainCategory: () => {},
+    setSubCategory: () => {},
+    setSecondSubCategory: () => {},
   },
 });

@@ -40,7 +40,7 @@ const ProductCard = props => {
           key={data.id}
           type="transparent"
           style={styles.cardWrapper}
-          onPress={() => Actions.ProductDetail({id_product: data.id})}>
+          onPress={() => Actions.ProductDetail({id_product: data.id || data.productId})}>
           <View
             style={[globalStyles.elevationShadowStyle(5), styles.imageWrapper]}>
             <Image style={styles.imageProduct} source={{uri: data.thumbnail}} />

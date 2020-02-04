@@ -77,11 +77,12 @@ function SecondSubCategory(props) {
               <TouchableOpacity
                 key={category.id}
                 onPress={() =>
-                  Actions.ThirdSubCategory({
-                    secondSubCategoryId: category.id,
-                    subCategoryName: props.subCategoryName,
-                    secondSubCategoryName: category.secondSubCategoryName,
-                  })
+                  // Actions.ThirdSubCategory({
+                  //   secondSubCategoryId: category.id,
+                  //   subCategoryName: props.subCategoryName,
+                  //   secondSubCategoryName: category.secondSubCategoryName,
+                  // })
+                  Actions.SearchResult({ category_id: category.id })
                 }
                 style={[
                   styles.listCategory,

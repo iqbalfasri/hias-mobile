@@ -12,6 +12,7 @@ import {Icon} from 'react-native-eva-icons';
 import globalStyle from '../styles/globalStyles';
 
 import {isAndroid, deviceWidth} from '../lib';
+import {withContext} from '../context/withContext';
 
 /**
  * Render back button
@@ -51,18 +52,40 @@ const RightIcon = props => (
     <Button activeOpacity={0.5} onPress={() => Actions.Cart()}>
       <Icon name="shopping-bag-outline" width={24} height={24} />
     </Button>
+    {renderCartCount(props.cartCount)}
   </View>
 );
+
+const renderCartCount = totalCart => {
+  return totalCart === 0 ? null : (
+    <View
+      style={{
+        backgroundColor: 'red',
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        right: -10,
+        top: -5,
+      }}>
+      <Text style={{fontSize: 12, color: 'white'}}>{totalCart}</Text>
+    </View>
+  );
+};
 
 /**
  * Render full top bar
  */
 const TopBar = props => {
+  const { cart } = props.store;
+  const countItemCart = cart.listItems !== undefined ? cart.listItems.length : 0;
   return isAndroid ? (
     <View style={styles.topBarWrapper}>
       <BackButton {...props} />
       <Title {...props} />
-      <RightIcon {...props} />
+      <RightIcon cartCount={countItemCart} {...props} />
     </View>
   ) : (
     // is ios device
@@ -70,7 +93,7 @@ const TopBar = props => {
       <View style={styles.topBarWrapper}>
         <BackButton {...props} />
         <Title {...props} />
-        <RightIcon {...props} />
+        <RightIcon cartCount={countItemCart} {...props} />
       </View>
     </SafeAreaView>
   );
@@ -106,4 +129,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TopBar;
+export default withContext(TopBar);

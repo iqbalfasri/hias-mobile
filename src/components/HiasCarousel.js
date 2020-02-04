@@ -12,6 +12,7 @@ import {Icon} from 'react-native-elements';
 // Own component
 import {deviceWidth, isAndroid} from '../lib';
 import globalStyle from '../styles/globalStyles';
+import {getBanner} from '../lib/api';
 
 const image1 = require('../assets/images/carousel/crs1.jpg');
 const image2 = require('../assets/images/carousel/crs2.jpg');
@@ -23,100 +24,35 @@ class Carousel extends Component {
 
     this.state = {
       carouselData: props.data,
+      banner: [],
     };
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      // scroll view position fix
-      this.scrollView.scrollTo({x: -30});
-    }, 1);
+  async componentDidMount() {
+    const {data} = await getBanner();
+    this.setState({banner: data.banner});
   }
 
   render() {
     return (
       <ScrollView
-        ref={scrollView => {
-          this.scrollView = scrollView;
-        }}
-        contentInset={{
-          top: 0,
-          left: 30,
-          bottom: 0,
-          right: 30,
-        }}
         showsHorizontalScrollIndicator={false}
-        snapToInterval={deviceWidth - (isAndroid ? 90 : 70)}
         snapToAlignment={'center'}
         decelerationRate={0}
         horizontal={true}>
         {/* Carousel wrapper */}
         <View style={styles.carouselWrapper}>
           {/* Carousel content */}
-          <View>
-            <Button onPress={() => alert('Press')} style={[styles.item1]}>
-              <Image style={styles.carouselImageFull} source={image1} />
-              <View style={styles.carouselOverlay}>
-                <Text style={styles.carouselTitle}>Special Promo</Text>
-                <Text style={styles.carouselSubTitle}>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
-                </Text>
-                <View style={{alignSelf: 'flex-end'}}>
-                  <Icon
-                    name="arrow-right"
-                    type="feather"
-                    size={24}
-                    color="white"
-                  />
-                </View>
-              </View>
-            </Button>
-          </View>
-          {/* Carousel */}
-          <Button
-            type={'transparent'}
-            onPress={() => alert('Pressed')}
-            style={styles.item1}>
-            <Image style={styles.carouselImageFull} source={image2} />
-            <View style={styles.carouselOverlay}>
-              <Text style={styles.carouselTitle}>Special Promo</Text>
-              <Text style={styles.carouselSubTitle}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </Text>
-              <View style={{alignSelf: 'flex-end'}}>
-                <Icon
-                  name="arrow-right"
-                  type="feather"
-                  size={24}
-                  color="white"
+          {this.state.banner.map((banner, index) => {
+            return (
+              <View style={[styles.item1]}>
+                <Image
+                  style={styles.carouselImageFull}
+                  source={{uri: banner.imageUrl}}
                 />
               </View>
-            </View>
-          </Button>
-          {/* Carousel */}
-          <Button
-            type={'transparent'}
-            onPress={() => alert('Pressed')}
-            style={styles.item1}>
-            <Image style={styles.carouselImageFull} source={image3} />
-            <View style={styles.carouselOverlay}>
-              <Text style={styles.carouselTitle}>Special Promo</Text>
-              <Text style={styles.carouselSubTitle}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </Text>
-              <View style={{alignSelf: 'flex-end'}}>
-                <Icon
-                  name="arrow-right"
-                  type="feather"
-                  size={24}
-                  color="white"
-                />
-              </View>
-            </View>
-          </Button>
+            );
+          })}
         </View>
       </ScrollView>
     );
@@ -125,8 +61,8 @@ class Carousel extends Component {
 
 const styles = StyleSheet.create({
   item1: {
-    width: deviceWidth - 80,
-    marginRight: 15,
+    width: deviceWidth,
+    paddingHorizontal: 15,
     height: 163,
     borderRadius: 10,
     overflow: 'hidden',
@@ -148,6 +84,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: null,
     height: null,
+    resizeMode: 'contain'
   },
   carouselTitle: {
     color: 'white',

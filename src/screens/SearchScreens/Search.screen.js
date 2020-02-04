@@ -18,6 +18,7 @@ import TopBar from '../../components/HiasTopBar';
 import globalStyle from '../../styles/globalStyles';
 
 import {UrlAPI} from '../../lib';
+import {withContext} from '../../context/withContext';
 
 function RenderSkeleton() {
   return (
@@ -36,8 +37,8 @@ function RenderSkeleton() {
 }
 
 function Search(props) {
-  const [mainCategory, setMainCategory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [keyword, setKeyword] = useState('');
 
   useEffect(() => {
     async function getMainCategory() {
@@ -47,7 +48,7 @@ function Search(props) {
 
         const {data} = responseJson;
 
-        setMainCategory(data);
+        props.actions.setMainCategory(data);
       } catch (error) {
         alert('Error ambil data main category');
       }
@@ -67,8 +68,8 @@ function Search(props) {
     } else {
       return (
         <React.Fragment>
-          {mainCategory.map((category, i) => {
-            let isLastItem = mainCategory.length - 1 === i;
+          {props.store.mainCategory.map((category, i) => {
+            let isLastItem = props.store.mainCategory.length - 1 === i;
             return (
               <Button
                 key={category.id}
@@ -102,7 +103,15 @@ function Search(props) {
           <Icon name="search-outline" fill="#9F9F9F" width={18} height={18} />
         </View>
         <View style={styles.searchInput}>
-          <TextInput style={globalStyle.fontNormal} placeholder="Search" />
+          <TextInput
+            style={globalStyle.fontNormal}
+            placeholder="Search"
+            returnKeyType="search"
+            onChangeText={text => setKeyword(text)}
+            onSubmitEditing={() => {
+              Actions.SearchResult({keyword: keyword});
+            }}
+          />
         </View>
       </View>
 
@@ -173,4 +182,4 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
-export default Search;
+export default withContext(Search);

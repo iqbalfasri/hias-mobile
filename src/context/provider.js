@@ -11,10 +11,13 @@ export default class ContextProvider extends Component {
       wishlist: [],
       hotProducts: [],
       bestProducts: [],
-      cart: [],
+      cart: null,
       hotProductsHome: [],
       bestProductsHome: [],
       productDetail: null,
+      mainCategory: [],
+      subCategory: [],
+      secondSubCategory: [],
     };
 
     this.actions = {
@@ -25,6 +28,9 @@ export default class ContextProvider extends Component {
       setHotProductsHome: this.setHotProductsHome,
       setBestProductsHome: this.setBestProductsHome,
       setProductDetail: this.setProductDetail,
+      setMainCategory: this.setMainCategory,
+      setSubCategory: this.setSubCategory,
+      setSecondSubCategory: this.setSecondSubCategory,
     };
   }
 
@@ -54,6 +60,18 @@ export default class ContextProvider extends Component {
 
   setProductDetail = value => {
     this.setState({productDetail: value});
+  };
+
+  setMainCategory = value => {
+    this.setState({mainCategory: value});
+  };
+
+  setSubCategory = value => {
+    this.setState({subCategory: value});
+  };
+
+  setSecondSubCategory = value => {
+    this.setState({secondSubCategory: value});
   };
 
   render() {
